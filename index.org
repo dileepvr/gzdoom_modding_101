@@ -1,0 +1,376 @@
+#+TITLE: Getting Started with GZDoom Modding
+#+SUBTITLE: A guide for absolute beginners
+#+OPTIONS: author:nil toc:2 html5-fancy:t
+#+HTML_DOCTYPE: html5
+#+BIND: org-tufte-embed-images:nil
+
+This guide will introduce the basics of modding for the GZDoom source
+port. It is aimed at beginners with little-to-no technical
+knowledge. For more advanced help, check the [[https://zdoom.org/wiki/Tutorials][Tutorials page]] on the
+zdoom wiki, or Jekyll Grim's [[https://jekyllgrim.github.io/ZScript_Basics/][Zscript basics]]. The guide will focus on
+GZDoom, but might have limited applicability to other source ports. It
+is structured as a sequence of exercises that the reader is expected
+to follow along. It presents particular ways of doing things in
+particular chapters for pedagogical reasons and to inculcate good
+habits. It will not present the full context or historical information
+for everything, because it is meant to be a first-pass curriculum,
+where too much extraneous information can be overwhelming and
+counter-productive.
+
+* Running GZDoom and understanding WADs
+
+** Getting the Engine
+
+First, let us get GZDoom running a playing a game. Download the latest
+version of GZDoom (and not ZDoom) for your operating system from here:
+[[https://zdoom.org/downloads][https://zdoom.org/downloads]]
+
+If you are running on Linux, you might be better off [[https://zdoom.org/wiki/Compile_GZDoom_on_Linux][compiling it from
+source]]. That is not a ding. I do this myself.
+
+
+After downloading and unpacking, you should end up with a folder
+somewhere on your computer with files named:
+- =gzdoom.exe= (or just =gzdoom=)
+- =gzdoom.pk3=
+- =lights.pk3=
+- =brightmaps.pk3=
+- =game_support.pk3=
+- =game_widescreen_gfx.pk3=
+- =fm_banks= (folder)
+- =soundfonts= (folder)
+
+Depending on the OS you downloaded for, you might have some extra
+files like =*.dll= files. If you try to run the executable file
+(=gzdoom.exe=) by either double-clicking on it, or running the command
+from a terminal/command-prompt from that folder location, it should
+throw up a message saying that it couldn't find any IWADs.
+
+To run as a command, open a terminal (Linux) or command prompt
+(Windows), and navigate to the directory location using the
+change-directory (=cd=) command. When there, list the files using the
+=ls= (Linux) or =dir= (Windows) command. It should print out all the
+files from the above list. Then from there, just type =./gzdoom=
+(Linux) or =gzdoom.exe= (Windows). This has the same effect as
+double-clicking the file from your graphical file browser. Keep the
+terminal/command-prompt open (minimize it for now). We won't be using
+the command method everytime but it helps understand what is happening
+under the hood.
+
+** Getting some IWADs
+
+Running the engine executable by itself couldn't run a game because
+you haven't downloaded any actual games for the engine to run. Let us
+fix that. For this guide, we will be using Freedoom, but you could
+follow the same steps with Doom 1 and Doom 2 if you have purchased
+those wad files from you favorite legal videogame store.
+
+Acquire the files =freedoom1.wad= and =freedoom2.wad= from
+[[https://freedoom.github.io/download.html][https://freedoom.github.io/download.html]] (click on the =Freedoom:
+Phase 1+2= hyperlink). Extract these two files from the zip archive
+and place them in the same directory as your GZDoom executable. If you
+are having trouble opening a zip archive file, double-click or
+right-click on it and "extract" the contents. On the Linux terminal, a
+tool like =unzip= can also be used. With the files placed at the same
+location as your GZDoom executable, running GZDoom again should cause
+the program to auto-detect =freedoom1.wad= and =freedoom2.wad= and
+list them for selection on startup.
+
+Let's run Freedoom2 from the command line. From the
+terminal/command-prompt, run the following command:
+
+- Windows
+#+BEGIN_SRC
+gzdoom.exe -iwad freedoom2.wad
+#+END_SRC
+- Linux
+#+BEGIN_SRC
+./gzdoom -iwad freedoom2.wad
+#+END_SRC
+
+The game should launch, and you should be greeted with these starting
+screens of main menu, and the first level:
+
+#+CAPTION: Main menu screen for Freedoom 2 (v0.13.0)
+#+ATTR_HTML: :width 800px
+[[./images/screenshot01.jpg]]
+
+#+CAPTION: Starting are of MAP01 in Freedoom 2 (v0.13.0)
+#+ATTR_HTML: :width 800px
+[[./images/screenshot02.jpg]]
+
+These screenshots are from running version 0.13.0 of
+=freedoom2.wad=. Another version might look slightly different.
+
+The files =freedoom.wad= and =freedoom2.wad= are called IWADs, which
+is short for [[https://zdoom.org/wiki/IWAD][internal WADs]]. These are wad-files that have all the
+information within them for the engine to run a whole game. Later on,
+we will take a look into what is actually inside them by using another
+program.
+
+* Basic replacement mods
+
+** Texture replacement
+
+Now we are going to make our first mod. Create a project folder
+somewhere on your computer. Call it something like
+"=my_first_mod=". Inside of it, create a folder named
+"=textures=". The name of this folder is important. It has to be spelt
+exactly and cannot be arbitrary. Now, right click the following image
+file and save it inside the "=textures=" folder. Make sure that it is
+named =AQRUST08.png=. The filename is important.
+
+#+CAPTION: =AQRUST08.png= modified wall texture
+[[./images/AQRUST08.png]]
+
+Now, zip the =textures= folder into a zip-archive file called
+something like =my_first_mod.zip=. The filename of this zip archive is
+not important and can be anything of your choosing. You can
+right-click the folder and compress it into a zip file. On Linux, you
+can run this command from the location of your project folder:
+
+#+BEGIN_SRC
+  zip -r my_first_mod.zip textures/
+#+END_SRC
+
+This uses the =zip= program with the =-r= recursive flag to make sure
+that contents of subfolders end up inside the zip
+file. Congratulations. As far is the current version of GZDoom (4.14.0
+as of this writing) is concerned, you just made your first mod. Now
+let's run it. You can do this either by dragging and dropping the zip
+file onto your =gzdoom.exe= executable file, and selecting the
+=freedoom2.wad= IWAD when it asks, or running the command:
+
+#+BEGIN_SRC
+  ./gzdoom -iwad freedoom2.wad -file <PATH-TO-PROJECT-FOLDER>/my_first_mod.zip
+#+END_SRC
+
+Once you launch the game, you should be greeted to this view:
+
+#+CAPTION: Opening area of MAP01 in Freedoom 2 (v0.13.0) with a texture replaced
+#+ATTR_HTML: :width 800px
+[[./images/screenshot03.jpg]]
+
+*** Analysis
+
+Let us unpack what is happening here. You ran GZDoom with two files:
+=freedoom2.wad= and =my_first_mod.zip=. The first one is the IWAD,
+meaning the file that contains the base game. The second one is what
+is called a PWAD (short for [[https://zdoom.org/wiki/PWAD][patch WAD]]). The IWAD contained a texture
+lump (will explain later) named =AQRUST08=, and a map lump (among
+others) named =MAP01=, and instructions inside the map lump for the
+engine to paint that texture on a specific bunch of walls (with some
+offsets, lighting effects, etc.). This is what happens when you run
+GZDoom with just the IWAD =freedoom2.wad= by itself. But when you run
+the IWAD with this PWAD, which contains its own copy of the =AQRUST08=
+texture, the engine replaces all instances of that texture with the
+one from your PWAD. *This is also why it was important to name the
+file exactly right.* If you load two PWADs that both replace the same
+texture like so:
+
+#+BEGIN_SRC
+  ./gzdoom -iwad freedoom2.wad -file mod1.pk3 -file mod2.pk3
+#+END_SRC
+
+then the replacement texture from the last PWAD (=mod2.pk3=) will be
+used. Think of it like the replacement instructions are executed
+serially, in the sequence of the files.
+
+*** Get setup with a Launcher before proceeding further
+
+This is one reason I illustrated the command line method of launching
+GZDoom. Selecting multiple mod files and dragging-and-dropping them
+onto the GZDoom executable does not give you control over the mod load
+order. People routinely play games on GZDoom with 5-15 mods loaded at
+once, often in a specific order. Don't worry. No one is actually
+typing out long commands. They are using launcher programs like [[https://zdoom.org/wiki/ZDL][ZDL]] or
+[[https://github.com/Youda008/DoomRunner/releases/][DoomRunner]]. I myself am partial to DoomRunner. Pick one and stick to
+it.
+
+Most launcher programs allow saving of presets for various mod and
+order combinations. On first launch, they typically as you to select
+engine executables, a list of IWADs, and the usual location for
+various kinds of PWADs like map packs. So you don't have to put files
+in your GZDoom folder, or any other specific location. You should feel
+free to organize your files on your computer any way you see fit. Here
+is a view of my DoomRunner front page:
+
+#+ATTR_HTML: :width 800px
+[[./images/doomrunner01.jpg]]
+
+As you can see, I have highlighted a preset that I have named
+"=Elementalism=" that is using the GZDoom executable, the =doom2.wad=
+IWAD file, and a whole bunch of PWADs in a particular
+order. =Elementalism= is an ambitious map pack, and =Hellrider
+Vengeful= is a weapons and player-movement mod. Here, I am adding a
+mod called =Flashlight++= even though =Hellrider= already comes with a
+flashlight, because the maps in =Elementalism= have all been
+programmed to strip the player of all inventory items and pistol-start
+every level. And the flashlight in =Flashlight++= happens to be
+unclearable using that method. If I were to try and and another mod
+that modifies weapons, like =Beautiful Doom= to this list, then the
+conflict with =Hellrider= will cause all weapons to be replaced by one
+mod and ammunition pickups be of the other. So not all mods are
+designed to go together. I mostly ignore DoomRunner's separate map
+pack subwindow and load map-pack mods as regular mods, with full
+control over load order.
+
+For the rest of this guide, I recommend picking a launcher program and
+launching GZDoom with =my_first_mod.zip= and =freedoom2.wad= just to
+develop good habits. Under the hood, all these Lauchers are just
+constructing and executing lengthy commands like the ones above.
+
+#+ATTR_HTML: :width 800px
+[[./images/doomrunner02.jpg]]
+
+And yes, you can rename your mod =my_first_mod.pk3= if you want. The
+file extension doesn't matter, and only exists to help you. Modern
+GZDoom PWADs are named =*.pk3= and IWADs are named =*.ipk3= (we'll get
+there). You might recall that the engine's internal files that came
+with the GZDoom download (=lights.pk3=, =brightmaps.pk3=,
+=game_support.pk3=, etc.) are also =*.pk3= files. These are the only
+ones that should not be moved out of the GZDoom executable's folder.
+
+Older mods, and mods made to be interoperable with source ports other
+than GZDoom aren't zip files, but are instead of the WAD format. While
+GZDoom can read WAD files (the IWAD freedoom2.wad is a WAD file, after
+all), the best practice is to make mods as =*.pk3= files (which are
+secretly zip files). Only levels/maps need to be in the old WAD
+format. More on that later.
+
+** Text files as lumps
+
+Let us continue adding to your mod. So far, you have a zip file
+(possibly renamed "=my_first_mod.pk3=") which contains a folder named
+=textures=, which in-turn contains a =png= image file named
+=AQRUST08.png=. It was important for this file to be a =png= file. And
+it is very important that both the folder and file names are what they
+are for the mod to work. The filename had to be =AQRUST08= because
+that tells the engine what texture it is meant to replace. The folder
+name =textures= is a reserved name. The engine (and most map editors)
+interpretes it as a location for texture files. You can put any =png=
+images in them, and even organize them into subfolders within. But you
+cannot put other arbitrary data in it and expect it to work. Nor can
+you just put the =AQRUST08.png= file alone in a zip archive and expect
+the replacement to work.
+
+There are other reserved names, as far as files and folders in the
+root (top) location of the zip archive is concerned. These reserved
+names can have any capitalization. They can be camelcase, all upper
+case, or lower case. It is all the same to the engine. Reserved names
+for folders include "=textures=", "=flats=", "=sprites=", "=maps=",
+etc. A [[https://zdoom.org/wiki/Using_ZIPs_as_WAD_replacement#How_to][full list]] is on the wiki. You can have other folders and
+subfolders, but these and their contents are treated by the engine in
+a special way. Reserved names for files include [[https://zdoom.org/wiki/TEXTURES][=TEXTURES=]], [[https://zdoom.org/wiki/ZScript#Load_order][=ZSCRIPT=]],
+[[https://zdoom.org/wiki/MAPINFO][=MAPINFO=]], [[https://zdoom.org/wiki/GLDEFS][=GLDEFS=]], etc. Again, the capitalization doesn't matter,
+and you can give them any file extensions you want (=*.lmp=, =*.txt=,
+=*.zsc=). You can store other files in the root location of your mod
+(like a lincense file, a readme, or a credits file if you end up using
+other people's work), but they cannot use these reserved names.
+
+Files in =*.pk3= archives may be referred to as lumps as a holdover
+from the wad-format days. The wad-format is also a sort of archive
+format like =zip=. Contiguous sequence of bits inside a wad-file
+(often marked with a =start= and =end= markers) represent specific
+types of data. We can explore this later, but we don't have to worry
+about that as long as we have subfolders and reserved names. These
+special lumps are often just text files that have their own format for
+presenting data to the engine. Let us try and use one to get a better
+feel.
+
+For this next exercise, we will replace the texture on the door
+visible from the starting area in Freedoom 2. The lump name for this
+texture needs to be =BIGDOOR1=. But we will not just be using a file
+named =BIGDOOR1.png= in the =textures= folder, even though that will
+work. We will instead use use some other file name, and try to use the
+=TEXTURES= lump to make it work.
+
+Pick any =png= image file you want. I'm going with [[https://en.wikipedia.org/wiki/John_Romero][John Romero's]]
+forehead. Crop/scale the image using some image manipulation program
+like GIMP, Photoshop, or even MSPaint, to fit into 128 x 96 pixels to
+match the door's texture size. I named my file =John_Romero.png=, and
+I placed it inside a subfolder inside the =textures= folder called
+=custom=. Then, open a text file in the project root location called
+=TEXTURES.lmp=. Put the following lines into it (replace the path and
+file name to match your new image):
+
+#+BEGIN_SRC
+Texture BIGDOOR1, 128, 96
+{
+   Patch "textures/custom/John_Romero.png", 0, 0
+}
+#+END_SRC
+
+Now re-compress the zip archive with these two new files and the new subfolder.
+
+#+BEGIN_SRC
+  zip -r my_first_mod.zip textures/ TEXTURES.lmp
+#+END_SRC
+
+The archive's internal structure should look something like this:
+
+[[./images/filestructure01.jpg]]
+
+Now, running the PWAD with the =freedoom2.wad= IWAD (through a
+launcher like DoomRunner) should bring up this view:
+
+#+ATTR_HTML: :width 800px
+[[./images/screenshot06.jpg]]
+
+** Basics of SLADE
+
+Coming soon ...
+
+** Sprite replacement and offsets
+
+Coming soon ...
+
+#+ATTR_HTML: :width 800px
+[[./images/screenshot04.jpg]]
+
+* Zscript class replacements
+
+** New pickup item
+
+Coming soon ...
+
+** Modifying Zombieman
+
+Coming soon ...
+
+#+ATTR_HTML: :width 800px
+[[./images/screenshot05.jpg]]
+
+** Modifying weapon
+
+Coming soon ...
+
+* Basics of mapping
+
+** Getting UDB
+
+*** First room
+*** Using custom textures from your mod
+*** Placing custom things from your mod
+
+** The Mapfile lump
+
+Coming soon ...
+
+*** Changing name for freedoom1
+*** MAPINFO lump
+*** Packing the map with your mod
+
+* Misc.
+
+** Git and version control
+
+Coming soon ...
+
+** Seeking help and forum/discord etiquette
+
+Coming soon ...
+
+** Studying famous mods
+
+Coming soon ...
