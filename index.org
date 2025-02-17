@@ -15,7 +15,9 @@ particular chapters for pedagogical reasons and to inculcate good
 habits. It will not present the full context or historical information
 for everything, because it is meant to be a first-pass curriculum,
 where too much extraneous information can be overwhelming and
-counter-productive.
+counter-productive. You can recommend additions/changes to this guide by
+submitting PRs to the [[https://github.com/dileepvr/gzdoom_modding_101][github repo]]. Please only make changes to the
+=index.org= file. Do not edit the =html= file directly.
 
 * Running GZDoom and understanding WADs
 

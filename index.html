@@ -65,38 +65,38 @@ table{border-color: var(--light-fg);}input#lightswitch:checked ~ table{border-co
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3afd96a">Running GZDoom and understanding WADs</a>
+<li><a href="#orgdb5bd3e">Running GZDoom and understanding WADs</a>
 <ul>
-<li><a href="#orgf899881">Getting the Engine</a></li>
-<li><a href="#orgb39c6aa">Getting some IWADs</a></li>
+<li><a href="#org6c3d126">Getting the Engine</a></li>
+<li><a href="#org14d7e03">Getting some IWADs</a></li>
 </ul>
 </li>
-<li><a href="#org13efd65">Basic replacement mods</a>
+<li><a href="#orgc51c625">Basic replacement mods</a>
 <ul>
-<li><a href="#org60109de">Texture replacement</a></li>
-<li><a href="#org0dad1ab">Text files as lumps</a></li>
-<li><a href="#org6d8a1cd">Basics of SLADE</a></li>
-<li><a href="#org0592076">Sprite replacement and offsets</a></li>
+<li><a href="#orgfc24058">Texture replacement</a></li>
+<li><a href="#org3441b3a">Text files as lumps</a></li>
+<li><a href="#orgb4a10b8">Basics of SLADE</a></li>
+<li><a href="#orge1f3a6d">Sprite replacement and offsets</a></li>
 </ul>
 </li>
-<li><a href="#org6d50f82">Zscript class replacements</a>
+<li><a href="#orga486b49">Zscript class replacements</a>
 <ul>
-<li><a href="#org485cf59">New pickup item</a></li>
-<li><a href="#org22326c4">Modifying Zombieman</a></li>
-<li><a href="#org6e0aace">Modifying weapon</a></li>
+<li><a href="#orgd9881dd">New pickup item</a></li>
+<li><a href="#org67ab0fb">Modifying Zombieman</a></li>
+<li><a href="#orgdd78101">Modifying weapon</a></li>
 </ul>
 </li>
-<li><a href="#orgd04d35e">Basics of mapping</a>
+<li><a href="#orgfe9750e">Basics of mapping</a>
 <ul>
-<li><a href="#org54a582f">Getting UDB</a></li>
-<li><a href="#org238b8ca">The Mapfile lump</a></li>
+<li><a href="#org4545fc5">Getting UDB</a></li>
+<li><a href="#org14dd2d0">The Mapfile lump</a></li>
 </ul>
 </li>
-<li><a href="#org5d11877">Misc.</a>
+<li><a href="#orgc9ab7ee">Misc.</a>
 <ul>
-<li><a href="#orgb8543ee">Git and version control</a></li>
-<li><a href="#org9b384cd">Seeking help and forum/discord etiquette</a></li>
-<li><a href="#org42d02f3">Studying famous mods</a></li>
+<li><a href="#org9571b06">Git and version control</a></li>
+<li><a href="#orgd99b003">Seeking help and forum/discord etiquette</a></li>
+<li><a href="#org6937c31">Studying famous mods</a></li>
 </ul>
 </li>
 </ul>
@@ -114,16 +114,18 @@ particular chapters for pedagogical reasons and to inculcate good
 habits. It will not present the full context or historical information
 for everything, because it is meant to be a first-pass curriculum,
 where too much extraneous information can be overwhelming and
-counter-productive.
+counter-productive. You can recommend additions/changes to this guide by
+submitting PRs to the <a href="https://github.com/dileepvr/gzdoom_modding_101">github repo</a>. Please only make changes to the
+<code>index.org</code> file. Do not edit the <code>html</code> file directly.
 </p>
 </section>
 
-<div id="outline-container-org3afd96a" class="outline-2">
-<h2 id="org3afd96a">Running GZDoom and understanding WADs</h2>
-<div class="outline-text-2" id="text-org3afd96a">
+<div id="outline-container-orgdb5bd3e" class="outline-2">
+<h2 id="orgdb5bd3e">Running GZDoom and understanding WADs</h2>
+<div class="outline-text-2" id="text-orgdb5bd3e">
 </div>
-<div id="outline-container-orgf899881" class="outline-3">
-<h3 id="orgf899881">Getting the Engine</h3>
+<div id="outline-container-org6c3d126" class="outline-3">
+<h3 id="org6c3d126">Getting the Engine</h3>
 <section><p>
 First, let us get GZDoom running and playing a game. Download the
 latest version of GZDoom (and not ZDoom) for your operating system
@@ -174,8 +176,8 @@ under the hood.
 </section>
 </div>
 
-<div id="outline-container-orgb39c6aa" class="outline-3">
-<h3 id="orgb39c6aa">Getting some IWADs</h3>
+<div id="outline-container-org14d7e03" class="outline-3">
+<h3 id="org14d7e03">Getting some IWADs</h3>
 <section><p>
 Running the engine executable by itself couldn&rsquo;t run a game because
 you haven&rsquo;t downloaded any actual games for the engine to run. Let us
@@ -219,14 +221,14 @@ screens of main menu, and the first level:
 </p>
 
 
-<figure id="orgfba71e5">
+<figure id="org19c3d0c">
 <img src="./images/screenshot01.jpg" alt="screenshot01.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 1: </span>Main menu screen for Freedoom 2 (v0.13.0)</figcaption>
 </figure>
 
 
-<figure id="org7875d7b">
+<figure id="org7da7dc4">
 <img src="./images/screenshot02.jpg" alt="screenshot02.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 2: </span>Starting area of MAP01 in Freedoom 2 (v0.13.0)</figcaption>
@@ -248,12 +250,12 @@ program.
 </div>
 </div>
 
-<div id="outline-container-org13efd65" class="outline-2">
-<h2 id="org13efd65">Basic replacement mods</h2>
-<div class="outline-text-2" id="text-org13efd65">
+<div id="outline-container-orgc51c625" class="outline-2">
+<h2 id="orgc51c625">Basic replacement mods</h2>
+<div class="outline-text-2" id="text-orgc51c625">
 </div>
-<div id="outline-container-org60109de" class="outline-3">
-<h3 id="org60109de">Texture replacement</h3>
+<div id="outline-container-orgfc24058" class="outline-3">
+<h3 id="orgfc24058">Texture replacement</h3>
 <section><p>
 Now we are going to make our first mod. Create a project folder
 somewhere on your computer. Call it something like
@@ -265,7 +267,7 @@ named <code>AQRUST08.png</code>. The filename is important.
 </p>
 
 
-<figure id="orgb5fd35b">
+<figure id="org5c6a0a3">
 <img src="./images/AQRUST08.png" alt="AQRUST08.png">
 
 <figcaption><span class="figure-number">Figure 3: </span><code>AQRUST08.png</code> modified wall texture</figcaption>
@@ -300,15 +302,15 @@ Once you launch the game, you should be greeted to this view:
 </p>
 
 
-<figure id="org5e96c8b">
+<figure id="orgb41c6ce">
 <img src="./images/screenshot03.jpg" alt="screenshot03.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 4: </span>Opening area of MAP01 in Freedoom 2 (v0.13.0) with a texture replaced</figcaption>
 </figure>
 </section>
 
-<div id="outline-container-orgcd4188d" class="outline-4">
-<h4 id="orgcd4188d">Analysis</h4>
+<div id="outline-container-org8aba5f4" class="outline-4">
+<h4 id="org8aba5f4">Analysis</h4>
 <section><p>
 Let us unpack what is happening here. You ran GZDoom with two files:
 <code>freedoom2.wad</code> and <code>my_first_mod.zip</code>. The first one is the IWAD,
@@ -337,8 +339,8 @@ serially, in the sequence of the files.
 </section>
 </div>
 
-<div id="outline-container-orgcfc2126" class="outline-4">
-<h4 id="orgcfc2126">Get setup with a Launcher before proceeding further</h4>
+<div id="outline-container-org3d8fc5d" class="outline-4">
+<h4 id="org3d8fc5d">Get setup with a Launcher before proceeding further</h4>
 <section><p>
 This is one reason I illustrated the command line method of launching
 GZDoom. Selecting multiple mod files and dragging-and-dropping them
@@ -361,7 +363,7 @@ is a view of my DoomRunner front page:
 </p>
 
 
-<figure id="orgd510cd5">
+<figure id="orgbcd1cdb">
 <img src="./images/doomrunner01.jpg" alt="doomrunner01.jpg" width="800px">
 
 </figure>
@@ -393,7 +395,7 @@ constructing and executing lengthy commands like the ones above.
 </p>
 
 
-<figure id="orgdc8e033">
+<figure id="orge89bcca">
 <img src="./images/doomrunner02.jpg" alt="doomrunner02.jpg" width="800px">
 
 </figure>
@@ -420,8 +422,8 @@ format. More on that later.
 </div>
 </div>
 
-<div id="outline-container-org0dad1ab" class="outline-3">
-<h3 id="org0dad1ab">Text files as lumps</h3>
+<div id="outline-container-org3441b3a" class="outline-3">
+<h3 id="org3441b3a">Text files as lumps</h3>
 <section><p>
 Let us continue adding to your mod. So far, you have a zip file
 (possibly renamed &ldquo;<code>my_first_mod.pk3</code>&rdquo;) which contains a folder named
@@ -504,7 +506,7 @@ The archive&rsquo;s internal structure should look something like this:
 </p>
 
 
-<figure id="org211c307">
+<figure id="org79b308d">
 <img src="./images/filestructure01.jpg" alt="filestructure01.jpg">
 
 </figure>
@@ -515,7 +517,7 @@ launcher like DoomRunner) should bring up this view:
 </p>
 
 
-<figure id="org2270cbb">
+<figure id="orgfa12e86">
 <img src="./images/screenshot06.jpg" alt="screenshot06.jpg" width="800px">
 
 </figure>
@@ -549,22 +551,22 @@ standardized.
 </section>
 </div>
 
-<div id="outline-container-org6d8a1cd" class="outline-3">
-<h3 id="org6d8a1cd">Basics of SLADE</h3>
+<div id="outline-container-orgb4a10b8" class="outline-3">
+<h3 id="orgb4a10b8">Basics of SLADE</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 </div>
 
-<div id="outline-container-org0592076" class="outline-3">
-<h3 id="org0592076">Sprite replacement and offsets</h3>
+<div id="outline-container-orge1f3a6d" class="outline-3">
+<h3 id="orge1f3a6d">Sprite replacement and offsets</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 
 
-<figure id="org96e277a">
+<figure id="org7d3c272">
 <img src="./images/screenshot04.jpg" alt="screenshot04.jpg" width="800px">
 
 </figure>
@@ -572,34 +574,34 @@ Coming soon &#x2026;
 </div>
 </div>
 
-<div id="outline-container-org6d50f82" class="outline-2">
-<h2 id="org6d50f82">Zscript class replacements</h2>
-<div class="outline-text-2" id="text-org6d50f82">
+<div id="outline-container-orga486b49" class="outline-2">
+<h2 id="orga486b49">Zscript class replacements</h2>
+<div class="outline-text-2" id="text-orga486b49">
 </div>
-<div id="outline-container-org485cf59" class="outline-3">
-<h3 id="org485cf59">New pickup item</h3>
+<div id="outline-container-orgd9881dd" class="outline-3">
+<h3 id="orgd9881dd">New pickup item</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 </div>
 
-<div id="outline-container-org22326c4" class="outline-3">
-<h3 id="org22326c4">Modifying Zombieman</h3>
+<div id="outline-container-org67ab0fb" class="outline-3">
+<h3 id="org67ab0fb">Modifying Zombieman</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 
 
-<figure id="orgaedadf0">
+<figure id="orga72281e">
 <img src="./images/screenshot05.jpg" alt="screenshot05.jpg" width="800px">
 
 </figure>
 </section>
 </div>
 
-<div id="outline-container-org6e0aace" class="outline-3">
-<h3 id="org6e0aace">Modifying weapon</h3>
+<div id="outline-container-orgdd78101" class="outline-3">
+<h3 id="orgdd78101">Modifying weapon</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
@@ -607,66 +609,66 @@ Coming soon &#x2026;
 </div>
 </div>
 
-<div id="outline-container-orgd04d35e" class="outline-2">
-<h2 id="orgd04d35e">Basics of mapping</h2>
-<div class="outline-text-2" id="text-orgd04d35e">
+<div id="outline-container-orgfe9750e" class="outline-2">
+<h2 id="orgfe9750e">Basics of mapping</h2>
+<div class="outline-text-2" id="text-orgfe9750e">
 </div>
-<div id="outline-container-org54a582f" class="outline-3">
-<h3 id="org54a582f">Getting UDB</h3>
-<div class="outline-text-3" id="text-org54a582f">
+<div id="outline-container-org4545fc5" class="outline-3">
+<h3 id="org4545fc5">Getting UDB</h3>
+<div class="outline-text-3" id="text-org4545fc5">
 </div>
-<div id="outline-container-org20c83f7" class="outline-4">
-<h4 id="org20c83f7">First room</h4>
+<div id="outline-container-org2b86466" class="outline-4">
+<h4 id="org2b86466">First room</h4>
 </div>
-<div id="outline-container-orgc418319" class="outline-4">
-<h4 id="orgc418319">Using custom textures from your mod</h4>
+<div id="outline-container-org9c8cf83" class="outline-4">
+<h4 id="org9c8cf83">Using custom textures from your mod</h4>
 </div>
-<div id="outline-container-orgc1338ac" class="outline-4">
-<h4 id="orgc1338ac">Placing custom things from your mod</h4>
+<div id="outline-container-org2fcf02f" class="outline-4">
+<h4 id="org2fcf02f">Placing custom things from your mod</h4>
 </div>
 </div>
 
-<div id="outline-container-org238b8ca" class="outline-3">
-<h3 id="org238b8ca">The Mapfile lump</h3>
+<div id="outline-container-org14dd2d0" class="outline-3">
+<h3 id="org14dd2d0">The Mapfile lump</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 
-<div id="outline-container-orgb27deb5" class="outline-4">
-<h4 id="orgb27deb5">Changing name for freedoom1</h4>
+<div id="outline-container-org404d262" class="outline-4">
+<h4 id="org404d262">Changing name for freedoom1</h4>
 </div>
-<div id="outline-container-orgf266d5f" class="outline-4">
-<h4 id="orgf266d5f">MAPINFO lump</h4>
+<div id="outline-container-orgb2172d8" class="outline-4">
+<h4 id="orgb2172d8">MAPINFO lump</h4>
 </div>
-<div id="outline-container-org878c181" class="outline-4">
-<h4 id="org878c181">Packing the map with your mod</h4>
+<div id="outline-container-org625ca25" class="outline-4">
+<h4 id="org625ca25">Packing the map with your mod</h4>
 </div>
 </div>
-</div>
-
-<div id="outline-container-org5d11877" class="outline-2">
-<h2 id="org5d11877">Misc.</h2>
-<div class="outline-text-2" id="text-org5d11877">
-</div>
-<div id="outline-container-orgb8543ee" class="outline-3">
-<h3 id="orgb8543ee">Git and version control</h3>
-<section><p>
-Coming soon &#x2026;
-</p>
-</section>
 </div>
 
-<div id="outline-container-org9b384cd" class="outline-3">
-<h3 id="org9b384cd">Seeking help and forum/discord etiquette</h3>
+<div id="outline-container-orgc9ab7ee" class="outline-2">
+<h2 id="orgc9ab7ee">Misc.</h2>
+<div class="outline-text-2" id="text-orgc9ab7ee">
+</div>
+<div id="outline-container-org9571b06" class="outline-3">
+<h3 id="org9571b06">Git and version control</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 </div>
 
-<div id="outline-container-org42d02f3" class="outline-3">
-<h3 id="org42d02f3">Studying famous mods</h3>
+<div id="outline-container-orgd99b003" class="outline-3">
+<h3 id="orgd99b003">Seeking help and forum/discord etiquette</h3>
+<section><p>
+Coming soon &#x2026;
+</p>
+</section>
+</div>
+
+<div id="outline-container-org6937c31" class="outline-3">
+<h3 id="org6937c31">Studying famous mods</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
