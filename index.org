@@ -21,9 +21,9 @@ counter-productive.
 
 ** Getting the Engine
 
-First, let us get GZDoom running a playing a game. Download the latest
-version of GZDoom (and not ZDoom) for your operating system from here:
-[[https://zdoom.org/downloads][https://zdoom.org/downloads]]
+First, let us get GZDoom running and playing a game. Download the
+latest version of GZDoom (and not ZDoom) for your operating system
+from here: [[https://zdoom.org/downloads][https://zdoom.org/downloads]]
 
 If you are running on Linux, you might be better off [[https://zdoom.org/wiki/Compile_GZDoom_on_Linux][compiling it from
 source]]. That is not a ding. I do this myself.
@@ -95,7 +95,7 @@ screens of main menu, and the first level:
 #+ATTR_HTML: :width 800px
 [[./images/screenshot01.jpg]]
 
-#+CAPTION: Starting are of MAP01 in Freedoom 2 (v0.13.0)
+#+CAPTION: Starting area of MAP01 in Freedoom 2 (v0.13.0)
 #+ATTR_HTML: :width 800px
 [[./images/screenshot02.jpg]]
 
@@ -188,7 +188,7 @@ typing out long commands. They are using launcher programs like [[https://zdoom.
 it.
 
 Most launcher programs allow saving of presets for various mod and
-order combinations. On first launch, they typically as you to select
+order combinations. On first launch, they typically ask you to select
 engine executables, a list of IWADs, and the usual location for
 various kinds of PWADs like map packs. So you don't have to put files
 in your GZDoom folder, or any other specific location. You should feel
@@ -316,6 +316,29 @@ launcher like DoomRunner) should bring up this view:
 
 #+ATTR_HTML: :width 800px
 [[./images/screenshot06.jpg]]
+
+What the =TEXTURES.lmp= file (or the =TEXTURES= lump) did was create a
+new, virtual texture container with the name =BIGDOOR1= with the image
+=John_Romer.png= patched in, and presented that to the engine. You can
+create new virtual textures this way by combining and mashing multiple
+other textures together (yes, even other virtual ones). You can scale,
+rotate, skew, mirror/flip, and mask, as well as do other kinds of
+transformations without actually creating new image files to be stored
+in the PWAD. The =TEXTURES= lump is a great way to put a decorative
+poster or graffiti onto an existing wall texture. An example we will
+go through later will involve slapping an interactable switch onto a
+wall texture for use in a custom map.
+
+These lump names, you will notice, have both been eight characters
+long (=AQRUST08=, =BIGDOOR1=). This is another hold-over from the DOS
+days, where file names would be truncated to height characters. The
+case doesn't matter, but you have to stick to this convention while
+naming lumps. Later on when we get into map making, you will find that
+certain map formats allow for use of full texture filenames with full
+paths instead of these short lump names. It is still recommended that
+you use these lump names instead. Because this makes your maps easily
+moddable (by you as well as others!) if the lump names are
+standardized.
 
 ** Basics of SLADE
 

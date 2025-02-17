@@ -32,19 +32,25 @@ div.figure > p:nth-child(2){float: right;clear: right;margin-top: 0;margin-botto
 .figure-number {display: none;}a:link{text-decoration: underline;background: none;text-shadow: none;}
 input#lightswitch{width: 2em;height: 1.5em;padding-left: 0.5em;}label#lightswitch-label{cursor: pointer;padding-left: 0.5em;font-size: 1.5em;}
 body{margin: 0;max-width: 100%;padding: 0;width: 100%;}
+h1{font-weight: 400;margin-top: 4rem;margin-bottom: 1.5rem;font-size: 3.2rem;line-height: 1;}
+h2{font-style: italic;font-weight: 400;margin-top: 2.1rem;margin-bottom: 1.4rem;font-size: 2.8rem;line-height: 1;}
+h3{font-style: italic;font-weight: 400;font-size: 2.2rem;margin-top: 2rem;margin-bottom: 1.4rem;line-height: 1;}
+h4{font-style: italic;font-weight: 400;font-size: 1.8rem;margin-top: 2rem;margin-bottom: 1.4rem;line-height: 1;text-decoration: underline;}
+pre code{font-size: 1.1em;padding: 0pt;overflow: auto;margin: 2em;position: relative;padding-top: 0.2em;padding-left: 1em;padding-right: 1em;border: 1px solid black;}
 div#body{min-height: calc(100vh - 4em);padding-bottom: 2em;padding-top: 2em;overflow-y: auto;}
 div#container{margin-left: auto;margin-right: auto;max-width: 1400px;padding-left: 12.5%;width: 87.5%;}article{padding-top: 0;}
 @media (max-width: 760px){body{width: 100%;margin: 0;padding: 0;}div#body{width: 92%;padding-right: 8%;}}
-:root{--dark-bg: #002b36;--dark-color: #eee8d5;--dark-code: #93a1a1;--light-bg: #fffff8;--light-color: #111;--light-code: #657b83;}
+:root{--dark-bg: #002b36;--dark-bg2: #224d57;--dark-color: #eee8d5;--dark-code: #b5c3c3;--light-bg: #fffff8;--light-bg2: #ccccc5;--light-color: #111;--light-code: #435961;}
 @media (prefers-color-scheme: dark){div#body{background-color: var(--dark-bg);color: var(--dark-color);}
 #table-of-contents{background: var(--dark-bg);}input#lightswitch:checked ~ div#body {background-color: var(--light-bg);color: var(--light-color);}
 input#lightswitch:checked ~ #body #container #content #table-of-contents{background: var(--light-bg);}input#lightswitch:checked + label {font-weight: bold;}
-pre code{color: var(--dark-code);}input#lightswitch:checked ~ pre code {color: var(--light-code);}
+pre code{color: var(--dark-code);background-color: var(--dark-bg2);}input#lightswitch:checked ~ #body #container #content pre code {color: var(--light-code);background-color: var(--light-bg2);}
 table{border-color: var(--dark-fg);}input#lightswitch:checked ~ table{border-color: var(--light-code);}}
 @media (prefers-color-scheme: light){div#body{background-color: var(--light-bg);color: var(--light-color);}
 #table-of-contents{background: var(--light-bg);}input#lightswitch:checked ~ div#body{background-color: var(--dark-bg);color: var(--dark-color);}
 input#lightswitch:checked ~ #body #container #content #table-of-contents{background: var(--dark-bg);}input#lightswitch:checked + label{font-weight: bold;}
-pre code{color: var(--light-code);}input#lightswitch:checked ~ pre code{color: var(--dark-code);}
+pre code{color: var(--light-code);background-color: var(--light-bg2);}
+input#lightswitch:checked ~ #body #container #content pre code{color: var(--dark-code);background-color: var(--dark-bg2);}
 table{border-color: var(--light-fg);}input#lightswitch:checked ~ table{border-color: var(--dark-code);}}
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
@@ -59,38 +65,38 @@ table{border-color: var(--light-fg);}input#lightswitch:checked ~ table{border-co
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org082faaf">Running GZDoom and understanding WADs</a>
+<li><a href="#org3afd96a">Running GZDoom and understanding WADs</a>
 <ul>
-<li><a href="#orgcf542ac">Getting the Engine</a></li>
-<li><a href="#org2d6a5d5">Getting some IWADs</a></li>
+<li><a href="#orgf899881">Getting the Engine</a></li>
+<li><a href="#orgb39c6aa">Getting some IWADs</a></li>
 </ul>
 </li>
-<li><a href="#org4ab7583">Basic replacement mods</a>
+<li><a href="#org13efd65">Basic replacement mods</a>
 <ul>
-<li><a href="#org71d46a8">Texture replacement</a></li>
-<li><a href="#org8272a5a">Text files as lumps</a></li>
-<li><a href="#org3632c37">Basics of SLADE</a></li>
-<li><a href="#org4e7da29">Sprite replacement and offsets</a></li>
+<li><a href="#org60109de">Texture replacement</a></li>
+<li><a href="#org0dad1ab">Text files as lumps</a></li>
+<li><a href="#org6d8a1cd">Basics of SLADE</a></li>
+<li><a href="#org0592076">Sprite replacement and offsets</a></li>
 </ul>
 </li>
-<li><a href="#org6bcf4f6">Zscript class replacements</a>
+<li><a href="#org6d50f82">Zscript class replacements</a>
 <ul>
-<li><a href="#orgb96598d">New pickup item</a></li>
-<li><a href="#orgf44bf86">Modifying Zombieman</a></li>
-<li><a href="#org6be2362">Modifying weapon</a></li>
+<li><a href="#org485cf59">New pickup item</a></li>
+<li><a href="#org22326c4">Modifying Zombieman</a></li>
+<li><a href="#org6e0aace">Modifying weapon</a></li>
 </ul>
 </li>
-<li><a href="#org14bab9c">Basics of mapping</a>
+<li><a href="#orgd04d35e">Basics of mapping</a>
 <ul>
-<li><a href="#orgf12c3e7">Getting UDB</a></li>
-<li><a href="#org1ffa2af">The Mapfile lump</a></li>
+<li><a href="#org54a582f">Getting UDB</a></li>
+<li><a href="#org238b8ca">The Mapfile lump</a></li>
 </ul>
 </li>
-<li><a href="#org17645a5">Misc.</a>
+<li><a href="#org5d11877">Misc.</a>
 <ul>
-<li><a href="#orgf635d84">Git and version control</a></li>
-<li><a href="#orgce97f27">Seeking help and forum/discord etiquette</a></li>
-<li><a href="#org99d3922">Studying famous mods</a></li>
+<li><a href="#orgb8543ee">Git and version control</a></li>
+<li><a href="#org9b384cd">Seeking help and forum/discord etiquette</a></li>
+<li><a href="#org42d02f3">Studying famous mods</a></li>
 </ul>
 </li>
 </ul>
@@ -112,16 +118,16 @@ counter-productive.
 </p>
 </section>
 
-<div id="outline-container-org082faaf" class="outline-2">
-<h2 id="org082faaf">Running GZDoom and understanding WADs</h2>
-<div class="outline-text-2" id="text-org082faaf">
+<div id="outline-container-org3afd96a" class="outline-2">
+<h2 id="org3afd96a">Running GZDoom and understanding WADs</h2>
+<div class="outline-text-2" id="text-org3afd96a">
 </div>
-<div id="outline-container-orgcf542ac" class="outline-3">
-<h3 id="orgcf542ac">Getting the Engine</h3>
+<div id="outline-container-orgf899881" class="outline-3">
+<h3 id="orgf899881">Getting the Engine</h3>
 <section><p>
-First, let us get GZDoom running a playing a game. Download the latest
-version of GZDoom (and not ZDoom) for your operating system from here:
-<a href="https://zdoom.org/downloads">https://zdoom.org/downloads</a>
+First, let us get GZDoom running and playing a game. Download the
+latest version of GZDoom (and not ZDoom) for your operating system
+from here: <a href="https://zdoom.org/downloads">https://zdoom.org/downloads</a>
 </p>
 
 <p>
@@ -168,8 +174,8 @@ under the hood.
 </section>
 </div>
 
-<div id="outline-container-org2d6a5d5" class="outline-3">
-<h3 id="org2d6a5d5">Getting some IWADs</h3>
+<div id="outline-container-orgb39c6aa" class="outline-3">
+<h3 id="orgb39c6aa">Getting some IWADs</h3>
 <section><p>
 Running the engine executable by itself couldn&rsquo;t run a game because
 you haven&rsquo;t downloaded any actual games for the engine to run. Let us
@@ -213,17 +219,17 @@ screens of main menu, and the first level:
 </p>
 
 
-<figure id="orgdb7bfa4">
+<figure id="orgfba71e5">
 <img src="./images/screenshot01.jpg" alt="screenshot01.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 1: </span>Main menu screen for Freedoom 2 (v0.13.0)</figcaption>
 </figure>
 
 
-<figure id="org669c938">
+<figure id="org7875d7b">
 <img src="./images/screenshot02.jpg" alt="screenshot02.jpg" width="800px">
 
-<figcaption><span class="figure-number">Figure 2: </span>Starting are of MAP01 in Freedoom 2 (v0.13.0)</figcaption>
+<figcaption><span class="figure-number">Figure 2: </span>Starting area of MAP01 in Freedoom 2 (v0.13.0)</figcaption>
 </figure>
 
 <p>
@@ -242,12 +248,12 @@ program.
 </div>
 </div>
 
-<div id="outline-container-org4ab7583" class="outline-2">
-<h2 id="org4ab7583">Basic replacement mods</h2>
-<div class="outline-text-2" id="text-org4ab7583">
+<div id="outline-container-org13efd65" class="outline-2">
+<h2 id="org13efd65">Basic replacement mods</h2>
+<div class="outline-text-2" id="text-org13efd65">
 </div>
-<div id="outline-container-org71d46a8" class="outline-3">
-<h3 id="org71d46a8">Texture replacement</h3>
+<div id="outline-container-org60109de" class="outline-3">
+<h3 id="org60109de">Texture replacement</h3>
 <section><p>
 Now we are going to make our first mod. Create a project folder
 somewhere on your computer. Call it something like
@@ -259,7 +265,7 @@ named <code>AQRUST08.png</code>. The filename is important.
 </p>
 
 
-<figure id="org726832e">
+<figure id="orgb5fd35b">
 <img src="./images/AQRUST08.png" alt="AQRUST08.png">
 
 <figcaption><span class="figure-number">Figure 3: </span><code>AQRUST08.png</code> modified wall texture</figcaption>
@@ -294,15 +300,15 @@ Once you launch the game, you should be greeted to this view:
 </p>
 
 
-<figure id="orgfee5a74">
+<figure id="org5e96c8b">
 <img src="./images/screenshot03.jpg" alt="screenshot03.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 4: </span>Opening area of MAP01 in Freedoom 2 (v0.13.0) with a texture replaced</figcaption>
 </figure>
 </section>
 
-<div id="outline-container-orgb23940d" class="outline-4">
-<h4 id="orgb23940d">Analysis</h4>
+<div id="outline-container-orgcd4188d" class="outline-4">
+<h4 id="orgcd4188d">Analysis</h4>
 <section><p>
 Let us unpack what is happening here. You ran GZDoom with two files:
 <code>freedoom2.wad</code> and <code>my_first_mod.zip</code>. The first one is the IWAD,
@@ -331,8 +337,8 @@ serially, in the sequence of the files.
 </section>
 </div>
 
-<div id="outline-container-org60b4654" class="outline-4">
-<h4 id="org60b4654">Get setup with a Launcher before proceeding further</h4>
+<div id="outline-container-orgcfc2126" class="outline-4">
+<h4 id="orgcfc2126">Get setup with a Launcher before proceeding further</h4>
 <section><p>
 This is one reason I illustrated the command line method of launching
 GZDoom. Selecting multiple mod files and dragging-and-dropping them
@@ -346,7 +352,7 @@ it.
 
 <p>
 Most launcher programs allow saving of presets for various mod and
-order combinations. On first launch, they typically as you to select
+order combinations. On first launch, they typically ask you to select
 engine executables, a list of IWADs, and the usual location for
 various kinds of PWADs like map packs. So you don&rsquo;t have to put files
 in your GZDoom folder, or any other specific location. You should feel
@@ -355,7 +361,7 @@ is a view of my DoomRunner front page:
 </p>
 
 
-<figure id="org054f76e">
+<figure id="orgd510cd5">
 <img src="./images/doomrunner01.jpg" alt="doomrunner01.jpg" width="800px">
 
 </figure>
@@ -387,7 +393,7 @@ constructing and executing lengthy commands like the ones above.
 </p>
 
 
-<figure id="orgbea31f7">
+<figure id="orgdc8e033">
 <img src="./images/doomrunner02.jpg" alt="doomrunner02.jpg" width="800px">
 
 </figure>
@@ -414,8 +420,8 @@ format. More on that later.
 </div>
 </div>
 
-<div id="outline-container-org8272a5a" class="outline-3">
-<h3 id="org8272a5a">Text files as lumps</h3>
+<div id="outline-container-org0dad1ab" class="outline-3">
+<h3 id="org0dad1ab">Text files as lumps</h3>
 <section><p>
 Let us continue adding to your mod. So far, you have a zip file
 (possibly renamed &ldquo;<code>my_first_mod.pk3</code>&rdquo;) which contains a folder named
@@ -498,7 +504,7 @@ The archive&rsquo;s internal structure should look something like this:
 </p>
 
 
-<figure id="org226c5e8">
+<figure id="org211c307">
 <img src="./images/filestructure01.jpg" alt="filestructure01.jpg">
 
 </figure>
@@ -509,29 +515,56 @@ launcher like DoomRunner) should bring up this view:
 </p>
 
 
-<figure id="org021b036">
+<figure id="org2270cbb">
 <img src="./images/screenshot06.jpg" alt="screenshot06.jpg" width="800px">
 
 </figure>
+
+<p>
+What the <code>TEXTURES.lmp</code> file (or the <code>TEXTURES</code> lump) did was create a
+new, virtual texture container with the name <code>BIGDOOR1</code> with the image
+<code>John_Romer.png</code> patched in, and presented that to the engine. You can
+create new virtual textures this way by combining and mashing multiple
+other textures together (yes, even other virtual ones). You can scale,
+rotate, skew, mirror/flip, and mask, as well as do other kinds of
+transformations without actually creating new image files to be stored
+in the PWAD. The <code>TEXTURES</code> lump is a great way to put a decorative
+poster or graffiti onto an existing wall texture. An example we will
+go through later will involve slapping an interactable switch onto a
+wall texture for use in a custom map.
+</p>
+
+<p>
+These lump names, you will notice, have both been eight characters
+long (<code>AQRUST08</code>, <code>BIGDOOR1</code>). This is another hold-over from the DOS
+days, where file names would be truncated to height characters. The
+case doesn&rsquo;t matter, but you have to stick to this convention while
+naming lumps. Later on when we get into map making, you will find that
+certain map formats allow for use of full texture filenames with full
+paths instead of these short lump names. It is still recommended that
+you use these lump names instead. Because this makes your maps easily
+moddable (by you as well as others!) if the lump names are
+standardized.
+</p>
 </section>
 </div>
 
-<div id="outline-container-org3632c37" class="outline-3">
-<h3 id="org3632c37">Basics of SLADE</h3>
+<div id="outline-container-org6d8a1cd" class="outline-3">
+<h3 id="org6d8a1cd">Basics of SLADE</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 </div>
 
-<div id="outline-container-org4e7da29" class="outline-3">
-<h3 id="org4e7da29">Sprite replacement and offsets</h3>
+<div id="outline-container-org0592076" class="outline-3">
+<h3 id="org0592076">Sprite replacement and offsets</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 
 
-<figure id="org8bf6a52">
+<figure id="org96e277a">
 <img src="./images/screenshot04.jpg" alt="screenshot04.jpg" width="800px">
 
 </figure>
@@ -539,34 +572,34 @@ Coming soon &#x2026;
 </div>
 </div>
 
-<div id="outline-container-org6bcf4f6" class="outline-2">
-<h2 id="org6bcf4f6">Zscript class replacements</h2>
-<div class="outline-text-2" id="text-org6bcf4f6">
+<div id="outline-container-org6d50f82" class="outline-2">
+<h2 id="org6d50f82">Zscript class replacements</h2>
+<div class="outline-text-2" id="text-org6d50f82">
 </div>
-<div id="outline-container-orgb96598d" class="outline-3">
-<h3 id="orgb96598d">New pickup item</h3>
+<div id="outline-container-org485cf59" class="outline-3">
+<h3 id="org485cf59">New pickup item</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 </div>
 
-<div id="outline-container-orgf44bf86" class="outline-3">
-<h3 id="orgf44bf86">Modifying Zombieman</h3>
+<div id="outline-container-org22326c4" class="outline-3">
+<h3 id="org22326c4">Modifying Zombieman</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 
 
-<figure id="orgee5230f">
+<figure id="orgaedadf0">
 <img src="./images/screenshot05.jpg" alt="screenshot05.jpg" width="800px">
 
 </figure>
 </section>
 </div>
 
-<div id="outline-container-org6be2362" class="outline-3">
-<h3 id="org6be2362">Modifying weapon</h3>
+<div id="outline-container-org6e0aace" class="outline-3">
+<h3 id="org6e0aace">Modifying weapon</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
@@ -574,66 +607,66 @@ Coming soon &#x2026;
 </div>
 </div>
 
-<div id="outline-container-org14bab9c" class="outline-2">
-<h2 id="org14bab9c">Basics of mapping</h2>
-<div class="outline-text-2" id="text-org14bab9c">
+<div id="outline-container-orgd04d35e" class="outline-2">
+<h2 id="orgd04d35e">Basics of mapping</h2>
+<div class="outline-text-2" id="text-orgd04d35e">
 </div>
-<div id="outline-container-orgf12c3e7" class="outline-3">
-<h3 id="orgf12c3e7">Getting UDB</h3>
-<div class="outline-text-3" id="text-orgf12c3e7">
+<div id="outline-container-org54a582f" class="outline-3">
+<h3 id="org54a582f">Getting UDB</h3>
+<div class="outline-text-3" id="text-org54a582f">
 </div>
-<div id="outline-container-org6283d0d" class="outline-4">
-<h4 id="org6283d0d">First room</h4>
+<div id="outline-container-org20c83f7" class="outline-4">
+<h4 id="org20c83f7">First room</h4>
 </div>
-<div id="outline-container-orge0e14c0" class="outline-4">
-<h4 id="orge0e14c0">Using custom textures from your mod</h4>
+<div id="outline-container-orgc418319" class="outline-4">
+<h4 id="orgc418319">Using custom textures from your mod</h4>
 </div>
-<div id="outline-container-org7c01584" class="outline-4">
-<h4 id="org7c01584">Placing custom things from your mod</h4>
+<div id="outline-container-orgc1338ac" class="outline-4">
+<h4 id="orgc1338ac">Placing custom things from your mod</h4>
 </div>
 </div>
 
-<div id="outline-container-org1ffa2af" class="outline-3">
-<h3 id="org1ffa2af">The Mapfile lump</h3>
+<div id="outline-container-org238b8ca" class="outline-3">
+<h3 id="org238b8ca">The Mapfile lump</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 
-<div id="outline-container-orgc046f55" class="outline-4">
-<h4 id="orgc046f55">Changing name for freedoom1</h4>
+<div id="outline-container-orgb27deb5" class="outline-4">
+<h4 id="orgb27deb5">Changing name for freedoom1</h4>
 </div>
-<div id="outline-container-org035710c" class="outline-4">
-<h4 id="org035710c">MAPINFO lump</h4>
+<div id="outline-container-orgf266d5f" class="outline-4">
+<h4 id="orgf266d5f">MAPINFO lump</h4>
 </div>
-<div id="outline-container-org2487331" class="outline-4">
-<h4 id="org2487331">Packing the map with your mod</h4>
+<div id="outline-container-org878c181" class="outline-4">
+<h4 id="org878c181">Packing the map with your mod</h4>
 </div>
 </div>
-</div>
-
-<div id="outline-container-org17645a5" class="outline-2">
-<h2 id="org17645a5">Misc.</h2>
-<div class="outline-text-2" id="text-org17645a5">
-</div>
-<div id="outline-container-orgf635d84" class="outline-3">
-<h3 id="orgf635d84">Git and version control</h3>
-<section><p>
-Coming soon &#x2026;
-</p>
-</section>
 </div>
 
-<div id="outline-container-orgce97f27" class="outline-3">
-<h3 id="orgce97f27">Seeking help and forum/discord etiquette</h3>
+<div id="outline-container-org5d11877" class="outline-2">
+<h2 id="org5d11877">Misc.</h2>
+<div class="outline-text-2" id="text-org5d11877">
+</div>
+<div id="outline-container-orgb8543ee" class="outline-3">
+<h3 id="orgb8543ee">Git and version control</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 </div>
 
-<div id="outline-container-org99d3922" class="outline-3">
-<h3 id="org99d3922">Studying famous mods</h3>
+<div id="outline-container-org9b384cd" class="outline-3">
+<h3 id="org9b384cd">Seeking help and forum/discord etiquette</h3>
+<section><p>
+Coming soon &#x2026;
+</p>
+</section>
+</div>
+
+<div id="outline-container-org42d02f3" class="outline-3">
+<h3 id="org42d02f3">Studying famous mods</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
