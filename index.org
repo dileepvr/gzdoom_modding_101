@@ -4,20 +4,24 @@
 #+HTML_DOCTYPE: html5
 #+BIND: org-tufte-embed-images:nil
 
-This guide will introduce the basics of modding for the GZDoom source
-port. It is aimed at beginners with little-to-no technical
-knowledge. For more advanced help, check the [[https://zdoom.org/wiki/Tutorials][Tutorials page]] on the
-zdoom wiki, or Jekyll Grim's [[https://jekyllgrim.github.io/ZScript_Basics/][Zscript basics]]. The guide will focus on
-GZDoom, but might have limited applicability to other source ports. It
-is structured as a sequence of exercises that the reader is expected
-to follow along. It presents particular ways of doing things in
-particular chapters for pedagogical reasons and to inculcate good
-habits. It will not present the full context or historical information
-for everything, because it is meant to be a first-pass curriculum,
-where too much extraneous information can be overwhelming and
-counter-productive. You can recommend additions/changes to this guide by
-submitting PRs to the [[https://github.com/dileepvr/gzdoom_modding_101][github repo]]. Please only make changes to the
-=index.org= file. Do not edit the =html= file directly.
+If you are reading this on the github repo, try [[https://dileepvr.github.io/gzdoom_modding_101][this link]] for some =HTML=
+styling. Then use the floating element labeled "/Table of Contents/" to the
+top-right of this page to navigate between sections.
+
+
+This guide will introduce the basics of modding for the GZDoom source port.
+It is aimed at beginners with little-to-no technical knowledge. For more
+advanced help, check the [[https://zdoom.org/wiki/Tutorials][Tutorials page]] on the zdoom wiki, or Jekyll Grim's
+[[https://jekyllgrim.github.io/ZScript_Basics/][Zscript basics]]. The guide will focus on GZDoom, but might have limited
+applicability to other source ports. It is structured as a sequence of
+exercises that the reader is expected to follow along. It presents
+particular ways of doing things in particular chapters for pedagogical
+reasons and to inculcate good habits. It will not present the full context
+or historical information for everything, because it is meant to be a
+first-pass curriculum, where too much extraneous information can be
+overwhelming and counter-productive. You can recommend additions/changes to
+this guide by submitting PRs to the [[https://github.com/dileepvr/gzdoom_modding_101][github repo]]. Please only make changes
+to the =index.org= file. Do not edit the =html= file directly.
 
 * Running GZDoom and understanding WADs
 
@@ -165,10 +169,10 @@ engine to paint that texture on a specific bunch of walls (with some
 offsets, lighting effects, etc.). This is what happens when you run
 GZDoom with just the IWAD =freedoom2.wad= by itself. But when you run
 the IWAD with this PWAD, which contains its own copy of the =AQRUST08=
-texture, the engine replaces all instances of that texture with the
-one from your PWAD. *This is also why it was important to name the
-file exactly right.* If you load two PWADs that both replace the same
-texture like so:
+texture (we'll get into how I knew that later), the engine replaces
+all instances of that texture with the one from your PWAD. *This is
+also why it was important to name the file exactly right.* If you load
+two PWADs that both replace the same texture like so:
 
 #+BEGIN_SRC
   ./gzdoom -iwad freedoom2.wad -file mod1.pk3 -file mod2.pk3
@@ -282,10 +286,11 @@ feel.
 
 For this next exercise, we will replace the texture on the door
 visible from the starting area in Freedoom 2. The lump name for this
-texture needs to be =BIGDOOR1=. But we will not just be using a file
-named =BIGDOOR1.png= in the =textures= folder, even though that will
-work. We will instead use use some other file name, and try to use the
-=TEXTURES= lump to make it work.
+texture needs to be =BIGDOOR1= (again, I'll get to how I know this
+later). But we will not just be using a file named =BIGDOOR1.png= in
+the =textures= folder, even though that will work. We will instead use
+use some other file name, and try to use the =TEXTURES= lump to make
+it work.
 
 Pick any =png= image file you want. I'm going with [[https://en.wikipedia.org/wiki/John_Romero][John Romero's]]
 forehead. Crop/scale the image using some image manipulation program
@@ -344,9 +349,100 @@ standardized.
 
 ** Basics of SLADE
 
-Coming soon ...
+Next, we will introduce another helpful program to our modding
+toolbelt. This one is a WAD-editor called SLADE. You can acquire it
+for your preferred OS from [[https://github.com/sirjuddington/SLADE/releases][here]] or [[https://slade.mancubus.net/index.php?page=downloads][here]]. SLADE is in principle capable
+of many things. You can write code, compile code, paint textures,
+create and modify brightmaps, and even [[https://eev.ee/blog/2015/12/19/you-should-make-a-doom-level-part-1/][make/edit levels]]. There are
+Doom mod authors who develop entirely on SLADE (some of them
+livestream the process). But in this guide, as a rule, we will only be
+using SLADE to take a peek into WADs, and possibly extract content. We
+will not be using SLADE to modify any data within wads. Feel free to
+learn its intricacies on your own, later.
+
+To not overwhelm ourselves, let us first use SLADE to open the
+simplest mod we have: "=my_first_mod.zip=" (or =.pk3=). Here is the
+view you should be presented with:
+
+#+ATTR_HTML: :width 800px
+[[./images/SLADE01.jpg]]
+
+It's all fairly intuitive. There is a panel that shows the files or
+"lumps" in your "WAD" (I've expanded the folders and subfolders), and
+a bigger panel to the right that shows the content of the currently
+selected lump. In the image, I have selected the =TEXTURES.lmp=
+file/lump to show its textual content. A few things of note here is
+the SLADE as correctly identified the file-types of our lumps as two
+=PNG= Graphic files and a "Texture Definition" lump. It says so next
+to the file as well as in the bottom bar of the window. Furthermore,
+it has auto-selected the "ZDoom Textures" option in the "Text
+Language" pulldown menu above the textual-content panel for syntax
+highlighting. All of these areas of the SLADE window are important to
+us. You can select the =AQRUST08.png= file and watch the image
+displayed in the content panel, along with graphic in the bottom bar.
+
+Now let's open a bigger "WAD" file: =freedoom2.wad=. Be sure to create
+a backup of this file before opening it in SLADE, just to avoid
+accidentally causing a change in it. That would violate our rule
+regarding SLADE for this guide.
+
+Since this is a wad-format file, you should be confronted with a
+lengthy, flat list of lumps with no hierarchical subfolder
+structure. The lumps are by default, ordered in the way they are
+stored in the wad (the ordering is important in the wad format). But
+you can click on the "Name" tab at the top of the lumps panel to
+display the lumps in ascending order of their name strings. If you
+scroll down to Freedoom 2's version of the =AQRUST08= graphic (the one
+your mod replaced), you will see that the "Type" field says "Graphic
+(Doom)" instead of "Graphic (PNG)". The image is stored in a Paletted
+raw format. If the image appears in black-and-white in the contents
+panel, you can instruct SLADE to use Doom's color palette in the
+drop-down menu to the top-right. The same goes for exporting
+graphics. You can't just right-click on the =AQRUST08= lump and click
+export, as it will result in a binary lump file. You would have to
+navigate to the sub-popup menu under "Graphic" after you right-click,
+and select the "Export as PNG" option. If you'd like to practice
+further, try exporting the =SLIME14= graphic as a =PNG= file and
+modify it, then include it in =my_first_mod.zip=. This should apply to
+the floor in the opening area of Freedoom 2.
+
+Another curiosity that should be of interest is that there is no lump
+named =BIGDOOR1= (at least as of Freedoom 2 version 0.13.0). There is
+one called =DOOR2_1= that looks suspiciously like the door from the
+opening level, but it is too small (96 x 96 pixels, see the bottom
+bar). You can test that it isn't the right one by attempting a
+=DOOR2_1= lump replacement file in your mod. If will replace all
+instances of =DOOR2_1= usage in the levels of Freedoom 2, but all
+=BIGDOOR1= instances (including the one in the opening area) will
+remain unaffected.
+
+Freedoom 2 is actually defining the =BIGDOOR1= lump inside its
+=TEXTURE1= lump. You can scroll to it and highlight it with a
+click. This is stored in the older wad-centric format here and not as
+a text file (unlike in =my_first_mod.zip=). Which is why the "Type"
+field says "TEXTUREx". But SLADE lets you edit it if you click on the
+"Edit Textures" button that should have appeared in the content
+panel. Clicking on it should open this lump in its own tab and present
+you with a list of virtual textures defined within.
+
+#+ATTR_HTML: :width 800px
+[[./images/SLADE02.jpg]]
+
+Scrolling this list and highlighting =BIGDOOR1= should reveal to you
+(in a "Patches" panel to the right) the five patches used to make this
+lump. There's four copies of the =W13_1= patch with the corresponding
+offsets forming a background canvas of size 128 x 96 pixels, and one
+instance of =DOOR2_1= patch slapped on top at the center. You can look
+at the =W13_1= graphic lump by tabbing back to the =freedoom2.wad=
+tab. If you've been following this guide in detail, you get exactly
+what is going on here.
 
 ** Sprite replacement and offsets
+
+So far, we have made basic replacements for textures. Next, let us
+replace some sprites. You would think that this is more of the same,
+but there is a subtletly that lets us learn a couple of new
+concepts. So I am dedicating an entire section of the guide to this.
 
 Coming soon ...
 

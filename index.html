@@ -65,67 +65,73 @@ table{border-color: var(--light-fg);}input#lightswitch:checked ~ table{border-co
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdb5bd3e">Running GZDoom and understanding WADs</a>
+<li><a href="#org7473cc8">Running GZDoom and understanding WADs</a>
 <ul>
-<li><a href="#org6c3d126">Getting the Engine</a></li>
-<li><a href="#org14d7e03">Getting some IWADs</a></li>
+<li><a href="#org4fabf50">Getting the Engine</a></li>
+<li><a href="#org1dcedfa">Getting some IWADs</a></li>
 </ul>
 </li>
-<li><a href="#orgc51c625">Basic replacement mods</a>
+<li><a href="#orgc2baa1c">Basic replacement mods</a>
 <ul>
-<li><a href="#orgfc24058">Texture replacement</a></li>
-<li><a href="#org3441b3a">Text files as lumps</a></li>
-<li><a href="#orgb4a10b8">Basics of SLADE</a></li>
-<li><a href="#orge1f3a6d">Sprite replacement and offsets</a></li>
+<li><a href="#org643f940">Texture replacement</a></li>
+<li><a href="#orgdf80338">Text files as lumps</a></li>
+<li><a href="#org02299a1">Basics of SLADE</a></li>
+<li><a href="#org486f73a">Sprite replacement and offsets</a></li>
 </ul>
 </li>
-<li><a href="#orga486b49">Zscript class replacements</a>
+<li><a href="#orgd01d1ff">Zscript class replacements</a>
 <ul>
-<li><a href="#orgd9881dd">New pickup item</a></li>
-<li><a href="#org67ab0fb">Modifying Zombieman</a></li>
-<li><a href="#orgdd78101">Modifying weapon</a></li>
+<li><a href="#org681e616">New pickup item</a></li>
+<li><a href="#orgd274c14">Modifying Zombieman</a></li>
+<li><a href="#org775e252">Modifying weapon</a></li>
 </ul>
 </li>
-<li><a href="#orgfe9750e">Basics of mapping</a>
+<li><a href="#orgafd33e3">Basics of mapping</a>
 <ul>
-<li><a href="#org4545fc5">Getting UDB</a></li>
-<li><a href="#org14dd2d0">The Mapfile lump</a></li>
+<li><a href="#org2fd2268">Getting UDB</a></li>
+<li><a href="#orga2b5a6e">The Mapfile lump</a></li>
 </ul>
 </li>
-<li><a href="#orgc9ab7ee">Misc.</a>
+<li><a href="#org560c0b0">Misc.</a>
 <ul>
-<li><a href="#org9571b06">Git and version control</a></li>
-<li><a href="#orgd99b003">Seeking help and forum/discord etiquette</a></li>
-<li><a href="#org6937c31">Studying famous mods</a></li>
+<li><a href="#orgda7bc99">Git and version control</a></li>
+<li><a href="#org16bda77">Seeking help and forum/discord etiquette</a></li>
+<li><a href="#orgce56d0a">Studying famous mods</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 <section><p>
-This guide will introduce the basics of modding for the GZDoom source
-port. It is aimed at beginners with little-to-no technical
-knowledge. For more advanced help, check the <a href="https://zdoom.org/wiki/Tutorials">Tutorials page</a> on the
-zdoom wiki, or Jekyll Grim&rsquo;s <a href="https://jekyllgrim.github.io/ZScript_Basics/">Zscript basics</a>. The guide will focus on
-GZDoom, but might have limited applicability to other source ports. It
-is structured as a sequence of exercises that the reader is expected
-to follow along. It presents particular ways of doing things in
-particular chapters for pedagogical reasons and to inculcate good
-habits. It will not present the full context or historical information
-for everything, because it is meant to be a first-pass curriculum,
-where too much extraneous information can be overwhelming and
-counter-productive. You can recommend additions/changes to this guide by
-submitting PRs to the <a href="https://github.com/dileepvr/gzdoom_modding_101">github repo</a>. Please only make changes to the
-<code>index.org</code> file. Do not edit the <code>html</code> file directly.
+If you are reading this on the github repo, try <a href="https://dileepvr.github.io/gzdoom_modding_101">this link</a> for some <code>HTML</code>
+styling. Then use the floating element labeled &ldquo;<i>Table of Contents</i>&rdquo; to the
+top-right of this page to navigate between sections.
+</p>
+
+
+<p>
+This guide will introduce the basics of modding for the GZDoom source port.
+It is aimed at beginners with little-to-no technical knowledge. For more
+advanced help, check the <a href="https://zdoom.org/wiki/Tutorials">Tutorials page</a> on the zdoom wiki, or Jekyll Grim&rsquo;s
+<a href="https://jekyllgrim.github.io/ZScript_Basics/">Zscript basics</a>. The guide will focus on GZDoom, but might have limited
+applicability to other source ports. It is structured as a sequence of
+exercises that the reader is expected to follow along. It presents
+particular ways of doing things in particular chapters for pedagogical
+reasons and to inculcate good habits. It will not present the full context
+or historical information for everything, because it is meant to be a
+first-pass curriculum, where too much extraneous information can be
+overwhelming and counter-productive. You can recommend additions/changes to
+this guide by submitting PRs to the <a href="https://github.com/dileepvr/gzdoom_modding_101">github repo</a>. Please only make changes
+to the <code>index.org</code> file. Do not edit the <code>html</code> file directly.
 </p>
 </section>
 
-<div id="outline-container-orgdb5bd3e" class="outline-2">
-<h2 id="orgdb5bd3e">Running GZDoom and understanding WADs</h2>
-<div class="outline-text-2" id="text-orgdb5bd3e">
+<div id="outline-container-org7473cc8" class="outline-2">
+<h2 id="org7473cc8">Running GZDoom and understanding WADs</h2>
+<div class="outline-text-2" id="text-org7473cc8">
 </div>
-<div id="outline-container-org6c3d126" class="outline-3">
-<h3 id="org6c3d126">Getting the Engine</h3>
+<div id="outline-container-org4fabf50" class="outline-3">
+<h3 id="org4fabf50">Getting the Engine</h3>
 <section><p>
 First, let us get GZDoom running and playing a game. Download the
 latest version of GZDoom (and not ZDoom) for your operating system
@@ -176,8 +182,8 @@ under the hood.
 </section>
 </div>
 
-<div id="outline-container-org14d7e03" class="outline-3">
-<h3 id="org14d7e03">Getting some IWADs</h3>
+<div id="outline-container-org1dcedfa" class="outline-3">
+<h3 id="org1dcedfa">Getting some IWADs</h3>
 <section><p>
 Running the engine executable by itself couldn&rsquo;t run a game because
 you haven&rsquo;t downloaded any actual games for the engine to run. Let us
@@ -221,14 +227,14 @@ screens of main menu, and the first level:
 </p>
 
 
-<figure id="org19c3d0c">
+<figure id="org33686c8">
 <img src="./images/screenshot01.jpg" alt="screenshot01.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 1: </span>Main menu screen for Freedoom 2 (v0.13.0)</figcaption>
 </figure>
 
 
-<figure id="org7da7dc4">
+<figure id="orgc063ded">
 <img src="./images/screenshot02.jpg" alt="screenshot02.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 2: </span>Starting area of MAP01 in Freedoom 2 (v0.13.0)</figcaption>
@@ -250,12 +256,12 @@ program.
 </div>
 </div>
 
-<div id="outline-container-orgc51c625" class="outline-2">
-<h2 id="orgc51c625">Basic replacement mods</h2>
-<div class="outline-text-2" id="text-orgc51c625">
+<div id="outline-container-orgc2baa1c" class="outline-2">
+<h2 id="orgc2baa1c">Basic replacement mods</h2>
+<div class="outline-text-2" id="text-orgc2baa1c">
 </div>
-<div id="outline-container-orgfc24058" class="outline-3">
-<h3 id="orgfc24058">Texture replacement</h3>
+<div id="outline-container-org643f940" class="outline-3">
+<h3 id="org643f940">Texture replacement</h3>
 <section><p>
 Now we are going to make our first mod. Create a project folder
 somewhere on your computer. Call it something like
@@ -267,7 +273,7 @@ named <code>AQRUST08.png</code>. The filename is important.
 </p>
 
 
-<figure id="org5c6a0a3">
+<figure id="org24cce7d">
 <img src="./images/AQRUST08.png" alt="AQRUST08.png">
 
 <figcaption><span class="figure-number">Figure 3: </span><code>AQRUST08.png</code> modified wall texture</figcaption>
@@ -302,15 +308,15 @@ Once you launch the game, you should be greeted to this view:
 </p>
 
 
-<figure id="orgb41c6ce">
+<figure id="org3c3f801">
 <img src="./images/screenshot03.jpg" alt="screenshot03.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 4: </span>Opening area of MAP01 in Freedoom 2 (v0.13.0) with a texture replaced</figcaption>
 </figure>
 </section>
 
-<div id="outline-container-org8aba5f4" class="outline-4">
-<h4 id="org8aba5f4">Analysis</h4>
+<div id="outline-container-orge4a516d" class="outline-4">
+<h4 id="orge4a516d">Analysis</h4>
 <section><p>
 Let us unpack what is happening here. You ran GZDoom with two files:
 <code>freedoom2.wad</code> and <code>my_first_mod.zip</code>. The first one is the IWAD,
@@ -322,10 +328,10 @@ engine to paint that texture on a specific bunch of walls (with some
 offsets, lighting effects, etc.). This is what happens when you run
 GZDoom with just the IWAD <code>freedoom2.wad</code> by itself. But when you run
 the IWAD with this PWAD, which contains its own copy of the <code>AQRUST08</code>
-texture, the engine replaces all instances of that texture with the
-one from your PWAD. <b>This is also why it was important to name the
-file exactly right.</b> If you load two PWADs that both replace the same
-texture like so:
+texture (we&rsquo;ll get into how I knew that later), the engine replaces
+all instances of that texture with the one from your PWAD. <b>This is
+also why it was important to name the file exactly right.</b> If you load
+two PWADs that both replace the same texture like so:
 </p>
 
 <pre class="code"><code>./gzdoom -iwad freedoom2.wad -file mod1.pk3 -file mod2.pk3
@@ -339,8 +345,8 @@ serially, in the sequence of the files.
 </section>
 </div>
 
-<div id="outline-container-org3d8fc5d" class="outline-4">
-<h4 id="org3d8fc5d">Get setup with a Launcher before proceeding further</h4>
+<div id="outline-container-org702d5b3" class="outline-4">
+<h4 id="org702d5b3">Get setup with a Launcher before proceeding further</h4>
 <section><p>
 This is one reason I illustrated the command line method of launching
 GZDoom. Selecting multiple mod files and dragging-and-dropping them
@@ -363,7 +369,7 @@ is a view of my DoomRunner front page:
 </p>
 
 
-<figure id="orgbcd1cdb">
+<figure id="org2658a03">
 <img src="./images/doomrunner01.jpg" alt="doomrunner01.jpg" width="800px">
 
 </figure>
@@ -395,7 +401,7 @@ constructing and executing lengthy commands like the ones above.
 </p>
 
 
-<figure id="orge89bcca">
+<figure id="org7b6d595">
 <img src="./images/doomrunner02.jpg" alt="doomrunner02.jpg" width="800px">
 
 </figure>
@@ -422,8 +428,8 @@ format. More on that later.
 </div>
 </div>
 
-<div id="outline-container-org3441b3a" class="outline-3">
-<h3 id="org3441b3a">Text files as lumps</h3>
+<div id="outline-container-orgdf80338" class="outline-3">
+<h3 id="orgdf80338">Text files as lumps</h3>
 <section><p>
 Let us continue adding to your mod. So far, you have a zip file
 (possibly renamed &ldquo;<code>my_first_mod.pk3</code>&rdquo;) which contains a folder named
@@ -471,10 +477,11 @@ feel.
 <p>
 For this next exercise, we will replace the texture on the door
 visible from the starting area in Freedoom 2. The lump name for this
-texture needs to be <code>BIGDOOR1</code>. But we will not just be using a file
-named <code>BIGDOOR1.png</code> in the <code>textures</code> folder, even though that will
-work. We will instead use use some other file name, and try to use the
-<code>TEXTURES</code> lump to make it work.
+texture needs to be <code>BIGDOOR1</code> (again, I&rsquo;ll get to how I know this
+later). But we will not just be using a file named <code>BIGDOOR1.png</code> in
+the <code>textures</code> folder, even though that will work. We will instead use
+use some other file name, and try to use the <code>TEXTURES</code> lump to make
+it work.
 </p>
 
 <p>
@@ -506,7 +513,7 @@ The archive&rsquo;s internal structure should look something like this:
 </p>
 
 
-<figure id="org79b308d">
+<figure id="orgfd16cb5">
 <img src="./images/filestructure01.jpg" alt="filestructure01.jpg">
 
 </figure>
@@ -517,7 +524,7 @@ launcher like DoomRunner) should bring up this view:
 </p>
 
 
-<figure id="orgfa12e86">
+<figure id="orgc2933b5">
 <img src="./images/screenshot06.jpg" alt="screenshot06.jpg" width="800px">
 
 </figure>
@@ -551,22 +558,135 @@ standardized.
 </section>
 </div>
 
-<div id="outline-container-orgb4a10b8" class="outline-3">
-<h3 id="orgb4a10b8">Basics of SLADE</h3>
+<div id="outline-container-org02299a1" class="outline-3">
+<h3 id="org02299a1">Basics of SLADE</h3>
 <section><p>
-Coming soon &#x2026;
+Next, we will introduce another helpful program to our modding
+toolbelt. This one is a WAD-editor called SLADE. You can acquire it
+for your preferred OS from <a href="https://github.com/sirjuddington/SLADE/releases">here</a> or <a href="https://slade.mancubus.net/index.php?page=downloads">here</a>. SLADE is in principle capable
+of many things. You can write code, compile code, paint textures,
+create and modify brightmaps, and even <a href="https://eev.ee/blog/2015/12/19/you-should-make-a-doom-level-part-1/">make/edit levels</a>. There are
+Doom mod authors who develop entirely on SLADE (some of them
+livestream the process). But in this guide, as a rule, we will only be
+using SLADE to take a peek into WADs, and possibly extract content. We
+will not be using SLADE to modify any data within wads. Feel free to
+learn its intricacies on your own, later.
+</p>
+
+<p>
+To not overwhelm ourselves, let us first use SLADE to open the
+simplest mod we have: &ldquo;<code>my_first_mod.zip</code>&rdquo; (or <code>.pk3</code>). Here is the
+view you should be presented with:
+</p>
+
+
+<figure id="org84dfa47">
+<img src="./images/SLADE01.jpg" alt="SLADE01.jpg" width="800px">
+
+</figure>
+
+<p>
+It&rsquo;s all fairly intuitive. There is a panel that shows the files or
+&ldquo;lumps&rdquo; in your &ldquo;WAD&rdquo; (I&rsquo;ve expanded the folders and subfolders), and
+a bigger panel to the right that shows the content of the currently
+selected lump. In the image, I have selected the <code>TEXTURES.lmp</code>
+file/lump to show its textual content. A few things of note here is
+the SLADE as correctly identified the file-types of our lumps as two
+<code>PNG</code> Graphic files and a &ldquo;Texture Definition&rdquo; lump. It says so next
+to the file as well as in the bottom bar of the window. Furthermore,
+it has auto-selected the &ldquo;ZDoom Textures&rdquo; option in the &ldquo;Text
+Language&rdquo; pulldown menu above the textual-content panel for syntax
+highlighting. All of these areas of the SLADE window are important to
+us. You can select the <code>AQRUST08.png</code> file and watch the image
+displayed in the content panel, along with graphic in the bottom bar.
+</p>
+
+<p>
+Now let&rsquo;s open a bigger &ldquo;WAD&rdquo; file: <code>freedoom2.wad</code>. Be sure to create
+a backup of this file before opening it in SLADE, just to avoid
+accidentally causing a change in it. That would violate our rule
+regarding SLADE for this guide.
+</p>
+
+<p>
+Since this is a wad-format file, you should be confronted with a
+lengthy, flat list of lumps with no hierarchical subfolder
+structure. The lumps are by default, ordered in the way they are
+stored in the wad (the ordering is important in the wad format). But
+you can click on the &ldquo;Name&rdquo; tab at the top of the lumps panel to
+display the lumps in ascending order of their name strings. If you
+scroll down to Freedoom 2&rsquo;s version of the <code>AQRUST08</code> graphic (the one
+your mod replaced), you will see that the &ldquo;Type&rdquo; field says &ldquo;Graphic
+(Doom)&rdquo; instead of &ldquo;Graphic (PNG)&rdquo;. The image is stored in a Paletted
+raw format. If the image appears in black-and-white in the contents
+panel, you can instruct SLADE to use Doom&rsquo;s color palette in the
+drop-down menu to the top-right. The same goes for exporting
+graphics. You can&rsquo;t just right-click on the <code>AQRUST08</code> lump and click
+export, as it will result in a binary lump file. You would have to
+navigate to the sub-popup menu under &ldquo;Graphic&rdquo; after you right-click,
+and select the &ldquo;Export as PNG&rdquo; option. If you&rsquo;d like to practice
+further, try exporting the <code>SLIME14</code> graphic as a <code>PNG</code> file and
+modify it, then include it in <code>my_first_mod.zip</code>. This should apply to
+the floor in the opening area of Freedoom 2.
+</p>
+
+<p>
+Another curiosity that should be of interest is that there is no lump
+named <code>BIGDOOR1</code> (at least as of Freedoom 2 version 0.13.0). There is
+one called <code>DOOR2_1</code> that looks suspiciously like the door from the
+opening level, but it is too small (96 x 96 pixels, see the bottom
+bar). You can test that it isn&rsquo;t the right one by attempting a
+<code>DOOR2_1</code> lump replacement file in your mod. If will replace all
+instances of <code>DOOR2_1</code> usage in the levels of Freedoom 2, but all
+<code>BIGDOOR1</code> instances (including the one in the opening area) will
+remain unaffected.
+</p>
+
+<p>
+Freedoom 2 is actually defining the <code>BIGDOOR1</code> lump inside its
+<code>TEXTURE1</code> lump. You can scroll to it and highlight it with a
+click. This is stored in the older wad-centric format here and not as
+a text file (unlike in <code>my_first_mod.zip</code>). Which is why the &ldquo;Type&rdquo;
+field says &ldquo;TEXTUREx&rdquo;. But SLADE lets you edit it if you click on the
+&ldquo;Edit Textures&rdquo; button that should have appeared in the content
+panel. Clicking on it should open this lump in its own tab and present
+you with a list of virtual textures defined within.
+</p>
+
+
+<figure id="org257f3f5">
+<img src="./images/SLADE02.jpg" alt="SLADE02.jpg" width="800px">
+
+</figure>
+
+<p>
+Scrolling this list and highlighting <code>BIGDOOR1</code> should reveal to you
+(in a &ldquo;Patches&rdquo; panel to the right) the five patches used to make this
+lump. There&rsquo;s four copies of the <code>W13_1</code> patch with the corresponding
+offsets forming a background canvas of size 128 x 96 pixels, and one
+instance of <code>DOOR2_1</code> patch slapped on top at the center. You can look
+at the <code>W13_1</code> graphic lump by tabbing back to the <code>freedoom2.wad</code>
+tab. If you&rsquo;ve been following this guide in detail, you get exactly
+what is going on here.
 </p>
 </section>
 </div>
 
-<div id="outline-container-orge1f3a6d" class="outline-3">
-<h3 id="orge1f3a6d">Sprite replacement and offsets</h3>
+<div id="outline-container-org486f73a" class="outline-3">
+<h3 id="org486f73a">Sprite replacement and offsets</h3>
 <section><p>
+So far, we have made basic replacements for textures. Next, let us
+replace some sprites. You would think that this is more of the same,
+but there is a subtletly that lets us learn a couple of new
+concepts. So I am dedicating an entire section of the guide to this.
+</p>
+
+<p>
 Coming soon &#x2026;
 </p>
 
 
-<figure id="org7d3c272">
+<figure id="org5eb3ad1">
 <img src="./images/screenshot04.jpg" alt="screenshot04.jpg" width="800px">
 
 </figure>
@@ -574,34 +694,34 @@ Coming soon &#x2026;
 </div>
 </div>
 
-<div id="outline-container-orga486b49" class="outline-2">
-<h2 id="orga486b49">Zscript class replacements</h2>
-<div class="outline-text-2" id="text-orga486b49">
+<div id="outline-container-orgd01d1ff" class="outline-2">
+<h2 id="orgd01d1ff">Zscript class replacements</h2>
+<div class="outline-text-2" id="text-orgd01d1ff">
 </div>
-<div id="outline-container-orgd9881dd" class="outline-3">
-<h3 id="orgd9881dd">New pickup item</h3>
+<div id="outline-container-org681e616" class="outline-3">
+<h3 id="org681e616">New pickup item</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 </div>
 
-<div id="outline-container-org67ab0fb" class="outline-3">
-<h3 id="org67ab0fb">Modifying Zombieman</h3>
+<div id="outline-container-orgd274c14" class="outline-3">
+<h3 id="orgd274c14">Modifying Zombieman</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 
 
-<figure id="orga72281e">
+<figure id="org1546397">
 <img src="./images/screenshot05.jpg" alt="screenshot05.jpg" width="800px">
 
 </figure>
 </section>
 </div>
 
-<div id="outline-container-orgdd78101" class="outline-3">
-<h3 id="orgdd78101">Modifying weapon</h3>
+<div id="outline-container-org775e252" class="outline-3">
+<h3 id="org775e252">Modifying weapon</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
@@ -609,66 +729,66 @@ Coming soon &#x2026;
 </div>
 </div>
 
-<div id="outline-container-orgfe9750e" class="outline-2">
-<h2 id="orgfe9750e">Basics of mapping</h2>
-<div class="outline-text-2" id="text-orgfe9750e">
+<div id="outline-container-orgafd33e3" class="outline-2">
+<h2 id="orgafd33e3">Basics of mapping</h2>
+<div class="outline-text-2" id="text-orgafd33e3">
 </div>
-<div id="outline-container-org4545fc5" class="outline-3">
-<h3 id="org4545fc5">Getting UDB</h3>
-<div class="outline-text-3" id="text-org4545fc5">
+<div id="outline-container-org2fd2268" class="outline-3">
+<h3 id="org2fd2268">Getting UDB</h3>
+<div class="outline-text-3" id="text-org2fd2268">
 </div>
-<div id="outline-container-org2b86466" class="outline-4">
-<h4 id="org2b86466">First room</h4>
+<div id="outline-container-org890f4da" class="outline-4">
+<h4 id="org890f4da">First room</h4>
 </div>
-<div id="outline-container-org9c8cf83" class="outline-4">
-<h4 id="org9c8cf83">Using custom textures from your mod</h4>
+<div id="outline-container-org1d99013" class="outline-4">
+<h4 id="org1d99013">Using custom textures from your mod</h4>
 </div>
-<div id="outline-container-org2fcf02f" class="outline-4">
-<h4 id="org2fcf02f">Placing custom things from your mod</h4>
+<div id="outline-container-orge4f5d19" class="outline-4">
+<h4 id="orge4f5d19">Placing custom things from your mod</h4>
 </div>
 </div>
 
-<div id="outline-container-org14dd2d0" class="outline-3">
-<h3 id="org14dd2d0">The Mapfile lump</h3>
+<div id="outline-container-orga2b5a6e" class="outline-3">
+<h3 id="orga2b5a6e">The Mapfile lump</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 
-<div id="outline-container-org404d262" class="outline-4">
-<h4 id="org404d262">Changing name for freedoom1</h4>
+<div id="outline-container-org64c6067" class="outline-4">
+<h4 id="org64c6067">Changing name for freedoom1</h4>
 </div>
-<div id="outline-container-orgb2172d8" class="outline-4">
-<h4 id="orgb2172d8">MAPINFO lump</h4>
+<div id="outline-container-org8634588" class="outline-4">
+<h4 id="org8634588">MAPINFO lump</h4>
 </div>
-<div id="outline-container-org625ca25" class="outline-4">
-<h4 id="org625ca25">Packing the map with your mod</h4>
+<div id="outline-container-org5e78f62" class="outline-4">
+<h4 id="org5e78f62">Packing the map with your mod</h4>
 </div>
 </div>
-</div>
-
-<div id="outline-container-orgc9ab7ee" class="outline-2">
-<h2 id="orgc9ab7ee">Misc.</h2>
-<div class="outline-text-2" id="text-orgc9ab7ee">
-</div>
-<div id="outline-container-org9571b06" class="outline-3">
-<h3 id="org9571b06">Git and version control</h3>
-<section><p>
-Coming soon &#x2026;
-</p>
-</section>
 </div>
 
-<div id="outline-container-orgd99b003" class="outline-3">
-<h3 id="orgd99b003">Seeking help and forum/discord etiquette</h3>
+<div id="outline-container-org560c0b0" class="outline-2">
+<h2 id="org560c0b0">Misc.</h2>
+<div class="outline-text-2" id="text-org560c0b0">
+</div>
+<div id="outline-container-orgda7bc99" class="outline-3">
+<h3 id="orgda7bc99">Git and version control</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 </div>
 
-<div id="outline-container-org6937c31" class="outline-3">
-<h3 id="org6937c31">Studying famous mods</h3>
+<div id="outline-container-org16bda77" class="outline-3">
+<h3 id="org16bda77">Seeking help and forum/discord etiquette</h3>
+<section><p>
+Coming soon &#x2026;
+</p>
+</section>
+</div>
+
+<div id="outline-container-orgce56d0a" class="outline-3">
+<h3 id="orgce56d0a">Studying famous mods</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
