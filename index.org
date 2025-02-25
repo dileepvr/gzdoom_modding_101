@@ -4,10 +4,11 @@
 #+HTML_DOCTYPE: html5
 #+BIND: org-tufte-embed-images:nil
 
-If you are reading this on the github repo, try [[https://dileepvr.github.io/gzdoom_modding_101][this link]] for some =HTML=
-styling. Then use the floating element labeled "/Table of Contents/" to the
-top-right of this page to navigate between sections.
-
+If you are reading this on the github repo, try [[https://dileepvr.github.io/gzdoom_modding_101][this link]] for some
+=HTML= styling. Then use the floating element labeled "/Table of
+Contents/" to the top-right of this page to navigate between
+sections. Click on the "Switch Color Mode" text at the top-left of the
+page to switch between /light/ and /dark/ modes.
 
 This guide will introduce the basics of modding for the GZDoom source port.
 It is aimed at beginners with little-to-no technical knowledge. For more
@@ -73,14 +74,16 @@ those wad files from you favorite legal videogame store.
 
 Acquire the files =freedoom1.wad= and =freedoom2.wad= from
 [[https://freedoom.github.io/download.html][https://freedoom.github.io/download.html]] (click on the =Freedoom:
-Phase 1+2= hyperlink). Extract these two files from the zip archive
-and place them in the same directory as your GZDoom executable. If you
-are having trouble opening a zip archive file, double-click or
-right-click on it and "extract" the contents. On the Linux terminal, a
-tool like =unzip= can also be used. With the files placed at the same
-location as your GZDoom executable, running GZDoom again should cause
-the program to auto-detect =freedoom1.wad= and =freedoom2.wad= and
-list them for selection on startup.
+Phase 1+2= hyperlink). Or better yet, get version 0.13.0 specifically
+[[https://github.com/freedoom/freedoom/releases/tag/v0.13.0][from here]], since that is the one this guide will be using. Extract
+these two =*.wad= files from the zip archive and place them in the
+same directory as your GZDoom executable. If you are having trouble
+opening a zip archive file, double-click or right-click on it and
+"extract" the contents. On the Linux terminal, a tool like =unzip= can
+also be used. With the files placed at the same location as your
+GZDoom executable, running GZDoom again should cause the program to
+auto-detect =freedoom1.wad= and =freedoom2.wad= and list them for
+selection on startup.
 
 Let's run Freedoom2 from the command line. From the
 terminal/command-prompt, run the following command:
@@ -207,14 +210,14 @@ is a view of my DoomRunner front page:
 As you can see, I have highlighted a preset that I have named
 "=Elementalism=" that is using the GZDoom executable, the =doom2.wad=
 IWAD file, and a whole bunch of PWADs in a particular
-order. =Elementalism= is an ambitious map pack, and =Hellrider
-Vengeful= is a weapons and player-movement mod. Here, I am adding a
-mod called =Flashlight++= even though =Hellrider= already comes with a
+order. [[https://www.moddb.com/mods/elementalism][=Elementalism=]] is an ambitious map pack, and [[https://xxheavy-swagxx.itch.io/hellrider-vengeful][=Hellrider
+Vengeful=]] is a weapons and player-movement mod. Here, I am adding a
+mod called [[https://forum.zdoom.org/viewtopic.php?t=75585][=Flashlight++=]] even though =Hellrider= already comes with a
 flashlight, because the maps in =Elementalism= have all been
 programmed to strip the player of all inventory items and pistol-start
 every level. And the flashlight in =Flashlight++= happens to be
 unclearable using that method. If I were to try and and another mod
-that modifies weapons, like =Beautiful Doom= to this list, then the
+that modifies weapons, like [[https://github.com/jekyllgrim/Beautiful-Doom/releases][=Beautiful Doom=]] to this list, then the
 conflict with =Hellrider= will cause all weapons to be replaced by one
 mod and ammunition pickups be of the other. So not all mods are
 designed to go together. I mostly ignore DoomRunner's separate map
@@ -294,7 +297,7 @@ it work.
 
 Pick any =png= image file you want. I'm going with [[https://en.wikipedia.org/wiki/John_Romero][John Romero's]]
 forehead. Crop/scale the image using some image manipulation program
-like GIMP, Photoshop, or even MSPaint, to fit into 128 x 96 pixels to
+like GIMP, Photoshop, or even MSPaint, to fit into 128 $\times$ 96 pixels to
 match the door's texture size. I named my file =John_Romero.png=, and
 I placed it inside a subfolder inside the =textures= folder called
 =custom=. Then, open a text file in the project root location called
@@ -409,7 +412,7 @@ the floor in the opening area of Freedoom 2.
 Another curiosity that should be of interest is that there is no lump
 named =BIGDOOR1= (at least as of Freedoom 2 version 0.13.0). There is
 one called =DOOR2_1= that looks suspiciously like the door from the
-opening level, but it is too small (96 x 96 pixels, see the bottom
+opening level, but it is too small (96 $\times$ 96 pixels, see the bottom
 bar). You can test that it isn't the right one by attempting a
 =DOOR2_1= lump replacement file in your mod. If will replace all
 instances of =DOOR2_1= usage in the levels of Freedoom 2, but all
@@ -431,7 +434,7 @@ you with a list of virtual textures defined within.
 Scrolling this list and highlighting =BIGDOOR1= should reveal to you
 (in a "Patches" panel to the right) the five patches used to make this
 lump. There's four copies of the =W13_1= patch with the corresponding
-offsets forming a background canvas of size 128 x 96 pixels, and one
+offsets forming a background canvas of size 128 $\times$ 96 pixels, and one
 instance of =DOOR2_1= patch slapped on top at the center. You can look
 at the =W13_1= graphic lump by tabbing back to the =freedoom2.wad=
 tab. If you've been following this guide in detail, you get exactly
@@ -442,12 +445,87 @@ what is going on here.
 So far, we have made basic replacements for textures. Next, let us
 replace some sprites. You would think that this is more of the same,
 but there is a subtletly that lets us learn a couple of new
-concepts. So I am dedicating an entire section of the guide to this.
-
-Coming soon ...
+concepts. Get back into the game Freedoom 2, and turn left in the
+starting area. You should see two health-pickup items called
+"[[https://zdoom.org/wiki/Classes:Stimpack][=stimpacks=]]". I have circled them in green in the following
+screenshot image:
 
 #+ATTR_HTML: :width 800px
 [[./images/screenshot04.jpg]]
+
+These are a pickup item that can restore up to 10 points of
+health. They can be picked up by walking over them. But your health
+(indicated in the HUD below) needs to be less than 100 points for a
+successful pickup. You can lose some health points by going forward in
+the corridor and deliberately getting shot at by the two enemy zombies
+in the cubby-room to the left of the door. Returning tothe =stimpacks=
+and walking over them should restore up to 10 points. Just walking
+around the =stimpacks=, you will notice that they are depicted on
+screen by a single sprite/image that always faces your viewpoint
+(meaning you can never see "behind" the sprite by walking around it).
+
+The sprite used by this object (the technical term is =actor=) is a
+lump called =STIMA0=. You can find it inside =freedoom2.wad= via
+SLADE. You would have to right-click and use the "Graphics" sub-menu
+popup and "Export as PNG" if you want it as an image. To replace the
+=STIMA0= sprite with one of your own in =my_first_mid.zip=, you will
+have to create one of the reserved-name folders called =sprites= and
+place your image with the name =STIMA0.png= inside it, and then make
+sure to zip it with the others. If you are having trouble
+finding/deciding on a replacement sprite, you can try this red-colored
+version. Just right-click and save the png image inside the =sprites=
+folder of your mod.
+
+#+ATTR_HTML: :width 100px
+[[./images/STIMA0.png]]
+
+#+BEGIN_SRC
+  zip -r my_first_mod.zip textures/ TEXTURES.lmp sprites/
+#+END_SRC
+
+If you are using some other image, you can try and match the original
+lump's size, which was 19 $\times$ 10 pixels (check this in the bottom
+bar inside the contents panel in SLADE). But you don't have to match
+it. So now the file structure inside of =my_first_mod.zip= should look
+like this:
+
+[[./images/filestructure02.jpg]]
+
+If you start the game now, and turn left at the starting area, you
+will be surprised to find ... nothing! But the two =stimpack= actors
+are actually there. You can confirm this by losing some health (get
+shot at) and running back here to "pick" them up. However, you can't
+see the new sprites. In truth, they are below the floor. By default,
+sprites in GZDoom are offset relative to the top-left corner of the
+image file. You can add the correct offsets to =PNG= files using SLADE
+(they get stored in the =PNG= format's [[https://zdoom.org/wiki/GrAb][=grAb=]] chunk) but we won't do
+that. For one, it violates our rule about not using SLADE to modify
+things. And secondly, it would have to be redone everytime you replace
+or modify the image file using some other third-party program. It
+might not seem like much for a single sprite, but once you have
+hundreds ...
+
+Let's instead use our already existing =TEXTURES.lmp= file. Add the
+following lines to it (i.e. append below the existing lines), and
+then re-zip the archive:
+
+#+BEGIN_SRC
+Sprite STIMA0, 19, 10
+{
+    Patch "sprites/STIMA0.png", 0, 0
+	  Offset 10, 10
+}
+#+END_SRC
+
+Note the new =Offset= field here. Change the numbers (as well as the
+overall size numbers) according to your choice of image. There is also
+a =Scale= field that you could use if your image is much larger than
+19 $\times$ 10 pixels. The =TEXTURES= lump uses inverse scale (2 = 50%
+of the original size, 0.5 = 200% of the original size, etc.). With the
+offset specified in the =TEXTURES.lmp= file, now you can modify the
+=PNG= file as much as you want without worrying about preserving or
+resetting the offsets within that file. The sprite replacement should
+work in the game now.
 
 * Zscript class replacements
 
@@ -470,7 +548,7 @@ Coming soon ...
 
 ** Getting UDB
 
-*** First room
+*** Your first room
 *** Using custom textures from your mod
 *** Placing custom things from your mod
 
