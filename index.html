@@ -65,38 +65,37 @@ table{border-color: var(--light-fg);}input#lightswitch:checked ~ table{border-co
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org8e4add5">Running GZDoom and understanding WADs</a>
+<li><a href="#org687821f">Running GZDoom and understanding WADs</a>
 <ul>
-<li><a href="#orgb3b0163">Getting the Engine</a></li>
-<li><a href="#orgcdd4733">Getting some IWADs</a></li>
+<li><a href="#orgc00540c">Getting the Engine</a></li>
+<li><a href="#org52e644f">Getting some IWADs</a></li>
 </ul>
 </li>
-<li><a href="#org595e818">Basic replacement mods</a>
+<li><a href="#org22246ff">Basic replacement mods</a>
 <ul>
-<li><a href="#org8885e3e">Texture replacement</a></li>
-<li><a href="#orgbe957ed">Text files as lumps</a></li>
-<li><a href="#org1e33095">Basics of SLADE</a></li>
-<li><a href="#org5493de0">Sprite replacement and offsets</a></li>
+<li><a href="#org46165d1">Texture replacement</a></li>
+<li><a href="#orgdadd356">Text files as lumps</a></li>
+<li><a href="#org15e11bc">Basics of SLADE</a></li>
+<li><a href="#orgaf9fe50">Sprite replacement and offsets</a></li>
 </ul>
 </li>
-<li><a href="#orgaf2e5ea">Zscript class replacements</a>
+<li><a href="#org61e725f">Zscript class replacements</a>
 <ul>
-<li><a href="#org101e012">New pickup item</a></li>
-<li><a href="#orgf501179">Modifying Zombieman</a></li>
-<li><a href="#org0d5e7e5">Modifying weapon</a></li>
+<li><a href="#orga301884">New pickup item</a></li>
+<li><a href="#org55c0a23">Modifying Zombieman</a></li>
 </ul>
 </li>
-<li><a href="#org175ee48">Basics of mapping</a>
+<li><a href="#org69cc2d5">Basics of mapping</a>
 <ul>
-<li><a href="#org6b05684">Getting UDB</a></li>
-<li><a href="#orgc4274f4">The Mapfile lump</a></li>
+<li><a href="#orgedf2e02">Getting UDB</a></li>
+<li><a href="#orge7377bf">The Mapfile lump</a></li>
 </ul>
 </li>
-<li><a href="#org76b2151">Misc.</a>
+<li><a href="#org16232ce">Misc.</a>
 <ul>
-<li><a href="#orge8f5102">Git and version control</a></li>
-<li><a href="#orgc5a1c0e">Seeking help and forum/discord etiquette</a></li>
-<li><a href="#org1c0f69b">Studying famous mods</a></li>
+<li><a href="#org5b872c1">Git and version control</a></li>
+<li><a href="#org1020c65">Seeking help and forum/discord etiquette</a></li>
+<li><a href="#orgaddbd24">Studying famous mods</a></li>
 </ul>
 </li>
 </ul>
@@ -111,28 +110,30 @@ page to switch between <i>light</i> and <i>dark</i> modes.
 </p>
 
 <p>
-This guide will introduce the basics of modding for the GZDoom source port.
-It is aimed at beginners with little-to-no technical knowledge. For more
-advanced help, check the <a href="https://zdoom.org/wiki/Tutorials">Tutorials page</a> on the zdoom wiki, or Jekyll Grim&rsquo;s
-<a href="https://jekyllgrim.github.io/ZScript_Basics/">Zscript basics</a>. The guide will focus on GZDoom, but might have limited
-applicability to other source ports. It is structured as a sequence of
-exercises that the reader is expected to follow along. It presents
-particular ways of doing things in particular chapters for pedagogical
-reasons and to inculcate good habits. It will not present the full context
-or historical information for everything, because it is meant to be a
-first-pass curriculum, where too much extraneous information can be
-overwhelming and counter-productive. You can recommend additions/changes to
-this guide by submitting PRs to the <a href="https://github.com/dileepvr/gzdoom_modding_101">github repo</a>. Please only make changes
-to the <code>index.org</code> file. Do not edit the <code>html</code> file directly.
+This guide will introduce the basics of modding for the GZDoom source
+port.  It is aimed at beginners with little-to-no technical
+knowledge. For more advanced help, check the <a href="https://zdoom.org/wiki/Tutorials">Tutorials page</a> on the
+zdoom wiki, or Jekyll Grim&rsquo;s <a href="https://jekyllgrim.github.io/ZScript_Basics/">Zscript basics</a>. The guide will focus on
+GZDoom, but might have limited applicability to other source ports. It
+is structured as a sequence of exercises that the reader is expected
+to follow along by actually implementing the instructions on their
+computer. It presents particular ways of doing things in particular
+chapters for pedagogical reasons and to inculcate good habits. It will
+not present the full context or historical information for everything,
+because it is meant to be a first-pass curriculum, where too much
+extraneous information can be overwhelming and counter-productive. You
+can recommend additions/changes to this guide by submitting PRs to the
+<a href="https://github.com/dileepvr/gzdoom_modding_101">github repo</a>. Please only make changes to the <code>index.org</code> file. Do not
+edit the <code>html</code> file directly.
 </p>
 </section>
 
-<div id="outline-container-org8e4add5" class="outline-2">
-<h2 id="org8e4add5">Running GZDoom and understanding WADs</h2>
-<div class="outline-text-2" id="text-org8e4add5">
+<div id="outline-container-org687821f" class="outline-2">
+<h2 id="org687821f">Running GZDoom and understanding WADs</h2>
+<div class="outline-text-2" id="text-org687821f">
 </div>
-<div id="outline-container-orgb3b0163" class="outline-3">
-<h3 id="orgb3b0163">Getting the Engine</h3>
+<div id="outline-container-orgc00540c" class="outline-3">
+<h3 id="orgc00540c">Getting the Engine</h3>
 <section><p>
 First, let us get GZDoom running and playing a game. Download the
 latest version of GZDoom (and not ZDoom) for your operating system
@@ -183,8 +184,8 @@ under the hood.
 </section>
 </div>
 
-<div id="outline-container-orgcdd4733" class="outline-3">
-<h3 id="orgcdd4733">Getting some IWADs</h3>
+<div id="outline-container-org52e644f" class="outline-3">
+<h3 id="org52e644f">Getting some IWADs</h3>
 <section><p>
 Running the engine executable by itself couldn&rsquo;t run a game because
 you haven&rsquo;t downloaded any actual games for the engine to run. Let us
@@ -230,14 +231,14 @@ screens of main menu, and the first level:
 </p>
 
 
-<figure id="orgc6a2b1a">
+<figure id="org7b2d819">
 <img src="./images/screenshot01.jpg" alt="screenshot01.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 1: </span>Main menu screen for Freedoom 2 (v0.13.0)</figcaption>
 </figure>
 
 
-<figure id="orgaa56762">
+<figure id="orgb1fbb10">
 <img src="./images/screenshot02.jpg" alt="screenshot02.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 2: </span>Starting area of MAP01 in Freedoom 2 (v0.13.0)</figcaption>
@@ -259,12 +260,12 @@ program.
 </div>
 </div>
 
-<div id="outline-container-org595e818" class="outline-2">
-<h2 id="org595e818">Basic replacement mods</h2>
-<div class="outline-text-2" id="text-org595e818">
+<div id="outline-container-org22246ff" class="outline-2">
+<h2 id="org22246ff">Basic replacement mods</h2>
+<div class="outline-text-2" id="text-org22246ff">
 </div>
-<div id="outline-container-org8885e3e" class="outline-3">
-<h3 id="org8885e3e">Texture replacement</h3>
+<div id="outline-container-org46165d1" class="outline-3">
+<h3 id="org46165d1">Texture replacement</h3>
 <section><p>
 Now we are going to make our first mod. Create a project folder
 somewhere on your computer. Call it something like
@@ -276,7 +277,7 @@ named <code>AQRUST08.png</code>. The filename is important.
 </p>
 
 
-<figure id="org821156f">
+<figure id="orge555e63">
 <img src="./images/AQRUST08.png" alt="AQRUST08.png">
 
 <figcaption><span class="figure-number">Figure 3: </span><code>AQRUST08.png</code> modified wall texture</figcaption>
@@ -311,15 +312,15 @@ Once you launch the game, you should be greeted to this view:
 </p>
 
 
-<figure id="orgd078d2c">
+<figure id="orgc1da0b9">
 <img src="./images/screenshot03.jpg" alt="screenshot03.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 4: </span>Opening area of MAP01 in Freedoom 2 (v0.13.0) with a texture replaced</figcaption>
 </figure>
 </section>
 
-<div id="outline-container-org22a1972" class="outline-4">
-<h4 id="org22a1972">Analysis</h4>
+<div id="outline-container-org9db9bac" class="outline-4">
+<h4 id="org9db9bac">Analysis</h4>
 <section><p>
 Let us unpack what is happening here. You ran GZDoom with two files:
 <code>freedoom2.wad</code> and <code>my_first_mod.zip</code>. The first one is the IWAD,
@@ -348,8 +349,8 @@ serially, in the sequence of the files.
 </section>
 </div>
 
-<div id="outline-container-org57dbd26" class="outline-4">
-<h4 id="org57dbd26">Get setup with a Launcher before proceeding further</h4>
+<div id="outline-container-org9515a95" class="outline-4">
+<h4 id="org9515a95">Get setup with a Launcher before proceeding further</h4>
 <section><p>
 This is one reason I illustrated the command line method of launching
 GZDoom. Selecting multiple mod files and dragging-and-dropping them
@@ -372,7 +373,7 @@ is a view of my DoomRunner front page:
 </p>
 
 
-<figure id="orgb34d405">
+<figure id="org14a5377">
 <img src="./images/doomrunner01.jpg" alt="doomrunner01.jpg" width="800px">
 
 </figure>
@@ -404,7 +405,7 @@ constructing and executing lengthy commands like the ones above.
 </p>
 
 
-<figure id="org96777d4">
+<figure id="orgc5337f3">
 <img src="./images/doomrunner02.jpg" alt="doomrunner02.jpg" width="800px">
 
 </figure>
@@ -431,8 +432,8 @@ format. More on that later.
 </div>
 </div>
 
-<div id="outline-container-orgbe957ed" class="outline-3">
-<h3 id="orgbe957ed">Text files as lumps</h3>
+<div id="outline-container-orgdadd356" class="outline-3">
+<h3 id="orgdadd356">Text files as lumps</h3>
 <section><p>
 Let us continue adding to your mod. So far, you have a zip file
 (possibly renamed &ldquo;<code>my_first_mod.pk3</code>&rdquo;) which contains a folder named
@@ -516,7 +517,7 @@ The archive&rsquo;s internal structure should look something like this:
 </p>
 
 
-<figure id="org1f86978">
+<figure id="orga3b9583">
 <img src="./images/filestructure01.jpg" alt="filestructure01.jpg">
 
 </figure>
@@ -527,7 +528,7 @@ launcher like DoomRunner) should bring up this view:
 </p>
 
 
-<figure id="org1d152d4">
+<figure id="orgf0daaae">
 <img src="./images/screenshot06.jpg" alt="screenshot06.jpg" width="800px">
 
 </figure>
@@ -561,8 +562,8 @@ standardized.
 </section>
 </div>
 
-<div id="outline-container-org1e33095" class="outline-3">
-<h3 id="org1e33095">Basics of SLADE</h3>
+<div id="outline-container-org15e11bc" class="outline-3">
+<h3 id="org15e11bc">Basics of SLADE</h3>
 <section><p>
 Next, we will introduce another helpful program to our modding
 toolbelt. This one is a WAD-editor called SLADE. You can acquire it
@@ -583,7 +584,7 @@ view you should be presented with:
 </p>
 
 
-<figure id="orgb8dcf9d">
+<figure id="org93faf3d">
 <img src="./images/SLADE01.jpg" alt="SLADE01.jpg" width="800px">
 
 </figure>
@@ -657,7 +658,7 @@ you with a list of virtual textures defined within.
 </p>
 
 
-<figure id="org75b62f1">
+<figure id="org6b6d9f0">
 <img src="./images/SLADE02.jpg" alt="SLADE02.jpg" width="800px">
 
 </figure>
@@ -675,20 +676,20 @@ what is going on here.
 </section>
 </div>
 
-<div id="outline-container-org5493de0" class="outline-3">
-<h3 id="org5493de0">Sprite replacement and offsets</h3>
+<div id="outline-container-orgaf9fe50" class="outline-3">
+<h3 id="orgaf9fe50">Sprite replacement and offsets</h3>
 <section><p>
 So far, we have made basic replacements for textures. Next, let us
 replace some sprites. You would think that this is more of the same,
 but there is a subtletly that lets us learn a couple of new
 concepts. Get back into the game Freedoom 2, and turn left in the
 starting area. You should see two health-pickup items called
-&ldquo;<a href="https://zdoom.org/wiki/Classes:Stimpack"><code>stimpacks</code></a>&rdquo;. I have circled them in green in the following
+&ldquo;<a href="https://zdoom.org/wiki/Classes:Stimpack"><code>StimPacks</code></a>&rdquo;. I have circled them in green in the following
 screenshot image:
 </p>
 
 
-<figure id="orgea9414b">
+<figure id="org35fc8a0">
 <img src="./images/screenshot04.jpg" alt="screenshot04.jpg" width="800px">
 
 </figure>
@@ -699,9 +700,9 @@ health. They can be picked up by walking over them. But your health
 (indicated in the HUD below) needs to be less than 100 points for a
 successful pickup. You can lose some health points by going forward in
 the corridor and deliberately getting shot at by the two enemy zombies
-in the cubby-room to the left of the door. Returning tothe <code>stimpacks</code>
+in the cubby-room to the left of the door. Returning to the <code>StimPacks</code>
 and walking over them should restore up to 10 points. Just walking
-around the <code>stimpacks</code>, you will notice that they are depicted on
+around the <code>StimPacks</code>, you will notice that they are depicted on
 screen by a single sprite/image that always faces your viewpoint
 (meaning you can never see &ldquo;behind&rdquo; the sprite by walking around it).
 </p>
@@ -721,7 +722,7 @@ folder of your mod.
 </p>
 
 
-<figure id="org02a083d">
+<figure id="orgdbdca06">
 <img src="./images/STIMA0.png" alt="STIMA0.png" width="100px">
 
 </figure>
@@ -738,14 +739,14 @@ like this:
 </p>
 
 
-<figure id="orge826f66">
+<figure id="orgac0133d">
 <img src="./images/filestructure02.jpg" alt="filestructure02.jpg">
 
 </figure>
 
 <p>
 If you start the game now, and turn left at the starting area, you
-will be surprised to find &#x2026; nothing! But the two <code>stimpack</code> actors
+will be surprised to find &#x2026; nothing! But the two <code>StimPack</code> actors
 are actually there. You can confirm this by losing some health (get
 shot at) and running back here to &ldquo;pick&rdquo; them up. However, you can&rsquo;t
 see the new sprites. In truth, they are below the floor. By default,
@@ -787,101 +788,383 @@ work in the game now.
 </div>
 </div>
 
-<div id="outline-container-orgaf2e5ea" class="outline-2">
-<h2 id="orgaf2e5ea">Zscript class replacements</h2>
-<div class="outline-text-2" id="text-orgaf2e5ea">
-</div>
-<div id="outline-container-org101e012" class="outline-3">
-<h3 id="org101e012">New pickup item</h3>
+<div id="outline-container-org61e725f" class="outline-2">
+<h2 id="org61e725f">Zscript class replacements</h2>
 <section><p>
-Coming soon &#x2026;
+Now we will learn the very basics of a scripting language called
+<code>Zscript</code>. GZDoom understands multiple scripting languages for
+modding. But most of them are deprecated and are only supported for
+backwards compatibility with older mods. For modern GZDoom, there are
+only two scripting languages you need to learn: <code>ACS</code> and
+<code>Zscript</code>. This guide won&rsquo;t be going into <code>ACS</code>, but know that that is
+mostly only used for map specials (conditional triggers and scripted
+sequences). For everything else, stick to <code>Zscript</code>. There are more
+advanced, and comprehensive guides to learning <code>Zscript</code>: <a href="https://jekyllgrim.github.io/ZScript_Basics/">Ash&rsquo;s
+Zscript basics</a> and <a href="https://www.youtube.com/playlist?list=PL-36gm0W-VKl89pw9lUfF36TJ28bjrNUn">David Newton&rsquo;s Youtube Tutorials</a>. In this guide,
+we will show the use of <code>Zscript</code> to modify two things present in this
+animated view from Freedoom 2, after you turn left at the big door in
+the starting area:
+</p>
+
+
+<figure id="org00d7a3d">
+<img src="./images/animated01.gif" alt="animated01.gif" width="800px">
+
+<figcaption><span class="figure-number">Figure 5: </span>We will be modifying the green <code>HealthBonus</code> items, and the <code>Zombieman</code> enemy.</figcaption>
+</figure>
+</section>
+
+<div id="outline-container-orga301884" class="outline-3">
+<h3 id="orga301884">New pickup item</h3>
+<section><p>
+First, let&rsquo;s replace those green, flashing bottle from the image
+above. That is a <code>HealthBonus</code>. Unlike the <code>StimPacks</code> from before,
+these give the player 1 point of health all the way up to a maximum of
+200 points. Meaning that you can pick them up even if you have a 100
+health points. Try doing this. There are two more <code>HealthBonus</code> items
+to the left of the view which can be picked up without alerting the
+two <code>Zombieman</code> enemies, as long as you don&rsquo;t fire your weapon or bump
+into them (or get into their light of sight).
+</p>
+
+<p>
+Create a text file named <code>ZSCRIPT.zsc</code> in your project folder (the
+extension doesn&rsquo;t matter. <code>ZSCRIPT</code> is one of those reserved lump
+names). In it, put the following text:
+</p>
+
+<pre class="code"><code>version <span style="color: #CC9393;">"4.14"</span>
+
+class MFM_Elixir : HealthBonus replaces HealthBonus
+{
+  Default
+  {
+    Inventory.Amount 5;
+    RenderStyle <span style="color: #CC9393;">"Shaded"</span>;
+    StencilColor <span style="color: #CC9393;">"Red"</span>;
+  }
+
+  States
+  {
+  <span style="color: #BFEBBF;">Spawn</span>:
+    <span style="color: #7CB8BB;">BON1</span> <span style="color: #DFAF8F;">ABCDCB</span> 3;
+    Loop;
+  }
+}
+</code></pre>
+
+<p>
+Now re-zip the archive with the new file:
+</p>
+
+<pre class="code"><code>zip -r my_first_mod.zip textures/ TEXTURES.lmp sprites/ ZSCRIPT.zsc
+</code></pre>
+
+<p>
+and launch the game with your mod (I hope you have habituated to using
+a launcher by now). Go close to the big door and turn left to the same
+location as before. All of the green <code>HealthBonus</code> items should now be
+replaced by translucent, red bottles that are flashing at twice the
+rate. And if you pick one of them up, they should give you 5 health
+points instead of 1.
+</p>
+</section>
+
+<div id="outline-container-orgc10751e" class="outline-4">
+<h4 id="orgc10751e">Analysis</h4>
+<section><p>
+Let us go through the contents of the <code>ZSCRIPT.zsc</code> file to see how
+this is achieved. The first line reads <code>version "4.14"</code>. This is a
+necessary clause at the beginning of the <code>ZSCRIPT</code> lump, and signals a
+minimum version that your mod can now be run in. If you try and load
+<code>my_first_mod.zip</code> in GZDoom 4.13.2 with the <code>ZSCRIPT.zsc</code> file in, it
+should throw an error. This facility exists to ensure that mods that
+use new, advanced <code>Zscript</code> features don&rsquo;t get accidentally launched
+by older versions of the engine, which would result in a crash.
+</p>
+
+<p>
+Looking further down, even if you have no experience with programming,
+you can notice the pairs of curly brackets encapsulating content,
+which has been formatted with <code>TAB</code>-indentations for clarity. There is
+a master-pair of curly brackets &ldquo;open&rdquo; after the line that starts with
+the term &ldquo;<code>class</code>&rdquo;, and encapsulate everything else. This &ldquo;everything
+else&rdquo; is in the &ldquo;<code>class</code>&rdquo; &ldquo;block&rdquo;, or belongs to the &ldquo;<code>class</code>&rdquo;. Within
+the <code>class</code>, there are two other blocks: the <code>Default</code> block, and the
+<a href="https://zdoom.org/wiki/Actor_states"><code>States</code></a> block. All of these are reserved keywords that the engine
+assigns special meaning to.
+</p>
+
+<p>
+Classes are a very common structure within programming languages, and
+their complete definition is beyond the scope of this guide. But in
+this limited context, a <code>class</code> is a &#x2026; well &#x2026; class of entity that
+can exist in the game&rsquo;s simulation. A <code>class</code> can be of various types:
+inventory item, monster, the player&rsquo;s character (called a
+<code>PlayerPawn</code>), a flying rocket, a falling rain drop, or even an
+invisible &ldquo;thinker&rdquo;. Every entity within the game is an instantiation
+of some <code>class</code>. The engine &ldquo;ticks&rdquo; about 35 times every second, and
+during each &ldquo;tick&rdquo; it runs through the list of entities on the map and
+runs some standard &ldquo;<code>Tick()</code>&rdquo; functions belonging to their <code>class</code>
+definitions. There is a little more to that, but this is basically how
+the game runs. Physics collisions, actors interacting with each other
+and the map, etc., all happen in &ldquo;ticks&rdquo;, and there&rsquo;s 35 of them in
+about a second.
+</p>
+
+<p>
+If the last paragraph was hard to understand, that is okay. The most
+important thing about classes is that you can inherit properties from
+a parent <code>class</code> and then modify them. For the purposes of modding,
+the syntax for declaring a <code>class</code> object is:
+</p>
+
+<pre class="code"><code>class &lt;NEW-CLASS-NAME&gt; : &lt;PARENT-CLASS-NAME&gt; [ replaces &lt;SOME-OTHER-CLASS-NAME&gt; ]
+</code></pre>
+
+<p>
+The part between the square brackets <code>[</code> &amp; <code>]</code> is optional. A new
+<code>class</code> doesn&rsquo;t have to replace an existing <code>class</code>. The new
+definition can exist and operate independently. To use our own
+example, the line reads:
+</p>
+
+<pre class="code"><code><span style="color: #7CB8BB;">class</span> <span style="color: #DFAF8F;">MFM_Elixir</span> : HealthBonus replaces HealthBonus
+</code></pre>
+
+<p>
+Here we have defined a new <code>class</code> with the name <code>MFM_Elixir</code>. The
+prefix <code>MFM_</code> stands for &ldquo;My first Mod&rdquo; (the name of your mod). It is
+good practice to add a unique prefix to all new <code>class</code>
+definitions. That way, there will be no conflict when your mod is
+loaded along with another mod that has its own elixir <code>class</code>, since
+that is a common word. Anyway, this new <code>class</code> is of the type
+<code>HealthBonus</code> which plays the role of the parent <code>class</code> that all
+properties can be inherited from. This <code>HealthBonus</code> <code>class</code> is an
+existing <code>class</code> that is defined inside the engine itself. You can
+take a look at its definition in GZDoom&rsquo;s source code <a href="https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/doomhealth.zs">here</a>. The class
+<code>HealthBonus</code> has the class <code>Health</code> as its parent class (further down
+in the same file, you can see the definition for the <code>StimPack</code> class,
+which also has <code>Health</code> as a parent class). You can find the same
+class definition inside the <code>gzdoom.pk3</code> file that came with the
+engine download. Find it using SLADE
+(<code>zscript-&gt;actors-&gt;doom-&gt;doomhealth.zs</code>), but remember the rule: do
+not modify the file. GZDoom automatically loads <code>gzdoom.pk3</code> when you
+run it (which is why it should always be present the same folder as
+the executable).
+</p>
+
+<p>
+Looking at the first few lines of <a href="https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/doomhealth.zs"><code>class HealthBonus</code></a>, you can see its
+<code>Default</code> and <code>States</code> blocks. We inherit these properties, and change
+some values within the <code>Default</code> block of our <code>MFM_Elixir</code> class
+definition. Namely, we changed something called <code>Inventory.Amount</code>
+from <code>1</code> to <code>5</code> (to make it give you 5 health points on pickup), and
+changed some other internal rendering properties like <a href="https://zdoom.org/wiki/Actor_properties#RenderStyle"><code>RenderStyle</code></a>
+and <a href="https://zdoom.org/wiki/Actor_properties#StencilColor"><code>StencilColor</code></a> which affects how its sprites are rendered. And
+lastly, the <a href="https://zdoom.org/wiki/Actor_states"><code>States</code></a> block is meant to contain the actor&rsquo;s state
+labels, which contain a state sequence. And each state in the sequence
+is specified by the sprite to display, the time (in &ldquo;ticks&rdquo;) to remain
+in this state for, and any other functions that need to be run. In our
+example, <code>MFM_Elixir</code> class&rsquo;s <code>States</code> block has a single state label
+(<code>Spawn</code>) just like its parent <code>HealthBonus</code> class. This marks the
+state sequence that all actors first enter when they are spawned on
+the map. The sequence line reads:
+</p>
+
+<pre class="code"><code><span style="color: #7CB8BB;">BON1</span> <span style="color: #DFAF8F;">ABCDCB</span> 3;
+</code></pre>
+
+<p>
+This tells the engine to display the sprites <code>BON1A0</code>, <code>BON1B0</code>,
+<code>BON1C0</code>, <code>BON1D0</code>, <code>BON1C0</code>, and <code>BON1B0</code> again in that order, each
+for <code>3</code> ticks. The <code>Loop;</code> statement in the next line causes this
+sequence to repeat indefinitely. You can find these sprites inside
+<code>freedoom2.wad</code> using SLADE. The original <a href="https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/doomhealth.zs"><code>HealthBonus</code></a> class
+displayed each of these sprites for <code>6</code> ticks, which is why it was
+flashing at half the speed of <code>MFM_Elixir</code>.
+</p>
+
+<p>
+Lastly, the <code>replace HealthBonus</code> clause instructed the engine to
+replace all instances of the <code>HealthBonus</code> item on any loaded map with
+<code>MFM_Elixir</code>. The replaced class doesn&rsquo;t have to be the same as the
+parent class. You could, if you wanted, replace all instances of the
+<code>Zombieman</code> class with <code>MFM_Elixir</code>. You can test the replacement
+effect by using <a href="https://zdoom.org/wiki/CCMDs">console commands</a>. Open the console while playing
+Freedoom 2 (by hitting the tilde &ldquo;~&rdquo; key below the <code>Escape</code>-key on
+your keyboard). This should pause the game and give you a command
+prompt. In it, type &ldquo;<code>summon MFM_Elixir</code>&rdquo; (without quotes) and hit
+<code>ENTER</code>. Now close the console by hitting the &ldquo;<code>~</code>&rdquo; key
+again. Provided that there is enough space in front of your player
+character, an instance of <code>MFM_Elixir</code> will have been spawned in front
+of you and will have fallen to the ground. If you repeat the exercise
+and try to <code>summon HealthBonus</code> instead, the replacement clause will
+cause another instance of <code>MFM_Elixir</code> to fall at your feet.
+</p>
+
+<p>
+Let us remove the replacement clause by either deleting the words
+<code>replace HealthBonus</code> or by commenting them out by prefixing a
+double-slash like so:
+</p>
+
+<pre class="code"><code><span style="color: #7CB8BB;">class</span> <span style="color: #DFAF8F;">MFM_Elixir</span> : HealthBonus <span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">replaces HealthBonus</span>
+</code></pre>
+
+<p>
+All text in a line that follows a double-slash &ldquo;<code>//</code>&rdquo; is treated as
+non-existent by the engine. So this is a great way to leave comments
+or notes-to-self all over your Zscript code to help yourself (and
+others) understand the code better. After doing this, you should be
+able to <code>summon HealthBonus</code> and <code>summon MFM_Elixir</code> via the console
+and watch both items flashing next to each other like so:
+</p>
+
+
+<figure id="org7161082">
+<img src="./images/potions.gif" alt="potions.gif">
+
+</figure>
+
+<p>
+Let us leave the mod in a state where <code>MFM_Elixir</code> is <b>NOT</b> replacing
+<code>HealthBonus</code> for now, as we will be using this to learn something new
+in the &ldquo;Basics of Mapping&rdquo; section later.
 </p>
 </section>
 </div>
 
-<div id="outline-container-orgf501179" class="outline-3">
-<h3 id="orgf501179">Modifying Zombieman</h3>
+<div id="outline-container-org9a0da06" class="outline-4">
+<h4 id="org9a0da06">Homework assignment</h4>
+<section><p>
+The sprites that we have explored so far: <code>STIMA0</code>, and the
+<code>BON1[ABCD]0</code>, all share a common feature. They all end in a &ldquo;0&rdquo;. The
+sprite names start with a 4-character string, followed by a
+single-character frame ID, and then a number. The two items that these
+sprites depict: <code>StimPack</code> and <code>HealthBonus</code>, both look the same from
+all directions. But we have seen sprited objects/actors in this game
+that look different from different angles (like the <code>Zombieman</code>). Let
+us try and understand how this is done. let us replace the
+<code>MFM_Elixir</code> sprite sequence with another set of sprites from
+<code>freedoom2.wad</code> that also have the <code>[ABCD]</code> frames, but do not end
+with a &ldquo;0&rdquo; character. Replace the state-sequence line with:
+</p>
+
+<pre class="code"><code><span style="color: #7CB8BB;">HEAD</span> <span style="color: #DFAF8F;">ABCDCB</span> 3;
+</code></pre>
+
+<p>
+Get back into the game and <code>summon MFM_Elixir</code> in a bright region. Now
+walk around it and see how the sprite changes based on the angle. To
+make it clearer to see, comment out the <code>RenderStyle</code> line in the
+<code>Default</code> block and use a single sprite frame to keep it from
+changing:
+</p>
+
+<pre class="code"><code><span style="color: #7CB8BB;">HEAD</span> <span style="color: #DFAF8F;">A</span> 1;
+</code></pre>
+
+<p>
+Now actually read the <code>Angles</code> and <code>Mirroring</code> sections from the
+<a href="https://zdoom.org/wiki/Sprite#Angles"><code>Sprites</code> wiki page</a>. Look up the names of all the sprite lumps that
+start with the characters <code>HEADA</code> (there should be five of them). See
+if the names make sense in terms of in-game viewing angle. Do not
+proceed further until you have understood how sprite-naming convention
+can affect sprite rotations. You can get pretty close to smooth
+rotations if you use all 16-rotation characters, but at that point,
+especially if you have a lot of animations, you are better of learning
+to use 3D models.
+</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-HTrzHkGZ-c?si=HfIz9i_nbo-uvsGP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p>
+Before proceeding, I want to confirm that you are not modifying the
+internal contents of <code>my_first_mod.zip</code> archive file using SLADE, but are
+directly modifying the files outside in your project folder and
+re-compressing the zip archive. The importance of this habit will become
+clear later.
+</p>
+</section>
+</div>
+</div>
+
+<div id="outline-container-org55c0a23" class="outline-3">
+<h3 id="org55c0a23">Modifying Zombieman</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 
 
-<figure id="orgc592cc6">
+<figure id="orgaf28c65">
 <img src="./images/screenshot05.jpg" alt="screenshot05.jpg" width="800px">
 
 </figure>
 </section>
 </div>
-
-<div id="outline-container-org0d5e7e5" class="outline-3">
-<h3 id="org0d5e7e5">Modifying weapon</h3>
-<section><p>
-Coming soon &#x2026;
-</p>
-</section>
-</div>
 </div>
 
-<div id="outline-container-org175ee48" class="outline-2">
-<h2 id="org175ee48">Basics of mapping</h2>
-<div class="outline-text-2" id="text-org175ee48">
+<div id="outline-container-org69cc2d5" class="outline-2">
+<h2 id="org69cc2d5">Basics of mapping</h2>
+<div class="outline-text-2" id="text-org69cc2d5">
 </div>
-<div id="outline-container-org6b05684" class="outline-3">
-<h3 id="org6b05684">Getting UDB</h3>
-<div class="outline-text-3" id="text-org6b05684">
+<div id="outline-container-orgedf2e02" class="outline-3">
+<h3 id="orgedf2e02">Getting UDB</h3>
+<div class="outline-text-3" id="text-orgedf2e02">
 </div>
-<div id="outline-container-orgd2bf2f0" class="outline-4">
-<h4 id="orgd2bf2f0">Your first room</h4>
+<div id="outline-container-org7abe75f" class="outline-4">
+<h4 id="org7abe75f">Your first room</h4>
 </div>
-<div id="outline-container-orgcd4a6f1" class="outline-4">
-<h4 id="orgcd4a6f1">Using custom textures from your mod</h4>
+<div id="outline-container-orga148802" class="outline-4">
+<h4 id="orga148802">Using custom textures from your mod</h4>
 </div>
-<div id="outline-container-org8d2024b" class="outline-4">
-<h4 id="org8d2024b">Placing custom things from your mod</h4>
+<div id="outline-container-orge52f42b" class="outline-4">
+<h4 id="orge52f42b">Placing custom things from your mod</h4>
 </div>
 </div>
 
-<div id="outline-container-orgc4274f4" class="outline-3">
-<h3 id="orgc4274f4">The Mapfile lump</h3>
+<div id="outline-container-orge7377bf" class="outline-3">
+<h3 id="orge7377bf">The Mapfile lump</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 
-<div id="outline-container-org0900092" class="outline-4">
-<h4 id="org0900092">Changing name for freedoom1</h4>
+<div id="outline-container-org75b9b5a" class="outline-4">
+<h4 id="org75b9b5a">Changing name for freedoom1</h4>
 </div>
-<div id="outline-container-org900eac6" class="outline-4">
-<h4 id="org900eac6">MAPINFO lump</h4>
+<div id="outline-container-orgb7a160b" class="outline-4">
+<h4 id="orgb7a160b">MAPINFO lump</h4>
 </div>
-<div id="outline-container-orgdf132ef" class="outline-4">
-<h4 id="orgdf132ef">Packing the map with your mod</h4>
+<div id="outline-container-org9feb44c" class="outline-4">
+<h4 id="org9feb44c">Packing the map with your mod</h4>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org76b2151" class="outline-2">
-<h2 id="org76b2151">Misc.</h2>
-<div class="outline-text-2" id="text-org76b2151">
+<div id="outline-container-org16232ce" class="outline-2">
+<h2 id="org16232ce">Misc.</h2>
+<div class="outline-text-2" id="text-org16232ce">
 </div>
-<div id="outline-container-orge8f5102" class="outline-3">
-<h3 id="orge8f5102">Git and version control</h3>
+<div id="outline-container-org5b872c1" class="outline-3">
+<h3 id="org5b872c1">Git and version control</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 </div>
 
-<div id="outline-container-orgc5a1c0e" class="outline-3">
-<h3 id="orgc5a1c0e">Seeking help and forum/discord etiquette</h3>
+<div id="outline-container-org1020c65" class="outline-3">
+<h3 id="org1020c65">Seeking help and forum/discord etiquette</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 </div>
 
-<div id="outline-container-org1c0f69b" class="outline-3">
-<h3 id="org1c0f69b">Studying famous mods</h3>
+<div id="outline-container-orgaddbd24" class="outline-3">
+<h3 id="orgaddbd24">Studying famous mods</h3>
 <section><p>
 Coming soon &#x2026;
 </p>

@@ -10,19 +10,21 @@ Contents/" to the top-right of this page to navigate between
 sections. Click on the "Switch Color Mode" text at the top-left of the
 page to switch between /light/ and /dark/ modes.
 
-This guide will introduce the basics of modding for the GZDoom source port.
-It is aimed at beginners with little-to-no technical knowledge. For more
-advanced help, check the [[https://zdoom.org/wiki/Tutorials][Tutorials page]] on the zdoom wiki, or Jekyll Grim's
-[[https://jekyllgrim.github.io/ZScript_Basics/][Zscript basics]]. The guide will focus on GZDoom, but might have limited
-applicability to other source ports. It is structured as a sequence of
-exercises that the reader is expected to follow along. It presents
-particular ways of doing things in particular chapters for pedagogical
-reasons and to inculcate good habits. It will not present the full context
-or historical information for everything, because it is meant to be a
-first-pass curriculum, where too much extraneous information can be
-overwhelming and counter-productive. You can recommend additions/changes to
-this guide by submitting PRs to the [[https://github.com/dileepvr/gzdoom_modding_101][github repo]]. Please only make changes
-to the =index.org= file. Do not edit the =html= file directly.
+This guide will introduce the basics of modding for the GZDoom source
+port.  It is aimed at beginners with little-to-no technical
+knowledge. For more advanced help, check the [[https://zdoom.org/wiki/Tutorials][Tutorials page]] on the
+zdoom wiki, or Jekyll Grim's [[https://jekyllgrim.github.io/ZScript_Basics/][Zscript basics]]. The guide will focus on
+GZDoom, but might have limited applicability to other source ports. It
+is structured as a sequence of exercises that the reader is expected
+to follow along by actually implementing the instructions on their
+computer. It presents particular ways of doing things in particular
+chapters for pedagogical reasons and to inculcate good habits. It will
+not present the full context or historical information for everything,
+because it is meant to be a first-pass curriculum, where too much
+extraneous information can be overwhelming and counter-productive. You
+can recommend additions/changes to this guide by submitting PRs to the
+[[https://github.com/dileepvr/gzdoom_modding_101][github repo]]. Please only make changes to the =index.org= file. Do not
+edit the =html= file directly.
 
 * Running GZDoom and understanding WADs
 
@@ -447,7 +449,7 @@ replace some sprites. You would think that this is more of the same,
 but there is a subtletly that lets us learn a couple of new
 concepts. Get back into the game Freedoom 2, and turn left in the
 starting area. You should see two health-pickup items called
-"[[https://zdoom.org/wiki/Classes:Stimpack][=stimpacks=]]". I have circled them in green in the following
+"[[https://zdoom.org/wiki/Classes:Stimpack][=StimPacks=]]". I have circled them in green in the following
 screenshot image:
 
 #+ATTR_HTML: :width 800px
@@ -458,9 +460,9 @@ health. They can be picked up by walking over them. But your health
 (indicated in the HUD below) needs to be less than 100 points for a
 successful pickup. You can lose some health points by going forward in
 the corridor and deliberately getting shot at by the two enemy zombies
-in the cubby-room to the left of the door. Returning tothe =stimpacks=
+in the cubby-room to the left of the door. Returning to the =StimPacks=
 and walking over them should restore up to 10 points. Just walking
-around the =stimpacks=, you will notice that they are depicted on
+around the =StimPacks=, you will notice that they are depicted on
 screen by a single sprite/image that always faces your viewpoint
 (meaning you can never see "behind" the sprite by walking around it).
 
@@ -492,7 +494,7 @@ like this:
 [[./images/filestructure02.jpg]]
 
 If you start the game now, and turn left at the starting area, you
-will be surprised to find ... nothing! But the two =stimpack= actors
+will be surprised to find ... nothing! But the two =StimPack= actors
 are actually there. You can confirm this by losing some health (get
 shot at) and running back here to "pick" them up. However, you can't
 see the new sprites. In truth, they are below the floor. By default,
@@ -529,9 +531,257 @@ work in the game now.
 
 * Zscript class replacements
 
+Now we will learn the very basics of a scripting language called
+=Zscript=. GZDoom understands multiple scripting languages for
+modding. But most of them are deprecated and are only supported for
+backwards compatibility with older mods. For modern GZDoom, there are
+only two scripting languages you need to learn: =ACS= and
+=Zscript=. This guide won't be going into =ACS=, but know that that is
+mostly only used for map specials (conditional triggers and scripted
+sequences). For everything else, stick to =Zscript=. There are more
+advanced, and comprehensive guides to learning =Zscript=: [[https://jekyllgrim.github.io/ZScript_Basics/][Ash's
+Zscript basics]] and [[https://www.youtube.com/playlist?list=PL-36gm0W-VKl89pw9lUfF36TJ28bjrNUn][David Newton's Youtube Tutorials]]. In this guide,
+we will show the use of =Zscript= to modify two things present in this
+animated view from Freedoom 2, after you turn left at the big door in
+the starting area:
+
+#+ATTR_HTML: :width 800px
+#+CAPTION: We will be modifying the green =HealthBonus= items, and the =Zombieman= enemy.
+[[./images/animated01.gif]]
+
 ** New pickup item
 
-Coming soon ...
+First, let's replace those green, flashing bottle from the image
+above. That is a =HealthBonus=. Unlike the =StimPacks= from before,
+these give the player 1 point of health all the way up to a maximum of
+200 points. Meaning that you can pick them up even if you have a 100
+health points. Try doing this. There are two more =HealthBonus= items
+to the left of the view which can be picked up without alerting the
+two =Zombieman= enemies, as long as you don't fire your weapon or bump
+into them (or get into their light of sight).
+
+Create a text file named =ZSCRIPT.zsc= in your project folder (the
+extension doesn't matter. =ZSCRIPT= is one of those reserved lump
+names). In it, put the following text:
+
+#+BEGIN_SRC C
+  version "4.14"
+
+  class MFM_Elixir : HealthBonus replaces HealthBonus
+  {
+	  Default
+	  {
+		  Inventory.Amount 5;
+		  RenderStyle "Shaded";
+		  StencilColor "Red";
+	  }
+
+	  States
+	  {
+	  Spawn:
+		  BON1 ABCDCB 3;
+		  Loop;
+	  }
+  }
+#+END_SRC
+
+Now re-zip the archive with the new file:
+
+#+BEGIN_SRC
+  zip -r my_first_mod.zip textures/ TEXTURES.lmp sprites/ ZSCRIPT.zsc
+#+END_SRC
+
+and launch the game with your mod (I hope you have habituated to using
+a launcher by now). Go close to the big door and turn left to the same
+location as before. All of the green =HealthBonus= items should now be
+replaced by translucent, red bottles that are flashing at twice the
+rate. And if you pick one of them up, they should give you 5 health
+points instead of 1.
+
+*** Analysis
+
+Let us go through the contents of the =ZSCRIPT.zsc= file to see how
+this is achieved. The first line reads =version "4.14"=. This is a
+necessary clause at the beginning of the =ZSCRIPT= lump, and signals a
+minimum version that your mod can now be run in. If you try and load
+=my_first_mod.zip= in GZDoom 4.13.2 with the =ZSCRIPT.zsc= file in, it
+should throw an error. This facility exists to ensure that mods that
+use new, advanced =Zscript= features don't get accidentally launched
+by older versions of the engine, which would result in a crash.
+
+Looking further down, even if you have no experience with programming,
+you can notice the pairs of curly brackets encapsulating content,
+which has been formatted with =TAB=-indentations for clarity. There is
+a master-pair of curly brackets "open" after the line that starts with
+the term "=class=", and encapsulate everything else. This "everything
+else" is in the "=class=" "block", or belongs to the "=class=". Within
+the =class=, there are two other blocks: the =Default= block, and the
+[[https://zdoom.org/wiki/Actor_states][=States=]] block. All of these are reserved keywords that the engine
+assigns special meaning to.
+
+Classes are a very common structure within programming languages, and
+their complete definition is beyond the scope of this guide. But in
+this limited context, a =class= is a ... well ... class of entity that
+can exist in the game's simulation. A =class= can be of various types:
+inventory item, monster, the player's character (called a
+=PlayerPawn=), a flying rocket, a falling rain drop, or even an
+invisible "thinker". Every entity within the game is an instantiation
+of some =class=. The engine "ticks" about 35 times every second, and
+during each "tick" it runs through the list of entities on the map and
+runs some standard "=Tick()=" functions belonging to their =class=
+definitions. There is a little more to that, but this is basically how
+the game runs. Physics collisions, actors interacting with each other
+and the map, etc., all happen in "ticks", and there's 35 of them in
+about a second.
+
+If the last paragraph was hard to understand, that is okay. The most
+important thing about classes is that you can inherit properties from
+a parent =class= and then modify them. For the purposes of modding,
+the syntax for declaring a =class= object is:
+
+#+BEGIN_SRC C
+  class <NEW-CLASS-NAME> : <PARENT-CLASS-NAME> [ replaces <SOME-OTHER-CLASS-NAME> ]
+#+END_SRC
+
+The part between the square brackets =[= & =]= is optional. A new
+=class= doesn't have to replace an existing =class=. The new
+definition can exist and operate independently. To use our own
+example, the line reads:
+
+#+BEGIN_SRC C
+  class MFM_Elixir : HealthBonus replaces HealthBonus
+#+END_SRC
+
+Here we have defined a new =class= with the name =MFM_Elixir=. The
+prefix =MFM_= stands for "My first Mod" (the name of your mod). It is
+good practice to add a unique prefix to all new =class=
+definitions. That way, there will be no conflict when your mod is
+loaded along with another mod that has its own elixir =class=, since
+that is a common word. Anyway, this new =class= is of the type
+=HealthBonus= which plays the role of the parent =class= that all
+properties can be inherited from. This =HealthBonus= =class= is an
+existing =class= that is defined inside the engine itself. You can
+take a look at its definition in GZDoom's source code [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/doomhealth.zs][here]]. The class
+=HealthBonus= has the class =Health= as its parent class (further down
+in the same file, you can see the definition for the =StimPack= class,
+which also has =Health= as a parent class). You can find the same
+class definition inside the =gzdoom.pk3= file that came with the
+engine download. Find it using SLADE
+(=zscript->actors->doom->doomhealth.zs=), but remember the rule: do
+not modify the file. GZDoom automatically loads =gzdoom.pk3= when you
+run it (which is why it should always be present the same folder as
+the executable).
+
+Looking at the first few lines of [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/doomhealth.zs][=class HealthBonus=]], you can see its
+=Default= and =States= blocks. We inherit these properties, and change
+some values within the =Default= block of our =MFM_Elixir= class
+definition. Namely, we changed something called =Inventory.Amount=
+from =1= to =5= (to make it give you 5 health points on pickup), and
+changed some other internal rendering properties like [[https://zdoom.org/wiki/Actor_properties#RenderStyle][=RenderStyle=]]
+and [[https://zdoom.org/wiki/Actor_properties#StencilColor][=StencilColor=]] which affects how its sprites are rendered. And
+lastly, the [[https://zdoom.org/wiki/Actor_states][=States=]] block is meant to contain the actor's state
+labels, which contain a state sequence. And each state in the sequence
+is specified by the sprite to display, the time (in "ticks") to remain
+in this state for, and any other functions that need to be run. In our
+example, =MFM_Elixir= class's =States= block has a single state label
+(=Spawn=) just like its parent =HealthBonus= class. This marks the
+state sequence that all actors first enter when they are spawned on
+the map. The sequence line reads:
+
+#+BEGIN_SRC C
+  BON1 ABCDCB 3;
+#+END_SRC
+
+This tells the engine to display the sprites =BON1A0=, =BON1B0=,
+=BON1C0=, =BON1D0=, =BON1C0=, and =BON1B0= again in that order, each
+for =3= ticks. The =Loop;= statement in the next line causes this
+sequence to repeat indefinitely. You can find these sprites inside
+=freedoom2.wad= using SLADE. The original [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/doomhealth.zs][=HealthBonus=]] class
+displayed each of these sprites for =6= ticks, which is why it was
+flashing at half the speed of =MFM_Elixir=.
+
+Lastly, the =replace HealthBonus= clause instructed the engine to
+replace all instances of the =HealthBonus= item on any loaded map with
+=MFM_Elixir=. The replaced class doesn't have to be the same as the
+parent class. You could, if you wanted, replace all instances of the
+=Zombieman= class with =MFM_Elixir=. You can test the replacement
+effect by using [[https://zdoom.org/wiki/CCMDs][console commands]]. Open the console while playing
+Freedoom 2 (by hitting the tilde "~" key below the =Escape=-key on
+your keyboard). This should pause the game and give you a command
+prompt. In it, type "=summon MFM_Elixir=" (without quotes) and hit
+=ENTER=. Now close the console by hitting the "=~=" key
+again. Provided that there is enough space in front of your player
+character, an instance of =MFM_Elixir= will have been spawned in front
+of you and will have fallen to the ground. If you repeat the exercise
+and try to =summon HealthBonus= instead, the replacement clause will
+cause another instance of =MFM_Elixir= to fall at your feet.
+
+Let us remove the replacement clause by either deleting the words
+=replace HealthBonus= or by commenting them out by prefixing a
+double-slash like so:
+
+#+BEGIN_SRC C
+  class MFM_Elixir : HealthBonus // replaces HealthBonus
+#+END_SRC
+
+All text in a line that follows a double-slash "=//=" is treated as
+non-existent by the engine. So this is a great way to leave comments
+or notes-to-self all over your Zscript code to help yourself (and
+others) understand the code better. After doing this, you should be
+able to =summon HealthBonus= and =summon MFM_Elixir= via the console
+and watch both items flashing next to each other like so:
+
+[[./images/potions.gif]]
+
+Let us leave the mod in a state where =MFM_Elixir= is *NOT* replacing
+=HealthBonus= for now, as we will be using this to learn something new
+in the "Basics of Mapping" section later.
+
+*** Homework assignment
+
+The sprites that we have explored so far: =STIMA0=, and the
+=BON1[ABCD]0=, all share a common feature. They all end in a "0". The
+sprite names start with a 4-character string, followed by a
+single-character frame ID, and then a number. The two items that these
+sprites depict: =StimPack= and =HealthBonus=, both look the same from
+all directions. But we have seen sprited objects/actors in this game
+that look different from different angles (like the =Zombieman=). Let
+us try and understand how this is done. let us replace the
+=MFM_Elixir= sprite sequence with another set of sprites from
+=freedoom2.wad= that also have the =[ABCD]= frames, but do not end
+with a "0" character. Replace the state-sequence line with:
+
+#+BEGIN_SRC C
+  HEAD ABCDCB 3;
+#+END_SRC
+
+Get back into the game and =summon MFM_Elixir= in a bright region. Now
+walk around it and see how the sprite changes based on the angle. To
+make it clearer to see, comment out the =RenderStyle= line in the
+=Default= block and use a single sprite frame to keep it from
+changing:
+
+#+BEGIN_SRC C
+  HEAD A 1;
+#+END_SRC
+
+Now actually read the =Angles= and =Mirroring= sections from the
+[[https://zdoom.org/wiki/Sprite#Angles][=Sprites= wiki page]]. Look up the names of all the sprite lumps that
+start with the characters =HEADA= (there should be five of them). See
+if the names make sense in terms of in-game viewing angle. Do not
+proceed further until you have understood how sprite-naming convention
+can affect sprite rotations. You can get pretty close to smooth
+rotations if you use all 16-rotation characters, but at that point,
+especially if you have a lot of animations, you are better of learning
+to use 3D models.
+
+#+HTML: <iframe width="560" height="315" src="https://www.youtube.com/embed/-HTrzHkGZ-c?si=HfIz9i_nbo-uvsGP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Before proceeding, I want to confirm that you are not modifying the
+internal contents of =my_first_mod.zip= archive file using SLADE, but are
+directly modifying the files outside in your project folder and
+re-compressing the zip archive. The importance of this habit will become
+clear later.
 
 ** Modifying Zombieman
 
@@ -539,10 +789,6 @@ Coming soon ...
 
 #+ATTR_HTML: :width 800px
 [[./images/screenshot05.jpg]]
-
-** Modifying weapon
-
-Coming soon ...
 
 * Basics of mapping
 
