@@ -65,37 +65,37 @@ table{border-color: var(--light-fg);}input#lightswitch:checked ~ table{border-co
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org687821f">Running GZDoom and understanding WADs</a>
+<li><a href="#org462f02d">Running GZDoom and understanding WADs</a>
 <ul>
-<li><a href="#orgc00540c">Getting the Engine</a></li>
-<li><a href="#org52e644f">Getting some IWADs</a></li>
+<li><a href="#orge58d2d5">Getting the Engine</a></li>
+<li><a href="#org1d3521a">Getting some IWADs</a></li>
 </ul>
 </li>
-<li><a href="#org22246ff">Basic replacement mods</a>
+<li><a href="#orgab2a790">Basic replacement mods</a>
 <ul>
-<li><a href="#org46165d1">Texture replacement</a></li>
-<li><a href="#orgdadd356">Text files as lumps</a></li>
-<li><a href="#org15e11bc">Basics of SLADE</a></li>
-<li><a href="#orgaf9fe50">Sprite replacement and offsets</a></li>
+<li><a href="#orgea42be1">Texture replacement</a></li>
+<li><a href="#orge905a9b">Text files as lumps</a></li>
+<li><a href="#org8c78d51">Basics of SLADE</a></li>
+<li><a href="#org5ac24c2">Sprite replacement and offsets</a></li>
 </ul>
 </li>
-<li><a href="#org61e725f">Zscript class replacements</a>
+<li><a href="#org8c6fc29">Zscript class replacements</a>
 <ul>
-<li><a href="#orga301884">New pickup item</a></li>
-<li><a href="#org55c0a23">Modifying Zombieman</a></li>
+<li><a href="#org5bc6283">New pickup item</a></li>
+<li><a href="#org8b291c9">Modifying Zombieman</a></li>
 </ul>
 </li>
-<li><a href="#org69cc2d5">Basics of mapping</a>
+<li><a href="#org9cbd8ef">Basics of mapping</a>
 <ul>
-<li><a href="#orgedf2e02">Getting UDB</a></li>
-<li><a href="#orge7377bf">The Mapfile lump</a></li>
+<li><a href="#org418893e">Getting UDB</a></li>
+<li><a href="#org0357f51">The Mapfile lump</a></li>
 </ul>
 </li>
-<li><a href="#org16232ce">Misc.</a>
+<li><a href="#org4bc415b">Misc.</a>
 <ul>
-<li><a href="#org5b872c1">Git and version control</a></li>
-<li><a href="#org1020c65">Seeking help and forum/discord etiquette</a></li>
-<li><a href="#orgaddbd24">Studying famous mods</a></li>
+<li><a href="#orgf6c7c9e">Git and version control</a></li>
+<li><a href="#org0090836">Seeking help and forum/discord etiquette</a></li>
+<li><a href="#org497fee5">Studying famous mods</a></li>
 </ul>
 </li>
 </ul>
@@ -128,12 +128,12 @@ edit the <code>html</code> file directly.
 </p>
 </section>
 
-<div id="outline-container-org687821f" class="outline-2">
-<h2 id="org687821f">Running GZDoom and understanding WADs</h2>
-<div class="outline-text-2" id="text-org687821f">
+<div id="outline-container-org462f02d" class="outline-2">
+<h2 id="org462f02d">Running GZDoom and understanding WADs</h2>
+<div class="outline-text-2" id="text-org462f02d">
 </div>
-<div id="outline-container-orgc00540c" class="outline-3">
-<h3 id="orgc00540c">Getting the Engine</h3>
+<div id="outline-container-orge58d2d5" class="outline-3">
+<h3 id="orge58d2d5">Getting the Engine</h3>
 <section><p>
 First, let us get GZDoom running and playing a game. Download the
 latest version of GZDoom (and not ZDoom) for your operating system
@@ -184,8 +184,8 @@ under the hood.
 </section>
 </div>
 
-<div id="outline-container-org52e644f" class="outline-3">
-<h3 id="org52e644f">Getting some IWADs</h3>
+<div id="outline-container-org1d3521a" class="outline-3">
+<h3 id="org1d3521a">Getting some IWADs</h3>
 <section><p>
 Running the engine executable by itself couldn&rsquo;t run a game because
 you haven&rsquo;t downloaded any actual games for the engine to run. Let us
@@ -231,14 +231,14 @@ screens of main menu, and the first level:
 </p>
 
 
-<figure id="org7b2d819">
+<figure id="org666b74d">
 <img src="./images/screenshot01.jpg" alt="screenshot01.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 1: </span>Main menu screen for Freedoom 2 (v0.13.0)</figcaption>
 </figure>
 
 
-<figure id="orgb1fbb10">
+<figure id="org745d824">
 <img src="./images/screenshot02.jpg" alt="screenshot02.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 2: </span>Starting area of MAP01 in Freedoom 2 (v0.13.0)</figcaption>
@@ -260,12 +260,12 @@ program.
 </div>
 </div>
 
-<div id="outline-container-org22246ff" class="outline-2">
-<h2 id="org22246ff">Basic replacement mods</h2>
-<div class="outline-text-2" id="text-org22246ff">
+<div id="outline-container-orgab2a790" class="outline-2">
+<h2 id="orgab2a790">Basic replacement mods</h2>
+<div class="outline-text-2" id="text-orgab2a790">
 </div>
-<div id="outline-container-org46165d1" class="outline-3">
-<h3 id="org46165d1">Texture replacement</h3>
+<div id="outline-container-orgea42be1" class="outline-3">
+<h3 id="orgea42be1">Texture replacement</h3>
 <section><p>
 Now we are going to make our first mod. Create a project folder
 somewhere on your computer. Call it something like
@@ -277,7 +277,7 @@ named <code>AQRUST08.png</code>. The filename is important.
 </p>
 
 
-<figure id="orge555e63">
+<figure id="orgcefb080">
 <img src="./images/AQRUST08.png" alt="AQRUST08.png">
 
 <figcaption><span class="figure-number">Figure 3: </span><code>AQRUST08.png</code> modified wall texture</figcaption>
@@ -312,15 +312,15 @@ Once you launch the game, you should be greeted to this view:
 </p>
 
 
-<figure id="orgc1da0b9">
+<figure id="org8e65471">
 <img src="./images/screenshot03.jpg" alt="screenshot03.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 4: </span>Opening area of MAP01 in Freedoom 2 (v0.13.0) with a texture replaced</figcaption>
 </figure>
 </section>
 
-<div id="outline-container-org9db9bac" class="outline-4">
-<h4 id="org9db9bac">Analysis</h4>
+<div id="outline-container-org6888d34" class="outline-4">
+<h4 id="org6888d34">Analysis</h4>
 <section><p>
 Let us unpack what is happening here. You ran GZDoom with two files:
 <code>freedoom2.wad</code> and <code>my_first_mod.zip</code>. The first one is the IWAD,
@@ -349,8 +349,8 @@ serially, in the sequence of the files.
 </section>
 </div>
 
-<div id="outline-container-org9515a95" class="outline-4">
-<h4 id="org9515a95">Get setup with a Launcher before proceeding further</h4>
+<div id="outline-container-orgd39a9f0" class="outline-4">
+<h4 id="orgd39a9f0">Get setup with a Launcher before proceeding further</h4>
 <section><p>
 This is one reason I illustrated the command line method of launching
 GZDoom. Selecting multiple mod files and dragging-and-dropping them
@@ -373,7 +373,7 @@ is a view of my DoomRunner front page:
 </p>
 
 
-<figure id="org14a5377">
+<figure id="org751744f">
 <img src="./images/doomrunner01.jpg" alt="doomrunner01.jpg" width="800px">
 
 </figure>
@@ -405,7 +405,7 @@ constructing and executing lengthy commands like the ones above.
 </p>
 
 
-<figure id="orgc5337f3">
+<figure id="orgfb472eb">
 <img src="./images/doomrunner02.jpg" alt="doomrunner02.jpg" width="800px">
 
 </figure>
@@ -432,8 +432,8 @@ format. More on that later.
 </div>
 </div>
 
-<div id="outline-container-orgdadd356" class="outline-3">
-<h3 id="orgdadd356">Text files as lumps</h3>
+<div id="outline-container-orge905a9b" class="outline-3">
+<h3 id="orge905a9b">Text files as lumps</h3>
 <section><p>
 Let us continue adding to your mod. So far, you have a zip file
 (possibly renamed &ldquo;<code>my_first_mod.pk3</code>&rdquo;) which contains a folder named
@@ -517,7 +517,7 @@ The archive&rsquo;s internal structure should look something like this:
 </p>
 
 
-<figure id="orga3b9583">
+<figure id="orgcccb99f">
 <img src="./images/filestructure01.jpg" alt="filestructure01.jpg">
 
 </figure>
@@ -528,7 +528,7 @@ launcher like DoomRunner) should bring up this view:
 </p>
 
 
-<figure id="orgf0daaae">
+<figure id="orgae9912d">
 <img src="./images/screenshot06.jpg" alt="screenshot06.jpg" width="800px">
 
 </figure>
@@ -562,8 +562,8 @@ standardized.
 </section>
 </div>
 
-<div id="outline-container-org15e11bc" class="outline-3">
-<h3 id="org15e11bc">Basics of SLADE</h3>
+<div id="outline-container-org8c78d51" class="outline-3">
+<h3 id="org8c78d51">Basics of SLADE</h3>
 <section><p>
 Next, we will introduce another helpful program to our modding
 toolbelt. This one is a WAD-editor called SLADE. You can acquire it
@@ -584,7 +584,7 @@ view you should be presented with:
 </p>
 
 
-<figure id="org93faf3d">
+<figure id="org507cfb2">
 <img src="./images/SLADE01.jpg" alt="SLADE01.jpg" width="800px">
 
 </figure>
@@ -658,7 +658,7 @@ you with a list of virtual textures defined within.
 </p>
 
 
-<figure id="org6b6d9f0">
+<figure id="org4c1d694">
 <img src="./images/SLADE02.jpg" alt="SLADE02.jpg" width="800px">
 
 </figure>
@@ -676,8 +676,8 @@ what is going on here.
 </section>
 </div>
 
-<div id="outline-container-orgaf9fe50" class="outline-3">
-<h3 id="orgaf9fe50">Sprite replacement and offsets</h3>
+<div id="outline-container-org5ac24c2" class="outline-3">
+<h3 id="org5ac24c2">Sprite replacement and offsets</h3>
 <section><p>
 So far, we have made basic replacements for textures. Next, let us
 replace some sprites. You would think that this is more of the same,
@@ -689,7 +689,7 @@ screenshot image:
 </p>
 
 
-<figure id="org35fc8a0">
+<figure id="orge362939">
 <img src="./images/screenshot04.jpg" alt="screenshot04.jpg" width="800px">
 
 </figure>
@@ -722,7 +722,7 @@ folder of your mod.
 </p>
 
 
-<figure id="orgdbdca06">
+<figure id="orgfc8da4a">
 <img src="./images/STIMA0.png" alt="STIMA0.png" width="100px">
 
 </figure>
@@ -739,7 +739,7 @@ like this:
 </p>
 
 
-<figure id="orgac0133d">
+<figure id="orgbcd349b">
 <img src="./images/filestructure02.jpg" alt="filestructure02.jpg">
 
 </figure>
@@ -788,11 +788,11 @@ work in the game now.
 </div>
 </div>
 
-<div id="outline-container-org61e725f" class="outline-2">
-<h2 id="org61e725f">Zscript class replacements</h2>
+<div id="outline-container-org8c6fc29" class="outline-2">
+<h2 id="org8c6fc29">Zscript class replacements</h2>
 <section><p>
 Now we will learn the very basics of a scripting language called
-<code>Zscript</code>. GZDoom understands multiple scripting languages for
+<a href="https://zdoom.org/wiki/ZScript"><code>Zscript</code></a>. GZDoom understands multiple scripting languages for
 modding. But most of them are deprecated and are only supported for
 backwards compatibility with older mods. For modern GZDoom, there are
 only two scripting languages you need to learn: <code>ACS</code> and
@@ -807,15 +807,15 @@ the starting area:
 </p>
 
 
-<figure id="org00d7a3d">
+<figure id="orgda3a223">
 <img src="./images/animated01.gif" alt="animated01.gif" width="800px">
 
-<figcaption><span class="figure-number">Figure 5: </span>We will be modifying the green <code>HealthBonus</code> items, and the <code>Zombieman</code> enemy.</figcaption>
+<figcaption><span class="figure-number">Figure 5: </span>We will be modifying the green <code>HealthBonus</code> items, and the <code>Zombieman</code> enemy</figcaption>
 </figure>
 </section>
 
-<div id="outline-container-orga301884" class="outline-3">
-<h3 id="orga301884">New pickup item</h3>
+<div id="outline-container-org5bc6283" class="outline-3">
+<h3 id="org5bc6283">New pickup item</h3>
 <section><p>
 First, let&rsquo;s replace those green, flashing bottle from the image
 above. That is a <code>HealthBonus</code>. Unlike the <code>StimPacks</code> from before,
@@ -870,8 +870,8 @@ points instead of 1.
 </p>
 </section>
 
-<div id="outline-container-orgc10751e" class="outline-4">
-<h4 id="orgc10751e">Analysis</h4>
+<div id="outline-container-org48f4922" class="outline-4">
+<h4 id="org48f4922">Analysis</h4>
 <section><p>
 Let us go through the contents of the <code>ZSCRIPT.zsc</code> file to see how
 this is achieved. The first line reads <code>version "4.14"</code>. This is a
@@ -989,8 +989,8 @@ flashing at half the speed of <code>MFM_Elixir</code>.
 Lastly, the <code>replace HealthBonus</code> clause instructed the engine to
 replace all instances of the <code>HealthBonus</code> item on any loaded map with
 <code>MFM_Elixir</code>. The replaced class doesn&rsquo;t have to be the same as the
-parent class. You could, if you wanted, replace all instances of the
-<code>Zombieman</code> class with <code>MFM_Elixir</code>. You can test the replacement
+parent class. You could, if you wanted to, replace all instances of
+the <code>Zombieman</code> class with <code>MFM_Elixir</code>. You can test the replacement
 effect by using <a href="https://zdoom.org/wiki/CCMDs">console commands</a>. Open the console while playing
 Freedoom 2 (by hitting the tilde &ldquo;~&rdquo; key below the <code>Escape</code>-key on
 your keyboard). This should pause the game and give you a command
@@ -1022,7 +1022,7 @@ and watch both items flashing next to each other like so:
 </p>
 
 
-<figure id="org7161082">
+<figure id="org6c98ab2">
 <img src="./images/potions.gif" alt="potions.gif">
 
 </figure>
@@ -1030,13 +1030,13 @@ and watch both items flashing next to each other like so:
 <p>
 Let us leave the mod in a state where <code>MFM_Elixir</code> is <b>NOT</b> replacing
 <code>HealthBonus</code> for now, as we will be using this to learn something new
-in the &ldquo;Basics of Mapping&rdquo; section later.
+in the <a href="#org9cbd8ef">&ldquo;<i>Basics of mapping</i>&rdquo;</a> section later.
 </p>
 </section>
 </div>
 
-<div id="outline-container-org9a0da06" class="outline-4">
-<h4 id="org9a0da06">Homework assignment</h4>
+<div id="outline-container-org2c3dd97" class="outline-4">
+<h4 id="org2c3dd97">Homework assignment</h4>
 <section><p>
 The sprites that we have explored so far: <code>STIMA0</code>, and the
 <code>BON1[ABCD]0</code>, all share a common feature. They all end in a &ldquo;0&rdquo;. The
@@ -1055,11 +1055,11 @@ with a &ldquo;0&rdquo; character. Replace the state-sequence line with:
 </code></pre>
 
 <p>
-Get back into the game and <code>summon MFM_Elixir</code> in a bright region. Now
-walk around it and see how the sprite changes based on the angle. To
-make it clearer to see, comment out the <code>RenderStyle</code> line in the
-<code>Default</code> block and use a single sprite frame to keep it from
-changing:
+Get back into the game and <code>summon MFM_Elixir</code> in a brightly lit
+region. Now walk around it and see how the sprite changes based on the
+angle. To make it clearer to see, comment out the <code>RenderStyle</code> line
+in the <code>Default</code> block and use a single sprite frame to keep it from
+animating:
 </p>
 
 <pre class="code"><code><span style="color: #7CB8BB;">HEAD</span> <span style="color: #DFAF8F;">A</span> 1;
@@ -1077,8 +1077,6 @@ especially if you have a lot of animations, you are better of learning
 to use 3D models.
 </p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/-HTrzHkGZ-c?si=HfIz9i_nbo-uvsGP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
 <p>
 Before proceeding, I want to confirm that you are not modifying the
 internal contents of <code>my_first_mod.zip</code> archive file using SLADE, but are
@@ -1090,81 +1088,328 @@ clear later.
 </div>
 </div>
 
-<div id="outline-container-org55c0a23" class="outline-3">
-<h3 id="org55c0a23">Modifying Zombieman</h3>
+<div id="outline-container-org8b291c9" class="outline-3">
+<h3 id="org8b291c9">Modifying Zombieman</h3>
 <section><p>
-Coming soon &#x2026;
+Okay. Now we do enemies. Boot up the game. You see these two former
+gentlemen admiring the flashing <code>HealthBonus</code> bottles:
 </p>
 
 
-<figure id="orgaf28c65">
+<figure id="orgcab271f">
 <img src="./images/screenshot05.jpg" alt="screenshot05.jpg" width="800px">
 
+<figcaption><span class="figure-number">Figure 6: </span>Zombiemen of culture</figcaption>
 </figure>
+
+<p>
+You can alert them by either bumping into one of them or firing your
+weapon. Even punching the air with your fist (weapon-slot 1) should do
+it. Get a feel for their behavior. What how they move around, and stop
+to shoot. With clever positioning, you can even get one of them to
+accidentally shoot the other and cause some in-fighting among
+them. After you&rsquo;ve gained some feel for their behavior, take a gander
+at their <code>class ZombieMan</code> definition in the <a href="https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs">engine source code</a> (or
+inside the <code>gzdoom.pk3</code> file). It has a master parent-class simply
+called <a href="https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/actor.zs"><code>Actor</code></a>, which has a parent-class called <code>Thinker</code>, which is
+doing most of the heavy lifting.
+</p>
+
+<p>
+<code>Zscript</code> is powerful enough to allow you to define any general sort
+of game actor with very unique, custom behavior. But since GZDoom
+started life as a Doom source port, it supports Doom-style functions
+and behavior out of the box. <a href="https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs"><code>ZombieMan</code></a> uses a very small set of
+built-in functions: <a href="https://zdoom.org/wiki/A_Look"><code>A_Look()</code></a>, <a href="https://zdoom.org/wiki/A_Chase"><code>A_Chase()</code></a>, <a href="https://zdoom.org/wiki/A_FaceTarget"><code>A_FaceTarget()</code></a>,
+<a href="https://zdoom.org/wiki/A_PosAttack"><code>A_PosAttack()</code></a>, <a href="https://zdoom.org/wiki/A_Pain"><code>A_Pain()</code></a>, <a href="https://zdoom.org/wiki/A_Scream"><code>A_Scream()</code></a>, <a href="https://zdoom.org/wiki/A_NoBlocking"><code>A_NoBlocking()</code></a>, and
+<a href="https://zdoom.org/wiki/A_XScream"><code>A_XScream()</code></a>. These functions rely on values of some default fields
+to perform some actions and kick the actor into one of the standard
+state labels. The standard state labels defined for the <a href="https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs"><code>ZombieMan</code></a>
+are <code>Spawn</code>, <code>See</code>, <code>Missile</code>, <code>Pain</code>, <code>Death</code>, <code>XDeath</code>, and
+<code>Raise</code>. These (along with some others used in interactive actors) are
+built in for the standard functions. For example, you can define a
+<a href="https://zdoom.org/wiki/Custom_damage_types_(ZScript)">custom damage type</a> named <code>XYZ</code>, for example, that can have its own
+<code>Pain.XYZ</code> and <code>Death.XYZ</code> state to transition to, if
+defined. <code>XDeath</code> is entered when damage incurred exceeds a certain
+threshold value. <code>Raise</code> comes in when a dead actor is resurrected
+using a built-in method.
+</p>
+
+<p>
+The <a href="https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs"><code>ZombieMan</code></a> has very simple, basic, AI.  <a href="https://zdoom.org/wiki/A_Look"><code>A_Look()</code></a> makes it look
+for hostiles.  <a href="https://zdoom.org/wiki/A_Chase"><code>A_Chase()</code></a> makes it turn 45-degrees in a random
+direction (biased towards its <code>target</code> actor) when ever it gets called
+(or the actor collides with something). The rest should be
+self-explanatory. You can read the wiki pages that I have hyperlinked
+for more. Suffice to say that GZDoom default AI functions have no
+concept of path finding or advanced goals and behaviors. Modders had
+to code it all themselves. Before the days of <code>ZScript</code> this was done
+using token inventory items. Although, at the time of this writing,
+GZDoom got some code updates for a <a href="https://github.com/ZDoom/gzdoom/pull/2908">behaviors subsystem</a>. So in the
+future, we should see that getting used (and someone will need to
+tutorialize it).
+</p>
+
+<p>
+You can define your own state labels, but will need custom functions
+to handle state transitions into and out of them. Let us now create a
+replacement class named <code>MFM_InviZombie</code> to make this enemy slightly
+more exciting. Let is add/modify the state labels one at a time. For
+starters, we will split the <code>See</code> state label into two:
+</p>
+
+<pre class="code"><code><span style="color: #7CB8BB;">class</span> <span style="color: #DFAF8F;">MFM_InviZombie</span> : ZombieMan replaces ZombieMan
+{
+   Default
+   {
+     StencilColor <span style="color: #CC9393;">"DDDDFF"</span>;
+     Speed 12;
+   }
+   States
+   {
+   <span style="color: #BFEBBF;">See</span>:
+     <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">A</span> 1 A_StartSound(<span style="color: #CC9393;">"brain/cube"</span>, starttime: 0.6);
+     <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">A</span> 4 A_SetRenderstyle(alpha, STYLE_Shaded);
+     <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">A</span> 4 A_SetRenderstyle(alpha, STYLE_Fuzzy);
+   <span style="color: #BFEBBF;">See2</span>:
+     <span style="color: #7CB8BB;">POSS</span> <span style="color: #DFAF8F;">AABBCCDD</span> 4 A_Chase;
+     Loop;
+   }
+}
+</code></pre>
+
+<p>
+So here, I gave the class a default <code>StencilColor</code> (a blue-ish white)
+and a <code>Speed</code> of <code>12</code> (the default <code>ZombieMan</code>&rsquo;s <code>Speed</code> was <code>8</code>). We
+omit defining the <code>Spawn</code> state label since we don&rsquo;t want to change
+it. We start the <code>See</code> state label by playing the &ldquo;<code>brain/cube</code>&rdquo; sound
+lump using the <a href="https://zdoom.org/wiki/A_StartSound"><code>A_StartSound()</code></a> function (it&rsquo;s just the <a href="https://github.com/ZDoom/gzdoom/blob/f1b5ba09e0fb001e7a6d1771ef68abfb15d2931d/wadsrc/static/filter/game-doomchex/sndinfo.txt#L375"><code>DSBOSCUB</code></a>
+lump from <code>freedoom2.wad</code> originally used in Chex&rsquo;s Quest) with the
+starting time 60% into the audio. And then the <a href="https://zdoom.org/wiki/A_SetRenderStyle"><code>A_SetRenderStyle()</code></a>
+function is used and the sprites are set to be rendered in the
+&ldquo;shaded&rdquo; style (just like for <code>MFM_Elixir</code>) with the new
+<code>StencilColor</code> for 4 ticks. And then the <a href="https://zdoom.org/wiki/Actor_properties#RenderStyle"><code>RenderStyle</code></a> gets changed
+again to &ldquo;fuzzy&rdquo; style, which is internally defined for use with the
+<a href="https://zdoom.org/wiki/Classes:Spectre"><code>Spectre</code></a> class of enemy from the Doom games. After this,
+<code>MFM_InviZombie</code> should enter our custom <code>See2</code> state label, which is
+just the looped state sequence from the default <code>See</code> state label in
+the original <a href="https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs"><code>ZombieMan</code></a> class. In game, the actor will be visible
+normally in the <code>Spawn</code> state label, but will enter the <code>See</code> (and
+eventually the <code>See2</code>) state label and look like a dark shade when
+alerted, like so:
+</p>
+
+
+<figure id="org2d4b205">
+<img src="./images/invi01.gif" alt="invi01.gif" width="800px">
+
+</figure>
+
+<p>
+When in the <code>See2</code> looped state sequence, the sprites are cycling
+between the <code>POSS[ABCD]</code> walking-animation frames at the speed defined
+in the code (look them up using SLADE). Next, let us add a modified
+<code>Missile</code> state label to the <code>States</code> block of <code>MFM_InviZombie</code> class:
+</p>
+
+<pre class="code"><code><span style="color: #BFEBBF;">Missile</span>:
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">E</span> 1 A_StartSound(<span style="color: #CC9393;">"misc/spawn"</span>);
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">E</span> 4 A_SetRenderstyle(alpha, STYLE_Shaded);
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">E</span> 4 A_SetRenderstyle(alpha, STYLE_Normal);
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #DFAF8F;">E</span> 12 A_FaceTarget;
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #DFAF8F;">F</span> 8 A_PosAttack;
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #DFAF8F;">E</span> 8;
+  <span style="color: #7CB8BB;">Goto</span> <span style="color: #DFAF8F;">See</span>;
+</code></pre>
+
+<p>
+If you compare this to the default <code>Missile</code> state label from the
+original <a href="https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs"><code>ZombieMan</code></a> class, you will see that the &ldquo;<code>misc/spawn</code>&rdquo; sound
+lump is played (it&rsquo;s just the <a href="https://github.com/ZDoom/gzdoom/blob/f1b5ba09e0fb001e7a6d1771ef68abfb15d2931d/wadsrc/static/filter/game-doomchex/sndinfo.txt#L422"><code>DSITMBK</code></a> lump from <code>freedoom2.wad</code>
+originally used in Chex&rsquo;s Quest), the render style is briefly set to
+&ldquo;shaded&rdquo; for 4 ticks, and then the rendering style is set to
+&ldquo;normal&rdquo;. Also, it now takes <code>1+4+4+12</code> meaning <code>21</code> ticks to get to
+the <code>A_PosAttack</code> call, which is longer than the default <code>10</code>
+ticks. This is to keep the monster difficulty roughly the same as
+before, giving the player more of a chance for a counter
+attack. Lastly, the actor is returned to the <code>See</code> state label which
+should play the other sound lump and set the render styles back to
+shaded (as we&rsquo;ve already seen). This should look like this:
+</p>
+
+
+<figure id="org89d20a6">
+<img src="./images/invi02.gif" alt="invi02.gif" width="800px">
+
+</figure>
+
+<p>
+To finish it up, we can also add new definitions of the <code>Pain</code>,
+<code>Death</code>, and <code>XDeath</code> state labels to our replacement class to make
+<code>MFM_InviZombie</code> visible in those states too:
+</p>
+
+<pre class="code"><code><span style="color: #BFEBBF;">Pain</span>:
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">G</span> 1 A_StartSound(<span style="color: #CC9393;">"misc/spawn"</span>);
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">G</span> 4 A_SetRenderstyle(alpha, STYLE_Shaded);
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">G</span> 4 A_SetRenderstyle(alpha, STYLE_Normal);
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #DFAF8F;">G</span> 3 A_Pain;
+  <span style="color: #7CB8BB;">Goto</span> <span style="color: #DFAF8F;">See</span>;
+<span style="color: #BFEBBF;">Death</span>:
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">H</span> 1 A_StartSound(<span style="color: #CC9393;">"misc/spawn"</span>);
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">H</span> 4 A_SetRenderstyle(alpha, STYLE_Shaded);
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">H</span> 5 A_SetRenderstyle(alpha, STYLE_Normal);
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #DFAF8F;">I</span> 5 A_Scream;
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #DFAF8F;">J</span> 5 A_NoBlocking;
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #DFAF8F;">K</span> 5;
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">L</span> -1 A_DropItem(<span style="color: #D0BF8F; font-weight: bold;">'</span>MFM_Elixir<span style="color: #D0BF8F; font-weight: bold;">'</span>);
+  Stop;
+<span style="color: #BFEBBF;">XDeath</span>:
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">M</span> 1 A_StartSound(<span style="color: #CC9393;">"misc/spawn"</span>);
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">M</span> 4 A_SetRenderstyle(alpha, STYLE_Shaded);
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">M</span> 5 A_SetRenderstyle(alpha, STYLE_Normal);
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #DFAF8F;">N</span> 5 A_XScream;
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #DFAF8F;">O</span> 5 A_NoBlocking;
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #DFAF8F;">PQRST</span> 5;
+  <span style="color: #7CB8BB;">POSS</span> <span style="color: #93E0E3;">U</span> -1 A_DropItem(<span style="color: #D0BF8F; font-weight: bold;">'</span>MFM_Elixir<span style="color: #D0BF8F; font-weight: bold;">'</span>);
+  Stop;
+</code></pre>
+
+<p>
+You should, once again, compare these to their counterparts in the
+original <a href="https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs"><code>ZombieMan</code></a> class. We don&rsquo;t be redefining the <code>Raise</code> state
+label. I have thrown in the use of the <a href="https://zdoom.org/wiki/A_DropItem"><code>A_DropItem()</code></a> function to make
+the <code>MFM_InviZombie</code> drop a bottle of <code>MFM_ELixir</code> when killed. This
+item is dropped along with the <code>ZombieMan</code>&rsquo;s default <code>DropItem</code>
+(<a href="https://zdoom.org/wiki/Classes:Clip"><code>Clip</code></a>). This should make the difficulty more fair.
+</p>
+
+
+<figure id="org8dc0f34">
+<img src="./images/invi03.gif" alt="invi03.gif" width="800px">
+
+</figure>
+
+<p>
+I have not justified some of the decisions made here (speed increase,
+partial spectre-like visibility, inclusion of sound cues, transitional
+blue-ish white shading, longer tick durations, additional drop items)
+as game design is beyond the scope of this guide. But you can vary
+these parameters yourself and see what suits your needs the best. You
+can make the monster completely invisible in any state sequence by
+replacing the sprites with <a href="https://zdoom.org/wiki/TNT1"><code>TNT1A0</code></a>. Better yet, the engine already
+provides a convenient flag that you can set to turn any monster into a
+<a href="https://zdoom.org/wiki/Stealth_monster">Stealth Monster</a>. All have to do is add the line <a href="https://zdoom.org/wiki/Classes:StealthZombieMan"><code>+STEALTH</code></a> to your
+class&rsquo;s <code>Default</code> block. Here is the minimum code you would need:
+</p>
+
+<pre class="code"><code><span style="color: #7CB8BB;">class</span> <span style="color: #DFAF8F;">MFM_StealthZombie</span> : ZombieMan
+{
+  Default
+  {
+    +STEALTH;
+    RenderStyle <span style="color: #CC9393;">"Translucent"</span>;
+    Alpha 0;
+  }
+}
+</code></pre>
+
+<p>
+Feel free to <code>summon MFM_StealthZombie</code> from the console and see how
+differently this plays. This flag also has a built-in slow
+fade-in/fade-out system so that the transition isn&rsquo;t abrupt. However,
+we lose some control by doing it this way. For one, the monster is
+invisible even in the starting <code>Spawn</code> state. So there is no reward
+for a stealth player who managed to sneak up on the monster without
+alerting it. The timings of all the state sequences are also the same
+as the default, and no sound cues have been added. These types of
+<a href="https://zdoom.org/wiki/Stealth_monster">Stealth Monsters</a> are highly discouraged in the modding scene as they
+are very difficult to balance. They get abused by novice modders and
+end up becoming very unfair. Game-design sense is an important skill
+that, imho, you cannot learn from a guide or tutorial.
+</p>
+
+<p>
+<a href="https://zdoom.org/wiki/ZScript"><code>Zscript</code></a> is a lot more powerful than what I have presented here.
+Everything we have covered could have also been done in the older scripting
+language called <a href="https://zdoom.org/wiki/DECORATE"><code>Decorate</code></a>. I didn&rsquo;t introduce <a href="https://zdoom.org/wiki/Events_and_handlers"><code>EventHandlers</code></a>, custom
+functions, <a href="https://zdoom.org/wiki/Dynamic_arrays">dynamic arrays</a>, or
+<a href="https://zdoom.org/wiki/Structs:LevelLocals">manipulation of level data</a>.
+Consider this guide just the start of your journey, and devour the more
+advanced guides next: <a href="https://jekyllgrim.github.io/ZScript_Basics/">Ash&rsquo;s Zscript basics</a> and <a href="https://www.youtube.com/playlist?list=PL-36gm0W-VKl89pw9lUfF36TJ28bjrNUn">David Newton&rsquo;s Youtube
+Tutorials</a>.
+</p>
+
+<p>
+I have introduced the use of the <a href="https://zdoom.org/wiki/A_StartSound"><code>A_StartSound()</code></a> function but did not
+introduce the <a href="https://zdoom.org/wiki/SNDINFO"><code>SNDINFO</code></a> or <a href="https://zdoom.org/wiki/SNDSEQ"><code>SNDSEQ</code></a> lumps or show you how to include
+custom sounds in your mod. I encourage to research and experiment with
+these on your own.
+</p>
 </section>
 </div>
 </div>
 
-<div id="outline-container-org69cc2d5" class="outline-2">
-<h2 id="org69cc2d5">Basics of mapping</h2>
-<div class="outline-text-2" id="text-org69cc2d5">
+<div id="outline-container-org9cbd8ef" class="outline-2">
+<h2 id="org9cbd8ef">Basics of mapping</h2>
+<div class="outline-text-2" id="text-org9cbd8ef">
 </div>
-<div id="outline-container-orgedf2e02" class="outline-3">
-<h3 id="orgedf2e02">Getting UDB</h3>
-<div class="outline-text-3" id="text-orgedf2e02">
+<div id="outline-container-org418893e" class="outline-3">
+<h3 id="org418893e">Getting UDB</h3>
+<div class="outline-text-3" id="text-org418893e">
 </div>
-<div id="outline-container-org7abe75f" class="outline-4">
-<h4 id="org7abe75f">Your first room</h4>
+<div id="outline-container-org19b4cea" class="outline-4">
+<h4 id="org19b4cea">Your first room</h4>
 </div>
-<div id="outline-container-orga148802" class="outline-4">
-<h4 id="orga148802">Using custom textures from your mod</h4>
+<div id="outline-container-org65a95de" class="outline-4">
+<h4 id="org65a95de">Using custom textures from your mod</h4>
 </div>
-<div id="outline-container-orge52f42b" class="outline-4">
-<h4 id="orge52f42b">Placing custom things from your mod</h4>
+<div id="outline-container-org612d8d8" class="outline-4">
+<h4 id="org612d8d8">Placing custom things from your mod</h4>
 </div>
 </div>
 
-<div id="outline-container-orge7377bf" class="outline-3">
-<h3 id="orge7377bf">The Mapfile lump</h3>
+<div id="outline-container-org0357f51" class="outline-3">
+<h3 id="org0357f51">The Mapfile lump</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 
-<div id="outline-container-org75b9b5a" class="outline-4">
-<h4 id="org75b9b5a">Changing name for freedoom1</h4>
+<div id="outline-container-org0058569" class="outline-4">
+<h4 id="org0058569">Changing name for freedoom1</h4>
 </div>
-<div id="outline-container-orgb7a160b" class="outline-4">
-<h4 id="orgb7a160b">MAPINFO lump</h4>
+<div id="outline-container-orgc5b8248" class="outline-4">
+<h4 id="orgc5b8248">MAPINFO lump</h4>
 </div>
-<div id="outline-container-org9feb44c" class="outline-4">
-<h4 id="org9feb44c">Packing the map with your mod</h4>
+<div id="outline-container-orgaa11221" class="outline-4">
+<h4 id="orgaa11221">Packing the map with your mod</h4>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org16232ce" class="outline-2">
-<h2 id="org16232ce">Misc.</h2>
-<div class="outline-text-2" id="text-org16232ce">
+<div id="outline-container-org4bc415b" class="outline-2">
+<h2 id="org4bc415b">Misc.</h2>
+<div class="outline-text-2" id="text-org4bc415b">
 </div>
-<div id="outline-container-org5b872c1" class="outline-3">
-<h3 id="org5b872c1">Git and version control</h3>
+<div id="outline-container-orgf6c7c9e" class="outline-3">
+<h3 id="orgf6c7c9e">Git and version control</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 </div>
 
-<div id="outline-container-org1020c65" class="outline-3">
-<h3 id="org1020c65">Seeking help and forum/discord etiquette</h3>
+<div id="outline-container-org0090836" class="outline-3">
+<h3 id="org0090836">Seeking help and forum/discord etiquette</h3>
 <section><p>
 Coming soon &#x2026;
 </p>
 </section>
 </div>
 
-<div id="outline-container-orgaddbd24" class="outline-3">
-<h3 id="orgaddbd24">Studying famous mods</h3>
+<div id="outline-container-org497fee5" class="outline-3">
+<h3 id="org497fee5">Studying famous mods</h3>
 <section><p>
 Coming soon &#x2026;
 </p>

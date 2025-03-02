@@ -532,7 +532,7 @@ work in the game now.
 * Zscript class replacements
 
 Now we will learn the very basics of a scripting language called
-=Zscript=. GZDoom understands multiple scripting languages for
+[[https://zdoom.org/wiki/ZScript][=Zscript=]]. GZDoom understands multiple scripting languages for
 modding. But most of them are deprecated and are only supported for
 backwards compatibility with older mods. For modern GZDoom, there are
 only two scripting languages you need to learn: =ACS= and
@@ -546,7 +546,7 @@ animated view from Freedoom 2, after you turn left at the big door in
 the starting area:
 
 #+ATTR_HTML: :width 800px
-#+CAPTION: We will be modifying the green =HealthBonus= items, and the =Zombieman= enemy.
+#+CAPTION: We will be modifying the green =HealthBonus= items, and the =Zombieman= enemy
 [[./images/animated01.gif]]
 
 ** New pickup item
@@ -703,8 +703,8 @@ flashing at half the speed of =MFM_Elixir=.
 Lastly, the =replace HealthBonus= clause instructed the engine to
 replace all instances of the =HealthBonus= item on any loaded map with
 =MFM_Elixir=. The replaced class doesn't have to be the same as the
-parent class. You could, if you wanted, replace all instances of the
-=Zombieman= class with =MFM_Elixir=. You can test the replacement
+parent class. You could, if you wanted to, replace all instances of
+the =Zombieman= class with =MFM_Elixir=. You can test the replacement
 effect by using [[https://zdoom.org/wiki/CCMDs][console commands]]. Open the console while playing
 Freedoom 2 (by hitting the tilde "~" key below the =Escape=-key on
 your keyboard). This should pause the game and give you a command
@@ -735,7 +735,7 @@ and watch both items flashing next to each other like so:
 
 Let us leave the mod in a state where =MFM_Elixir= is *NOT* replacing
 =HealthBonus= for now, as we will be using this to learn something new
-in the "Basics of Mapping" section later.
+in the [[*Basics of mapping]["/Basics of mapping/"]] section later.
 
 *** Homework assignment
 
@@ -755,11 +755,11 @@ with a "0" character. Replace the state-sequence line with:
   HEAD ABCDCB 3;
 #+END_SRC
 
-Get back into the game and =summon MFM_Elixir= in a bright region. Now
-walk around it and see how the sprite changes based on the angle. To
-make it clearer to see, comment out the =RenderStyle= line in the
-=Default= block and use a single sprite frame to keep it from
-changing:
+Get back into the game and =summon MFM_Elixir= in a brightly lit
+region. Now walk around it and see how the sprite changes based on the
+angle. To make it clearer to see, comment out the =RenderStyle= line
+in the =Default= block and use a single sprite frame to keep it from
+animating:
 
 #+BEGIN_SRC C
   HEAD A 1;
@@ -775,8 +775,6 @@ rotations if you use all 16-rotation characters, but at that point,
 especially if you have a lot of animations, you are better of learning
 to use 3D models.
 
-#+HTML: <iframe width="560" height="315" src="https://www.youtube.com/embed/-HTrzHkGZ-c?si=HfIz9i_nbo-uvsGP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
 Before proceeding, I want to confirm that you are not modifying the
 internal contents of =my_first_mod.zip= archive file using SLADE, but are
 directly modifying the files outside in your project folder and
@@ -785,10 +783,226 @@ clear later.
 
 ** Modifying Zombieman
 
-Coming soon ...
+Okay. Now we do enemies. Boot up the game. You see these two former
+gentlemen admiring the flashing =HealthBonus= bottles:
 
 #+ATTR_HTML: :width 800px
+#+CAPTION: Zombiemen of culture
 [[./images/screenshot05.jpg]]
+
+You can alert them by either bumping into one of them or firing your
+weapon. Even punching the air with your fist (weapon-slot 1) should do
+it. Get a feel for their behavior. What how they move around, and stop
+to shoot. With clever positioning, you can even get one of them to
+accidentally shoot the other and cause some in-fighting among
+them. After you've gained some feel for their behavior, take a gander
+at their =class ZombieMan= definition in the [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][engine source code]] (or
+inside the =gzdoom.pk3= file). It has a master parent-class simply
+called [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/actor.zs][=Actor=]], which has a parent-class called =Thinker=, which is
+doing most of the heavy lifting.
+
+=Zscript= is powerful enough to allow you to define any general sort
+of game actor with very unique, custom behavior. But since GZDoom
+started life as a Doom source port, it supports Doom-style functions
+and behavior out of the box. [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]] uses a very small set of
+built-in functions: [[https://zdoom.org/wiki/A_Look][=A_Look()=]], [[https://zdoom.org/wiki/A_Chase][=A_Chase()=]], [[https://zdoom.org/wiki/A_FaceTarget][=A_FaceTarget()=]],
+[[https://zdoom.org/wiki/A_PosAttack][=A_PosAttack()=]], [[https://zdoom.org/wiki/A_Pain][=A_Pain()=]], [[https://zdoom.org/wiki/A_Scream][=A_Scream()=]], [[https://zdoom.org/wiki/A_NoBlocking][=A_NoBlocking()=]], and
+[[https://zdoom.org/wiki/A_XScream][=A_XScream()=]]. These functions rely on values of some default fields
+to perform some actions and kick the actor into one of the standard
+state labels. The standard state labels defined for the [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]]
+are =Spawn=, =See=, =Missile=, =Pain=, =Death=, =XDeath=, and
+=Raise=. These (along with some others used in interactive actors) are
+built in for the standard functions. For example, you can define a
+[[https://zdoom.org/wiki/Custom_damage_types_(ZScript)][custom damage type]] named =XYZ=, for example, that can have its own
+=Pain.XYZ= and =Death.XYZ= state to transition to, if
+defined. =XDeath= is entered when damage incurred exceeds a certain
+threshold value. =Raise= comes in when a dead actor is resurrected
+using a built-in method.
+
+The [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]] has very simple, basic, AI.  [[https://zdoom.org/wiki/A_Look][=A_Look()=]] makes it look
+for hostiles.  [[https://zdoom.org/wiki/A_Chase][=A_Chase()=]] makes it turn 45-degrees in a random
+direction (biased towards its =target= actor) when ever it gets called
+(or the actor collides with something). The rest should be
+self-explanatory. You can read the wiki pages that I have hyperlinked
+for more. Suffice to say that GZDoom default AI functions have no
+concept of path finding or advanced goals and behaviors. Modders had
+to code it all themselves. Before the days of =ZScript= this was done
+using token inventory items. Although, at the time of this writing,
+GZDoom got some code updates for a [[https://github.com/ZDoom/gzdoom/pull/2908][behaviors subsystem]]. So in the
+future, we should see that getting used (and someone will need to
+tutorialize it).
+
+You can define your own state labels, but will need custom functions
+to handle state transitions into and out of them. Let us now create a
+replacement class named =MFM_InviZombie= to make this enemy slightly
+more exciting. Let is add/modify the state labels one at a time. For
+starters, we will split the =See= state label into two:
+
+#+BEGIN_SRC C
+  class MFM_InviZombie : ZombieMan replaces ZombieMan
+  {
+	   Default
+	   {
+		   StencilColor "DDDDFF";
+		   Speed 12;
+	   }
+	   States
+	   {
+	   See:
+		   POSS A 1 A_StartSound("brain/cube", starttime: 0.6);
+		   POSS A 4 A_SetRenderstyle(alpha, STYLE_Shaded);
+		   POSS A 4 A_SetRenderstyle(alpha, STYLE_Fuzzy);
+	   See2:
+		   POSS AABBCCDD 4 A_Chase;
+		   Loop;
+	   }
+  }
+#+END_SRC
+
+So here, I gave the class a default =StencilColor= (a blue-ish white)
+and a =Speed= of =12= (the default =ZombieMan='s =Speed= was =8=). We
+omit defining the =Spawn= state label since we don't want to change
+it. We start the =See= state label by playing the "=brain/cube=" sound
+lump using the [[https://zdoom.org/wiki/A_StartSound][=A_StartSound()=]] function (it's just the [[https://github.com/ZDoom/gzdoom/blob/f1b5ba09e0fb001e7a6d1771ef68abfb15d2931d/wadsrc/static/filter/game-doomchex/sndinfo.txt#L375][=DSBOSCUB=]]
+lump from =freedoom2.wad= originally used in Chex's Quest) with the
+starting time 60% into the audio. And then the [[https://zdoom.org/wiki/A_SetRenderStyle][=A_SetRenderStyle()=]]
+function is used and the sprites are set to be rendered in the
+"shaded" style (just like for =MFM_Elixir=) with the new
+=StencilColor= for 4 ticks. And then the [[https://zdoom.org/wiki/Actor_properties#RenderStyle][=RenderStyle=]] gets changed
+again to "fuzzy" style, which is internally defined for use with the
+[[https://zdoom.org/wiki/Classes:Spectre][=Spectre=]] class of enemy from the Doom games. After this,
+=MFM_InviZombie= should enter our custom =See2= state label, which is
+just the looped state sequence from the default =See= state label in
+the original [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]] class. In game, the actor will be visible
+normally in the =Spawn= state label, but will enter the =See= (and
+eventually the =See2=) state label and look like a dark shade when
+alerted, like so:
+
+#+ATTR_HTML: :width 800px
+[[./images/invi01.gif]]
+
+When in the =See2= looped state sequence, the sprites are cycling
+between the =POSS[ABCD]= walking-animation frames at the speed defined
+in the code (look them up using SLADE). Next, let us add a modified
+=Missile= state label to the =States= block of =MFM_InviZombie= class:
+
+#+BEGIN_SRC C
+	Missile:
+		POSS E 1 A_StartSound("misc/spawn");
+		POSS E 4 A_SetRenderstyle(alpha, STYLE_Shaded);
+		POSS E 4 A_SetRenderstyle(alpha, STYLE_Normal);
+		POSS E 12 A_FaceTarget;
+		POSS F 8 A_PosAttack;
+		POSS E 8;
+		Goto See;
+#+END_SRC
+
+If you compare this to the default =Missile= state label from the
+original [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]] class, you will see that the "=misc/spawn=" sound
+lump is played (it's just the [[https://github.com/ZDoom/gzdoom/blob/f1b5ba09e0fb001e7a6d1771ef68abfb15d2931d/wadsrc/static/filter/game-doomchex/sndinfo.txt#L422][=DSITMBK=]] lump from =freedoom2.wad=
+originally used in Chex's Quest), the render style is briefly set to
+"shaded" for 4 ticks, and then the rendering style is set to
+"normal". Also, it now takes =1+4+4+12= meaning =21= ticks to get to
+the =A_PosAttack= call, which is longer than the default =10=
+ticks. This is to keep the monster difficulty roughly the same as
+before, giving the player more of a chance for a counter
+attack. Lastly, the actor is returned to the =See= state label which
+should play the other sound lump and set the render styles back to
+shaded (as we've already seen). This should look like this:
+
+#+ATTR_HTML: :width 800px
+[[./images/invi02.gif]]
+
+To finish it up, we can also add new definitions of the =Pain=,
+=Death=, and =XDeath= state labels to our replacement class to make
+=MFM_InviZombie= visible in those states too:
+
+#+BEGIN_SRC C
+	Pain:
+		POSS G 1 A_StartSound("misc/spawn");
+		POSS G 4 A_SetRenderstyle(alpha, STYLE_Shaded);
+		POSS G 4 A_SetRenderstyle(alpha, STYLE_Normal);
+		POSS G 3 A_Pain;
+		Goto See;
+	Death:
+		POSS H 1 A_StartSound("misc/spawn");
+		POSS H 4 A_SetRenderstyle(alpha, STYLE_Shaded);
+		POSS H 5 A_SetRenderstyle(alpha, STYLE_Normal);
+		POSS I 5 A_Scream;
+		POSS J 5 A_NoBlocking;
+		POSS K 5;
+		POSS L -1 A_DropItem('MFM_Elixir');
+		Stop;
+	XDeath:
+		POSS M 1 A_StartSound("misc/spawn");
+		POSS M 4 A_SetRenderstyle(alpha, STYLE_Shaded);
+		POSS M 5 A_SetRenderstyle(alpha, STYLE_Normal);
+		POSS N 5 A_XScream;
+		POSS O 5 A_NoBlocking;
+		POSS PQRST 5;
+		POSS U -1 A_DropItem('MFM_Elixir');
+		Stop;
+#+END_SRC
+
+You should, once again, compare these to their counterparts in the
+original [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]] class. We don't be redefining the =Raise= state
+label. I have thrown in the use of the [[https://zdoom.org/wiki/A_DropItem][=A_DropItem()=]] function to make
+the =MFM_InviZombie= drop a bottle of =MFM_ELixir= when killed. This
+item is dropped along with the =ZombieMan='s default =DropItem=
+([[https://zdoom.org/wiki/Classes:Clip][=Clip=]]). This should make the difficulty more fair.
+
+#+ATTR_HTML: :width 800px
+[[./images/invi03.gif]]
+
+I have not justified some of the decisions made here (speed increase,
+partial spectre-like visibility, inclusion of sound cues, transitional
+blue-ish white shading, longer tick durations, additional drop items)
+as game design is beyond the scope of this guide. But you can vary
+these parameters yourself and see what suits your needs the best. You
+can make the monster completely invisible in any state sequence by
+replacing the sprites with [[https://zdoom.org/wiki/TNT1][=TNT1A0=]]. Better yet, the engine already
+provides a convenient flag that you can set to turn any monster into a
+[[https://zdoom.org/wiki/Stealth_monster][Stealth Monster]]. All have to do is add the line [[https://zdoom.org/wiki/Classes:StealthZombieMan][=+STEALTH=]] to your
+class's =Default= block. Here is the minimum code you would need:
+
+#+BEGIN_SRC C
+  class MFM_StealthZombie : ZombieMan
+  {
+	  Default
+	  {
+		  +STEALTH;
+		  RenderStyle "Translucent";
+		  Alpha 0;
+	  }
+  }
+#+END_SRC
+
+Feel free to =summon MFM_StealthZombie= from the console and see how
+differently this plays. This flag also has a built-in slow
+fade-in/fade-out system so that the transition isn't abrupt. However,
+we lose some control by doing it this way. For one, the monster is
+invisible even in the starting =Spawn= state. So there is no reward
+for a stealth player who managed to sneak up on the monster without
+alerting it. The timings of all the state sequences are also the same
+as the default, and no sound cues have been added. These types of
+[[https://zdoom.org/wiki/Stealth_monster][Stealth Monsters]] are highly discouraged in the modding scene as they
+are very difficult to balance. They get abused by novice modders and
+end up becoming very unfair. Game-design sense is an important skill
+that, imho, you cannot learn from a guide or tutorial.
+
+[[https://zdoom.org/wiki/ZScript][=Zscript=]] is a lot more powerful than what I have presented here.
+Everything we have covered could have also been done in the older scripting
+language called [[https://zdoom.org/wiki/DECORATE][=Decorate=]]. I didn't introduce [[https://zdoom.org/wiki/Events_and_handlers][=EventHandlers=]], custom
+functions, [[https://zdoom.org/wiki/Dynamic_arrays][dynamic arrays]], or
+[[https://zdoom.org/wiki/Structs:LevelLocals][manipulation of level data]].
+Consider this guide just the start of your journey, and devour the more
+advanced guides next: [[https://jekyllgrim.github.io/ZScript_Basics/][Ash's Zscript basics]] and [[https://www.youtube.com/playlist?list=PL-36gm0W-VKl89pw9lUfF36TJ28bjrNUn][David Newton's Youtube
+Tutorials]].
+
+I have introduced the use of the [[https://zdoom.org/wiki/A_StartSound][=A_StartSound()=]] function but did not
+introduce the [[https://zdoom.org/wiki/SNDINFO][=SNDINFO=]] or [[https://zdoom.org/wiki/SNDSEQ][=SNDSEQ=]] lumps or show you how to include
+custom sounds in your mod. I encourage to research and experiment with
+these on your own.
 
 * Basics of mapping
 
