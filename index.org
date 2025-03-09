@@ -10,21 +10,23 @@ Contents/" to the top-right of this page to navigate between
 sections. Click on the "Switch Color Mode" text at the top-left of the
 page to switch between /light/ and /dark/ modes.
 
-This guide will introduce the basics of modding for the GZDoom source
-port.  It is aimed at beginners with little-to-no technical
-knowledge. For more advanced help, check the [[https://zdoom.org/wiki/Tutorials][Tutorials page]] on the
-zdoom wiki, or Jekyll Grim's [[https://jekyllgrim.github.io/ZScript_Basics/][Zscript basics]]. The guide will focus on
-GZDoom, but might have limited applicability to other source ports. It
-is structured as a sequence of exercises that the reader is expected
-to follow along by actually implementing the instructions on their
-computer. It presents particular ways of doing things in particular
-chapters for pedagogical reasons and to inculcate good habits. It will
-not present the full context or historical information for everything,
-because it is meant to be a first-pass curriculum, where too much
-extraneous information can be overwhelming and counter-productive. You
-can recommend additions/changes to this guide by submitting PRs to the
-[[https://github.com/dileepvr/gzdoom_modding_101][github repo]]. Please only make changes to the =index.org= file. Do not
-edit the =html= file directly.
+This guide will introduce the basics of modding for the GZDoom source port.
+It is aimed at beginners with little-to-no technical knowledge. It will
+seem tedious to people with some proficiency with coding or GUI experience.
+For more advanced help, check the [[https://zdoom.org/wiki/Tutorials][Tutorials page]] on the zdoom wiki, or
+Jekyll Grim's [[https://jekyllgrim.github.io/ZScript_Basics/][Zscript basics]]. The guide will focus on GZDoom, but might
+have limited applicability to other source ports. It is structured as a
+sequence of exercises that the reader is expected to follow along by
+actually implementing the instructions on their computer. It is meant to be
+done at a relaxed pace over several sessions spanning days, and not in a
+single sitting. It presents particular ways of doing things in particular
+chapters for pedagogical reasons and to inculcate good habits. It will not
+present the full context or historical information for everything, because
+it is meant to be a first-pass curriculum, where too much extraneous
+information can be overwhelming and counter-productive. You can recommend
+additions/changes to this guide by submitting PRs to the [[https://github.com/dileepvr/gzdoom_modding_101][github repo]].
+Please only make changes to the =index.org= file. Do not edit the =html=
+file directly. And do not expand the scope too much.
 
 * Running GZDoom and understanding WADs
 
@@ -49,22 +51,21 @@ somewhere on your computer with files named:
 - =fm_banks= (folder)
 - =soundfonts= (folder)
 
-Depending on the OS you downloaded for, you might have some extra
-files like =*.dll= files. If you try to run the executable file
-(=gzdoom.exe=) by either double-clicking on it, or running the command
-from a terminal/command-prompt from that folder location, it should
-throw up a message saying that it couldn't find any IWADs.
+Depending on the OS you downloaded for, you might have some extra files
+like =*.dll= files. If you try to run the executable file (=gzdoom.exe=) by
+either double-clicking on it, or by running the command from a
+terminal/command-prompt from that folder location, it should throw up a
+message saying that it couldn't find any IWADs.
 
-To run as a command, open a terminal (Linux) or command prompt
-(Windows), and navigate to the directory location using the
-change-directory (=cd=) command. When there, list the files using the
-=ls= (Linux) or =dir= (Windows) command. It should print out all the
-files from the above list. Then from there, just type =./gzdoom=
-(Linux) or =gzdoom.exe= (Windows). This has the same effect as
-double-clicking the file from your graphical file browser. Keep the
-terminal/command-prompt open (minimize it for now). We won't be using
-the command method everytime but it helps understand what is happening
-under the hood.
+To run as a command, open a terminal (Linux) or command prompt (Windows),
+and navigate to the directory location using the change-directory (=cd=)
+command. When there, list the files using the =ls= (Linux) or =dir=
+(Windows) command. It should print out all the files from the above list.
+Then from there, just type =./gzdoom= (Linux) or =gzdoom.exe= (Windows).
+This has the same effect as double-clicking the file from your graphical
+file browser. Keep the terminal/command-prompt open (minimize it for now).
+We won't be using the command method everytime but it helps with
+understanding what is happening under the hood.
 
 ** Getting some IWADs
 
@@ -87,7 +88,7 @@ GZDoom executable, running GZDoom again should cause the program to
 auto-detect =freedoom1.wad= and =freedoom2.wad= and list them for
 selection on startup.
 
-Let's run Freedoom2 from the command line. From the
+Let's run Freedoom 2 from the command line. From the
 terminal/command-prompt, run the following command:
 
 - Windows
@@ -100,7 +101,7 @@ gzdoom.exe -iwad freedoom2.wad
 #+END_SRC
 
 The game should launch, and you should be greeted with these starting
-screens of main menu, and the first level:
+screens of the main menu, and the first level:
 
 #+CAPTION: Main menu screen for Freedoom 2 (v0.13.0)
 #+ATTR_HTML: :width 800px
@@ -110,14 +111,16 @@ screens of main menu, and the first level:
 #+ATTR_HTML: :width 800px
 [[./images/screenshot02.jpg]]
 
-These screenshots are from running version 0.13.0 of
-=freedoom2.wad=. Another version might look slightly different.
+These screenshots are from running version 0.13.0 of =freedoom2.wad=.
+Another version might look slightly different. And while we are here, go
+back into the main menu, go to =Options=, then enable =Full Options Menu=.
+In here, go to =Display Options -> Texture Options -> Texture Filter mode=
+and set it to "=None (Trilinear)=". Thank me later.
 
-The files =freedoom.wad= and =freedoom2.wad= are called IWADs, which
-is short for [[https://zdoom.org/wiki/IWAD][internal WADs]]. These are wad-files that have all the
-information within them for the engine to run a whole game. Later on,
-we will take a look into what is actually inside them by using another
-program.
+The files =freedoom1.wad= and =freedoom2.wad= are called IWADs, which is
+short for [[https://zdoom.org/wiki/IWAD][internal WADs]]. These are wad-files that have all the information
+within them for the engine to run a whole game. Later on, we will take a
+look into what is actually inside them by using another program.
 
 * Basic replacement mods
 
@@ -144,13 +147,13 @@ can run this command from the location of your project folder:
   zip -r my_first_mod.zip textures/
 #+END_SRC
 
-This uses the =zip= program with the =-r= recursive flag to make sure
-that contents of subfolders end up inside the zip
-file. Congratulations. As far is the current version of GZDoom (4.14.0
-as of this writing) is concerned, you just made your first mod. Now
-let's run it. You can do this either by dragging and dropping the zip
-file onto your =gzdoom.exe= executable file, and selecting the
-=freedoom2.wad= IWAD when it asks, or running the command:
+This uses the =zip= program with the =-r= recursive flag to make sure that
+contents of subfolders end up inside the zip file. Congratulations. As far
+is the current version of GZDoom (4.14.0 as of this writing) is concerned,
+you just made your first mod. Now let's run it. You can do this either by
+dragging and dropping the zip file onto your =gzdoom.exe= executable file,
+and selecting the =freedoom2.wad= IWAD when it asks, or by running the
+command:
 
 #+BEGIN_SRC
   ./gzdoom -iwad freedoom2.wad -file <PATH-TO-PROJECT-FOLDER>/my_first_mod.zip
@@ -183,9 +186,11 @@ two PWADs that both replace the same texture like so:
   ./gzdoom -iwad freedoom2.wad -file mod1.pk3 -file mod2.pk3
 #+END_SRC
 
-then the replacement texture from the last PWAD (=mod2.pk3=) will be
-used. Think of it like the replacement instructions are executed
-serially, in the sequence of the files.
+then the replacement texture from the last PWAD (=mod2.pk3=) will be used.
+Think of it as if the replacement instructions are executed serially, in
+the sequence of the files specified. For the rest of this guide, we will be
+naming the zip-archive file =my_first_mod.pk3=, but always remember that
+under the hood it is merely a zip file.
 
 *** Get setup with a Launcher before proceeding further
 
@@ -227,20 +232,20 @@ pack subwindow and load map-pack mods as regular mods, with full
 control over load order.
 
 For the rest of this guide, I recommend picking a launcher program and
-launching GZDoom with =my_first_mod.zip= and =freedoom2.wad= just to
+launching GZDoom with =my_first_mod.pk3= and =freedoom2.wad= just to
 develop good habits. Under the hood, all these Lauchers are just
 constructing and executing lengthy commands like the ones above.
 
 #+ATTR_HTML: :width 800px
 [[./images/doomrunner02.jpg]]
 
-And yes, you can rename your mod =my_first_mod.pk3= if you want. The
-file extension doesn't matter, and only exists to help you. Modern
-GZDoom PWADs are named =*.pk3= and IWADs are named =*.ipk3= (we'll get
-there). You might recall that the engine's internal files that came
-with the GZDoom download (=lights.pk3=, =brightmaps.pk3=,
-=game_support.pk3=, etc.) are also =*.pk3= files. These are the only
-ones that should not be moved out of the GZDoom executable's folder.
+Remember that =my_first_mod.pk3= is really just a zip file. The file
+extension doesn't matter, and only exists to help you. Modern GZDoom PWADs
+are named =*.pk3= and IWADs are named =*.ipk3= (we'll get there). You might
+recall that the engine's internal files that came with the GZDoom download
+(=lights.pk3=, =brightmaps.pk3=, =game_support.pk3=, etc.) are also =*.pk3=
+files. These are the only ones that should not be moved out of the GZDoom
+executable's folder.
 
 Older mods, and mods made to be interoperable with source ports other
 than GZDoom aren't zip files, but are instead of the WAD format. While
@@ -251,19 +256,18 @@ format. More on that later.
 
 ** Text files as lumps
 
-Let us continue adding to your mod. So far, you have a zip file
-(possibly renamed "=my_first_mod.pk3=") which contains a folder named
-=textures=, which in-turn contains a =png= image file named
-=AQRUST08.png=. It was important for this file to be a =png= file. And
-it is very important that both the folder and file names are what they
-are for the mod to work. The filename had to be =AQRUST08= because
-that tells the engine what texture it is meant to replace. The folder
-name =textures= is a reserved name. The engine (and most map editors)
-interpretes it as a location for texture files. You can put any =png=
-images in them, and even organize them into subfolders within. But you
-cannot put other arbitrary data in it and expect it to work. Nor can
-you just put the =AQRUST08.png= file alone in a zip archive and expect
-the replacement to work.
+Let us continue adding to your mod. So far, you have a zip file (now named
+"=my_first_mod.pk3=") which contains a folder named =textures=, which
+in-turn contains a =png= image file named =AQRUST08.png=. It was important
+for this file to be a =png= file. And it is very important that both the
+folder and file names are what they are for the mod to work. The filename
+had to be =AQRUST08= because that tells the engine what texture it is meant
+to replace. The folder name =textures= is a reserved name. The engine (and
+most map editors) interpretes it as a location for texture files. You can
+put any =png= images in them, and even organize them into subfolders
+within. But you cannot put other arbitrary data in it and expect it to
+work. Nor can you just put the =AQRUST08.png= file alone in a zip archive
+and expect the replacement to work.
 
 There are other reserved names, as far as files and folders in the
 root (top) location of the zip archive is concerned. These reserved
@@ -276,7 +280,7 @@ a special way. Reserved names for files include [[https://zdoom.org/wiki/TEXTURE
 [[https://zdoom.org/wiki/MAPINFO][=MAPINFO=]], [[https://zdoom.org/wiki/GLDEFS][=GLDEFS=]], etc. Again, the capitalization doesn't matter,
 and you can give them any file extensions you want (=*.lmp=, =*.txt=,
 =*.zsc=). You can store other files in the root location of your mod
-(like a lincense file, a readme, or a credits file if you end up using
+(like a license file, a readme, or a credits file if you end up using
 other people's work), but they cannot use these reserved names.
 
 Files in =*.pk3= archives may be referred to as lumps as a holdover
@@ -289,22 +293,21 @@ special lumps are often just text files that have their own format for
 presenting data to the engine. Let us try and use one to get a better
 feel.
 
-For this next exercise, we will replace the texture on the door
-visible from the starting area in Freedoom 2. The lump name for this
-texture needs to be =BIGDOOR1= (again, I'll get to how I know this
-later). But we will not just be using a file named =BIGDOOR1.png= in
-the =textures= folder, even though that will work. We will instead use
-use some other file name, and try to use the =TEXTURES= lump to make
-it work.
+For this next exercise, we will replace the texture on the door visible
+from the starting area in Freedoom 2. The lump name for this texture needs
+to be =BIGDOOR1= (again, I'll get to how I know this later). But we will
+not just be using a file named =BIGDOOR1.png= in the =textures= folder,
+even though that will work. We will instead use some other file name, and
+try to use the =TEXTURES= lump to make it work.
 
-Pick any =png= image file you want. I'm going with [[https://en.wikipedia.org/wiki/John_Romero][John Romero's]]
-forehead. Crop/scale the image using some image manipulation program
-like GIMP, Photoshop, or even MSPaint, to fit into 128 $\times$ 96 pixels to
-match the door's texture size. I named my file =John_Romero.png=, and
-I placed it inside a subfolder inside the =textures= folder called
-=custom=. Then, open a text file in the project root location called
-=TEXTURES.lmp=. Put the following lines into it (replace the path and
-file name to match your new image):
+Pick any =png= image file you want. I'm going with [[https://en.wikipedia.org/wiki/John_Romero][John Romero's]] forehead.
+Crop/scale the image using some image manipulation program like GIMP,
+Photoshop, or even MSPaint, to fit into 128 $\times$ 96 pixels to match the
+door's texture size. I named my file =John_Romero.png=, and I placed it
+inside a subfolder inside the =textures= folder called =custom=. Then, open
+a text file called =TEXTURES.lmp= in the project root location. Put the
+following lines into it (replace the path and file name in the =Patch= line
+to match your new image):
 
 #+BEGIN_SRC
 Texture BIGDOOR1, 128, 96
@@ -313,10 +316,12 @@ Texture BIGDOOR1, 128, 96
 }
 #+END_SRC
 
-Now re-compress the zip archive with these two new files and the new subfolder.
+The commas and the curly-brackets ={= & =}= are important and not just
+for show. Now re-compress the zip archive with these two new files and
+the new subfolder.
 
 #+BEGIN_SRC
-  zip -r my_first_mod.zip textures/ TEXTURES.lmp
+  zip -r my_first_mod.pk3 textures/ TEXTURES.lmp
 #+END_SRC
 
 The archive's internal structure should look something like this:
@@ -341,16 +346,15 @@ poster or graffiti onto an existing wall texture. An example we will
 go through later will involve slapping an interactable switch onto a
 wall texture for use in a custom map.
 
-These lump names, you will notice, have both been eight characters
-long (=AQRUST08=, =BIGDOOR1=). This is another hold-over from the DOS
-days, where file names would be truncated to height characters. The
-case doesn't matter, but you have to stick to this convention while
-naming lumps. Later on when we get into map making, you will find that
-certain map formats allow for use of full texture filenames with full
-paths instead of these short lump names. It is still recommended that
-you use these lump names instead. Because this makes your maps easily
-moddable (by you as well as others!) if the lump names are
-standardized.
+These lump names, you will notice, have both been eight characters long
+(=AQRUST08=, =BIGDOOR1=). This is another hold-over from the DOS days,
+where file names would be truncated to eight characters. The case doesn't
+matter, but you have to stick to this convention while naming lumps. Later
+on when we get into map making, you will find that certain map formats
+allow for use of full texture filenames with full paths instead of these
+short lump names. It is still recommended that you use these lump names
+instead. Because this makes your maps easily moddable (by you as well as
+others!) if the lump names are standardized.
 
 ** Basics of SLADE
 
@@ -365,26 +369,26 @@ using SLADE to take a peek into WADs, and possibly extract content. We
 will not be using SLADE to modify any data within wads. Feel free to
 learn its intricacies on your own, later.
 
-To not overwhelm ourselves, let us first use SLADE to open the
-simplest mod we have: "=my_first_mod.zip=" (or =.pk3=). Here is the
-view you should be presented with:
+To not overwhelm ourselves, let us first use SLADE to open the simplest mod
+we have: "=my_first_mod.pk3=". Here is the view you should be presented
+with:
 
 #+ATTR_HTML: :width 800px
 [[./images/SLADE01.jpg]]
 
-It's all fairly intuitive. There is a panel that shows the files or
-"lumps" in your "WAD" (I've expanded the folders and subfolders), and
-a bigger panel to the right that shows the content of the currently
-selected lump. In the image, I have selected the =TEXTURES.lmp=
-file/lump to show its textual content. A few things of note here is
-the SLADE as correctly identified the file-types of our lumps as two
-=PNG= Graphic files and a "Texture Definition" lump. It says so next
-to the file as well as in the bottom bar of the window. Furthermore,
-it has auto-selected the "ZDoom Textures" option in the "Text
-Language" pulldown menu above the textual-content panel for syntax
-highlighting. All of these areas of the SLADE window are important to
-us. You can select the =AQRUST08.png= file and watch the image
-displayed in the content panel, along with graphic in the bottom bar.
+It's all fairly intuitive. There is a panel that shows the files or "lumps"
+in your "WAD" (I've expanded the folders and subfolders), and a bigger
+panel to the right that shows the content of the currently selected lump.
+In the image, I have selected the =TEXTURES.lmp= file/lump to show its
+textual content. A few things of note here is the SLADE as correctly
+identified the file-types of our lumps as two =PNG= Graphic files and a
+"Texture Definition" lump. It says so next to the file as well as in the
+bottom bar of the window. Furthermore, it has auto-selected the "ZDoom
+Textures" option in the "Text Language" pulldown menu above the
+textual-content panel for syntax highlighting. All of these areas of the
+SLADE window are important to us. You can select the =AQRUST08.png= file
+and watch the image displayed in the content panel, along with the image
+size in the bottom bar.
 
 Now let's open a bigger "WAD" file: =freedoom2.wad=. Be sure to create
 a backup of this file before opening it in SLADE, just to avoid
@@ -408,7 +412,7 @@ export, as it will result in a binary lump file. You would have to
 navigate to the sub-popup menu under "Graphic" after you right-click,
 and select the "Export as PNG" option. If you'd like to practice
 further, try exporting the =SLIME14= graphic as a =PNG= file and
-modify it, then include it in =my_first_mod.zip=. This should apply to
+modify it, then include it in =my_first_mod.pk3=. This should apply to
 the floor in the opening area of Freedoom 2.
 
 Another curiosity that should be of interest is that there is no lump
@@ -424,7 +428,7 @@ remain unaffected.
 Freedoom 2 is actually defining the =BIGDOOR1= lump inside its
 =TEXTURE1= lump. You can scroll to it and highlight it with a
 click. This is stored in the older wad-centric format here and not as
-a text file (unlike in =my_first_mod.zip=). Which is why the "Type"
+a text file (unlike in =my_first_mod.pk3=). Which is why the "Type"
 field says "TEXTUREx". But SLADE lets you edit it if you click on the
 "Edit Textures" button that should have appeared in the content
 panel. Clicking on it should open this lump in its own tab and present
@@ -470,7 +474,7 @@ The sprite used by this object (the technical term is =actor=) is a
 lump called =STIMA0=. You can find it inside =freedoom2.wad= via
 SLADE. You would have to right-click and use the "Graphics" sub-menu
 popup and "Export as PNG" if you want it as an image. To replace the
-=STIMA0= sprite with one of your own in =my_first_mid.zip=, you will
+=STIMA0= sprite with one of your own in =my_first_mid.pk3=, you will
 have to create one of the reserved-name folders called =sprites= and
 place your image with the name =STIMA0.png= inside it, and then make
 sure to zip it with the others. If you are having trouble
@@ -482,13 +486,13 @@ folder of your mod.
 [[./images/STIMA0.png]]
 
 #+BEGIN_SRC
-  zip -r my_first_mod.zip textures/ TEXTURES.lmp sprites/
+  zip -r my_first_mod.pk3 textures/ TEXTURES.lmp sprites/
 #+END_SRC
 
 If you are using some other image, you can try and match the original
 lump's size, which was 19 $\times$ 10 pixels (check this in the bottom
 bar inside the contents panel in SLADE). But you don't have to match
-it. So now the file structure inside of =my_first_mod.zip= should look
+it. So now the file structure inside of =my_first_mod.pk3= should look
 like this:
 
 [[./images/filestructure02.jpg]]
@@ -531,19 +535,18 @@ work in the game now.
 
 * Zscript class replacements
 
-Now we will learn the very basics of a scripting language called
-[[https://zdoom.org/wiki/ZScript][=Zscript=]]. GZDoom understands multiple scripting languages for
-modding. But most of them are deprecated and are only supported for
-backwards compatibility with older mods. For modern GZDoom, there are
-only two scripting languages you need to learn: =ACS= and
-=Zscript=. This guide won't be going into =ACS=, but know that that is
-mostly only used for map specials (conditional triggers and scripted
-sequences). For everything else, stick to =Zscript=. There are more
-advanced, and comprehensive guides to learning =Zscript=: [[https://jekyllgrim.github.io/ZScript_Basics/][Ash's
-Zscript basics]] and [[https://www.youtube.com/playlist?list=PL-36gm0W-VKl89pw9lUfF36TJ28bjrNUn][David Newton's Youtube Tutorials]]. In this guide,
+Now we will learn the very basics of a scripting language called [[https://zdoom.org/wiki/ZScript][=Zscript=]].
+GZDoom understands multiple scripting languages for modding. But most of
+them are deprecated and are only supported for backwards compatibility with
+older mods. For modern GZDoom, there are only two scripting languages you
+need to learn: =ACS= and =Zscript=. This guide won't be going into =ACS=,
+but know that that is mostly only used for map specials (conditional
+triggers and scripted sequences). For everything else, stick to =Zscript=.
+There are more advanced, and comprehensive guides to learning =Zscript=:
+[[https://jekyllgrim.github.io/ZScript_Basics/][Ash's Zscript basics]] and [[https://www.youtube.com/playlist?list=PL-36gm0W-VKl89pw9lUfF36TJ28bjrNUn][David Newton's Youtube Tutorials]]. In this guide,
 we will show the use of =Zscript= to modify two things present in this
-animated view from Freedoom 2, after you turn left at the big door in
-the starting area:
+animated view from Freedoom 2, visible after you turn left at the big door
+in the starting area:
 
 #+ATTR_HTML: :width 800px
 #+CAPTION: We will be modifying the green =HealthBonus= items, and the =Zombieman= enemy
@@ -551,14 +554,14 @@ the starting area:
 
 ** New pickup item
 
-First, let's replace those green, flashing bottle from the image
-above. That is a =HealthBonus=. Unlike the =StimPacks= from before,
-these give the player 1 point of health all the way up to a maximum of
-200 points. Meaning that you can pick them up even if you have a 100
-health points. Try doing this. There are two more =HealthBonus= items
-to the left of the view which can be picked up without alerting the
-two =Zombieman= enemies, as long as you don't fire your weapon or bump
-into them (or get into their light of sight).
+First, let's replace those green, flashing bottles from the image above.
+That is a =HealthBonus=. Unlike the =StimPacks= from before, these give the
+player 1 point of health all the way up to a maximum of 200 points. Meaning
+that you can pick them up even if you have a 100 health points. Try doing
+this. There are two more =HealthBonus= items to the left of the view which
+can be picked up without alerting the two =Zombieman= enemies, as long as
+you don't fire your weapon or bump into them (or get into their light of
+sight).
 
 Create a text file named =ZSCRIPT.zsc= in your project folder (the
 extension doesn't matter. =ZSCRIPT= is one of those reserved lump
@@ -585,10 +588,15 @@ names). In it, put the following text:
   }
 #+END_SRC
 
-Now re-zip the archive with the new file:
+The syntax here is different from what we've seen so far in
+non-zscript files like the =TEXTURES= lump. The semicolons "=;=" at
+the ends of some of the lines are very important. If you know some =C=
+or =C=-like programming language, this should be familiar. The colon
+("=:=") after the word "=Spawn=" is deliberate and not a typo. Now
+re-zip the archive with the new file:
 
 #+BEGIN_SRC
-  zip -r my_first_mod.zip textures/ TEXTURES.lmp sprites/ ZSCRIPT.zsc
+  zip -r my_first_mod.pk3 textures/ TEXTURES.lmp sprites/ ZSCRIPT.zsc
 #+END_SRC
 
 and launch the game with your mod (I hope you have habituated to using
@@ -604,7 +612,7 @@ Let us go through the contents of the =ZSCRIPT.zsc= file to see how
 this is achieved. The first line reads =version "4.14"=. This is a
 necessary clause at the beginning of the =ZSCRIPT= lump, and signals a
 minimum version that your mod can now be run in. If you try and load
-=my_first_mod.zip= in GZDoom 4.13.2 with the =ZSCRIPT.zsc= file in, it
+=my_first_mod.pk3= in GZDoom 4.13.2 with the =ZSCRIPT.zsc= file in, it
 should throw an error. This facility exists to ensure that mods that
 use new, advanced =Zscript= features don't get accidentally launched
 by older versions of the engine, which would result in a crash.
@@ -643,10 +651,10 @@ the syntax for declaring a =class= object is:
   class <NEW-CLASS-NAME> : <PARENT-CLASS-NAME> [ replaces <SOME-OTHER-CLASS-NAME> ]
 #+END_SRC
 
-The part between the square brackets =[= & =]= is optional. A new
-=class= doesn't have to replace an existing =class=. The new
-definition can exist and operate independently. To use our own
-example, the line reads:
+The part between the square brackets =[= & =]= is optional (the square
+brackets themselves shouldn't be typed). A new =class= doesn't have to
+replace an existing =class=. The new definition can exist and operate
+independently. To use our own example, the line reads:
 
 #+BEGIN_SRC C
   class MFM_Elixir : HealthBonus replaces HealthBonus
@@ -656,10 +664,10 @@ Here we have defined a new =class= with the name =MFM_Elixir=. The
 prefix =MFM_= stands for "My first Mod" (the name of your mod). It is
 good practice to add a unique prefix to all new =class=
 definitions. That way, there will be no conflict when your mod is
-loaded along with another mod that has its own elixir =class=, since
-that is a common word. Anyway, this new =class= is of the type
-=HealthBonus= which plays the role of the parent =class= that all
-properties can be inherited from. This =HealthBonus= =class= is an
+loaded along with another mod that might happen to have its own elixir
+=class=, since that is a common word. Anyway, this new =class= is of
+the type =HealthBonus= which plays the role of the parent =class= that
+all properties can be inherited from. This =HealthBonus= =class= is an
 existing =class= that is defined inside the engine itself. You can
 take a look at its definition in GZDoom's source code [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/doomhealth.zs][here]]. The class
 =HealthBonus= has the class =Health= as its parent class (further down
@@ -776,7 +784,7 @@ especially if you have a lot of animations, you are better of learning
 to use 3D models.
 
 Before proceeding, I want to confirm that you are not modifying the
-internal contents of =my_first_mod.zip= archive file using SLADE, but are
+internal contents of =my_first_mod.pk3= archive file using SLADE, but are
 directly modifying the files outside in your project folder and
 re-compressing the zip archive. The importance of this habit will become
 clear later.
@@ -791,15 +799,14 @@ gentlemen admiring the flashing =HealthBonus= bottles:
 [[./images/screenshot05.jpg]]
 
 You can alert them by either bumping into one of them or firing your
-weapon. Even punching the air with your fist (weapon-slot 1) should do
-it. Get a feel for their behavior. What how they move around, and stop
-to shoot. With clever positioning, you can even get one of them to
-accidentally shoot the other and cause some in-fighting among
-them. After you've gained some feel for their behavior, take a gander
-at their =class ZombieMan= definition in the [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][engine source code]] (or
-inside the =gzdoom.pk3= file). It has a master parent-class simply
-called [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/actor.zs][=Actor=]], which has a parent-class called =Thinker=, which is
-doing most of the heavy lifting.
+weapon. Even punching the air with your fist (weapon-slot 1) should do it.
+Get a feel for their behavior. Watch how they move around, and stop to
+shoot. With clever positioning, you can even get one of them to
+accidentally shoot the other and cause some in-fighting among them. After
+you've gained some feel for their behavior, take a gander at their =class
+ZombieMan= definition in the [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][engine source code]] (or inside the =gzdoom.pk3=
+file). It has a master parent-class simply called [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/actor.zs][=Actor=]], which has a
+parent-class called =Thinker=, which is doing most of the heavy lifting.
 
 =Zscript= is powerful enough to allow you to define any general sort
 of game actor with very unique, custom behavior. But since GZDoom
@@ -812,12 +819,12 @@ to perform some actions and kick the actor into one of the standard
 state labels. The standard state labels defined for the [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]]
 are =Spawn=, =See=, =Missile=, =Pain=, =Death=, =XDeath=, and
 =Raise=. These (along with some others used in interactive actors) are
-built in for the standard functions. For example, you can define a
-[[https://zdoom.org/wiki/Custom_damage_types_(ZScript)][custom damage type]] named =XYZ=, for example, that can have its own
-=Pain.XYZ= and =Death.XYZ= state to transition to, if
-defined. =XDeath= is entered when damage incurred exceeds a certain
-threshold value. =Raise= comes in when a dead actor is resurrected
-using a built-in method.
+built in for the standard functions. You can define a [[https://zdoom.org/wiki/Custom_damage_types_(ZScript)][custom damage
+type]] named =XYZ=, for example, that can have its own =Pain.XYZ= and
+=Death.XYZ= states to transition to if they were defined (the default
+=Pain= and =Death= states are used otherwise). =XDeath= is entered
+when damage incurred exceeds a certain threshold value. =Raise= comes
+in when a dead actor is resurrected using a built-in method.
 
 The [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]] has very simple, basic, AI.  [[https://zdoom.org/wiki/A_Look][=A_Look()=]] makes it look
 for hostiles.  [[https://zdoom.org/wiki/A_Chase][=A_Chase()=]] makes it turn 45-degrees in a random
@@ -835,8 +842,10 @@ tutorialize it).
 You can define your own state labels, but will need custom functions
 to handle state transitions into and out of them. Let us now create a
 replacement class named =MFM_InviZombie= to make this enemy slightly
-more exciting. Let is add/modify the state labels one at a time. For
-starters, we will split the =See= state label into two:
+more exciting. You can add these lines to the same =ZSCRIPT.zsc= file
+below the =MFM_Elixir= class definition. Let is add/modify the state
+labels one at a time. For starters, we will split the =See= state
+label into two:
 
 #+BEGIN_SRC C
   class MFM_InviZombie : ZombieMan replaces ZombieMan
@@ -859,24 +868,23 @@ starters, we will split the =See= state label into two:
   }
 #+END_SRC
 
-So here, I gave the class a default =StencilColor= (a blue-ish white)
-and a =Speed= of =12= (the default =ZombieMan='s =Speed= was =8=). We
-omit defining the =Spawn= state label since we don't want to change
-it. We start the =See= state label by playing the "=brain/cube=" sound
-lump using the [[https://zdoom.org/wiki/A_StartSound][=A_StartSound()=]] function (it's just the [[https://github.com/ZDoom/gzdoom/blob/f1b5ba09e0fb001e7a6d1771ef68abfb15d2931d/wadsrc/static/filter/game-doomchex/sndinfo.txt#L375][=DSBOSCUB=]]
-lump from =freedoom2.wad= originally used in Chex's Quest) with the
-starting time 60% into the audio. And then the [[https://zdoom.org/wiki/A_SetRenderStyle][=A_SetRenderStyle()=]]
-function is used and the sprites are set to be rendered in the
-"shaded" style (just like for =MFM_Elixir=) with the new
-=StencilColor= for 4 ticks. And then the [[https://zdoom.org/wiki/Actor_properties#RenderStyle][=RenderStyle=]] gets changed
-again to "fuzzy" style, which is internally defined for use with the
-[[https://zdoom.org/wiki/Classes:Spectre][=Spectre=]] class of enemy from the Doom games. After this,
-=MFM_InviZombie= should enter our custom =See2= state label, which is
-just the looped state sequence from the default =See= state label in
-the original [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]] class. In game, the actor will be visible
+So here, I gave the class a default =StencilColor= (a blue-ish white) and a
+=Speed= of =12= (the default =ZombieMan='s =Speed= was =8=). We omit
+defining the =Spawn= state label since we don't want to change it. We start
+the =See= state label by playing the "=brain/cube=" sound lump using the
+[[https://zdoom.org/wiki/A_StartSound][=A_StartSound()=]] function (it's just the [[https://github.com/ZDoom/gzdoom/blob/f1b5ba09e0fb001e7a6d1771ef68abfb15d2931d/wadsrc/static/filter/game-doomchex/sndinfo.txt#L375][=DSBOSCUB=]] lump from
+=freedoom2.wad= originally used in Chex's Quest) with the starting time 60%
+into the audio. And then the [[https://zdoom.org/wiki/A_SetRenderStyle][=A_SetRenderStyle()=]] function is used and the
+sprites are set to be rendered in the "shaded" style (just like for
+=MFM_Elixir=) with the new =StencilColor= for 4 ticks. And then the
+[[https://zdoom.org/wiki/Actor_properties#RenderStyle][=RenderStyle=]] gets changed again to "fuzzy" style, which is internally
+defined for use with the [[https://zdoom.org/wiki/Classes:Spectre][=Spectre=]] class of enemy from the Doom games.
+After 4 more ticks, =MFM_InviZombie= should enter our custom =See2= state
+label, which is just the looped state sequence from the default =See= state
+label in the original [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]] class. In game, the actor will be visible
 normally in the =Spawn= state label, but will enter the =See= (and
-eventually the =See2=) state label and look like a dark shade when
-alerted, like so:
+eventually the =See2=) state label and look like a dark shade when alerted,
+like so:
 
 #+ATTR_HTML: :width 800px
 [[./images/invi01.gif]]
@@ -897,17 +905,16 @@ in the code (look them up using SLADE). Next, let us add a modified
 		Goto See;
 #+END_SRC
 
-If you compare this to the default =Missile= state label from the
-original [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]] class, you will see that the "=misc/spawn=" sound
-lump is played (it's just the [[https://github.com/ZDoom/gzdoom/blob/f1b5ba09e0fb001e7a6d1771ef68abfb15d2931d/wadsrc/static/filter/game-doomchex/sndinfo.txt#L422][=DSITMBK=]] lump from =freedoom2.wad=
-originally used in Chex's Quest), the render style is briefly set to
-"shaded" for 4 ticks, and then the rendering style is set to
-"normal". Also, it now takes =1+4+4+12= meaning =21= ticks to get to
-the =A_PosAttack= call, which is longer than the default =10=
-ticks. This is to keep the monster difficulty roughly the same as
-before, giving the player more of a chance for a counter
-attack. Lastly, the actor is returned to the =See= state label which
-should play the other sound lump and set the render styles back to
+If you compare this to the default =Missile= state label from the original
+[[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]] class, you will see that the "=misc/spawn=" sound lump is
+played (it's just the [[https://github.com/ZDoom/gzdoom/blob/f1b5ba09e0fb001e7a6d1771ef68abfb15d2931d/wadsrc/static/filter/game-doomchex/sndinfo.txt#L422][=DSITMBK=]] lump from =freedoom2.wad= originally used
+in Chex's Quest), the render style is briefly set to "shaded" for 4 ticks,
+and then the rendering style is set to "normal". Also, it now takes
+=1+4+4+12= meaning =21= ticks to get to the =A_PosAttack()= call, which is
+longer than the default =10= ticks. This is to keep the monster difficulty
+roughly the same as before, giving the player more of a chance to execute a
+counter attack. Lastly, the actor is returned to the =See= state label
+which should play the other sound lump and set the render style back to
 shaded (as we've already seen). This should look like this:
 
 #+ATTR_HTML: :width 800px
@@ -935,35 +942,46 @@ To finish it up, we can also add new definitions of the =Pain=,
 		Stop;
 	XDeath:
 		POSS M 1 A_StartSound("misc/spawn");
-		POSS M 4 A_SetRenderstyle(alpha, STYLE_Shaded);
-		POSS M 5 A_SetRenderstyle(alpha, STYLE_Normal);
+		POSS M 3 A_SetRenderstyle(alpha, STYLE_Shaded);
+		POSS M 1 A_SetRenderstyle(alpha, STYLE_Normal);
 		POSS N 5 A_XScream;
 		POSS O 5 A_NoBlocking;
 		POSS PQRST 5;
-		POSS U -1 A_DropItem('MFM_Elixir');
+		POSS U -1;
 		Stop;
 #+END_SRC
 
 You should, once again, compare these to their counterparts in the
-original [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]] class. We don't be redefining the =Raise= state
-label. I have thrown in the use of the [[https://zdoom.org/wiki/A_DropItem][=A_DropItem()=]] function to make
-the =MFM_InviZombie= drop a bottle of =MFM_ELixir= when killed. This
-item is dropped along with the =ZombieMan='s default =DropItem=
-([[https://zdoom.org/wiki/Classes:Clip][=Clip=]]). This should make the difficulty more fair.
+original [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]] class. We won't be redefining the =Raise= state
+label. I have thrown in the use of the [[https://zdoom.org/wiki/A_DropItem][=A_DropItem()=]] function at the
+end of the =Death= state sequences to make the =MFM_InviZombie= drop a
+bottle of =MFM_Elixir= when killed. This item is dropped along with
+the =ZombieMan='s default =DropItem= ([[https://zdoom.org/wiki/Classes:Clip][=Clip=]]). This should make the
+difficulty more fair.
 
 #+ATTR_HTML: :width 800px
+#+CAPTION: Look closely. That other guy in the back stole my kill!
 [[./images/invi03.gif]]
+
+I have omitted dropping the =MFM_Elixir= from the =XDeath= state to
+avoid rewarding the act of blowing the monster up with some
+splash-damage weapon that didn't require as much precision, like
+shooting an explosive barrel next to the monster (try summoning an
+[[https://zdoom.org/wiki/Classes:ExplosiveBarrel][=ExplosiveBarrel=]] via the console next to an unalerted
+=MFM_InviZombie= and shooting it). From a game-logic-rationalization
+point-of-view, the explosion smashed the bottle with the elixir!
 
 I have not justified some of the decisions made here (speed increase,
 partial spectre-like visibility, inclusion of sound cues, transitional
-blue-ish white shading, longer tick durations, additional drop items)
+blue-ish white shading, longer tick durations, conditional drop items)
 as game design is beyond the scope of this guide. But you can vary
-these parameters yourself and see what suits your needs the best. You
-can make the monster completely invisible in any state sequence by
-replacing the sprites with [[https://zdoom.org/wiki/TNT1][=TNT1A0=]]. Better yet, the engine already
-provides a convenient flag that you can set to turn any monster into a
-[[https://zdoom.org/wiki/Stealth_monster][Stealth Monster]]. All have to do is add the line [[https://zdoom.org/wiki/Classes:StealthZombieMan][=+STEALTH=]] to your
-class's =Default= block. Here is the minimum code you would need:
+these parameters yourself and see what suits your needs best. You can
+make the monster completely invisible in any state sequence by
+replacing the sprites with [[https://zdoom.org/wiki/TNT1][=TNT1A0=]], which is a dummy lump name for a
+blank sprite. Better yet, the engine already provides a convenient
+flag that you can set to turn any monster into a [[https://zdoom.org/wiki/Stealth_monster][Stealth Monster]]. All
+you have to do is add the line [[https://zdoom.org/wiki/Classes:StealthZombieMan][=+STEALTH=]] to your class's =Default=
+block. Here is the minimum code you would need:
 
 #+BEGIN_SRC C
   class MFM_StealthZombie : ZombieMan
@@ -979,16 +997,17 @@ class's =Default= block. Here is the minimum code you would need:
 
 Feel free to =summon MFM_StealthZombie= from the console and see how
 differently this plays. This flag also has a built-in slow
-fade-in/fade-out system so that the transition isn't abrupt. However,
-we lose some control by doing it this way. For one, the monster is
-invisible even in the starting =Spawn= state. So there is no reward
-for a stealth player who managed to sneak up on the monster without
-alerting it. The timings of all the state sequences are also the same
-as the default, and no sound cues have been added. These types of
-[[https://zdoom.org/wiki/Stealth_monster][Stealth Monsters]] are highly discouraged in the modding scene as they
-are very difficult to balance. They get abused by novice modders and
-end up becoming very unfair. Game-design sense is an important skill
-that, imho, you cannot learn from a guide or tutorial.
+fade-in/fade-out system so that the transitions aren't
+abrupt. However, we lose some control by doing it this way. For one,
+the monster is invisible even in the starting =Spawn= state. So there
+is no reward for a stealthy player who managed to sneak up on the
+monster without alerting it. The timings of all the state sequences
+are also the same as the default, and no sound cues have been
+added. These types of [[https://zdoom.org/wiki/Stealth_monster][Stealth Monsters]] are highly discouraged in the
+modding scene as they are very difficult to balance. They get abused
+by novice modders and end up becoming very unfair. Game-design sense
+is an important skill that, imho, you cannot learn from a guide or
+tutorial.
 
 [[https://zdoom.org/wiki/ZScript][=Zscript=]] is a lot more powerful than what I have presented here.
 Everything we have covered could have also been done in the older scripting
@@ -1001,35 +1020,591 @@ Tutorials]].
 
 I have introduced the use of the [[https://zdoom.org/wiki/A_StartSound][=A_StartSound()=]] function but did not
 introduce the [[https://zdoom.org/wiki/SNDINFO][=SNDINFO=]] or [[https://zdoom.org/wiki/SNDSEQ][=SNDSEQ=]] lumps or show you how to include
-custom sounds in your mod. I encourage to research and experiment with
-these on your own.
+custom sounds in your mod. I encourage you to research and experiment
+with these on your own.
 
 * Basics of mapping
 
+Doom modding is dominated by custom maps. This is the most popular format
+for sharing and enjoying the community's creations. Over the years, there
+have been several mapping contests: spanning long-term veteran quality
+collections (see [[https://doomer.boards.net/page/dbp][Doomer Board Projects]]) to newbie-friendly, all-comers
+compilations (checkout [[https://ramp2021.teamouse.net/][RAMP]], run by David Newton). Single-map mods have won
+[[https://www.doomworld.com/cacowards/][Cacowards]] quite often. Mapping for Doom can be a very fun, addicting
+experience. In this guide, I will only cover the basic setup of one of the
+programs that can be used for it, as well as using custom resources, and
+some quirks about map-only WAD files and their lump naming and packaging.
+
+Mapping is fundamentally a visual task. You need an editor with a GUI to
+even get anywhere. Therefore, the best tutorials are all in video format.
+In fact, (semi-)professional doom mappers livestream their process on
+streaming websites. If you were to get on a video-sharing site like youtube
+and search for something like "doom mapping tutorials," and filter for
+playlists, some of the earliest uploads you will see are from a personality
+who calls himself Chubz. He has a couple of series ([[https://www.youtube.com/playlist?list=PL99214A1614CD2EED][here]] and [[https://www.youtube.com/playlist?list=PLCE835098C82D8F24][here]]) on an
+editor called =Doom Builder= (he seems to have created one for [[https://www.youtube.com/playlist?list=PLuDCrjOek9njK8hXkZmTxaU8PWzjzGql7][ACS
+scripting too]]). We won't be using =Doom Builder= here, but the one I will
+introduce (Ultimate Doom Builder, or UDB for short) shares some genealogy
+with =Doom Builder= and related editors. Most of those lessons are directly
+applicable with very few required changes that you will be able to figure
+out on your own.
+
+More modern playlists from [[https://www.youtube.com/playlist?list=PLgyvB-paJoALDy0rRlc5na8-3xPHGFlHb][lazygamer]] or [[https://www.youtube.com/playlist?list=PL1cBWOFfRw5V69xdgxhmjVwaC1DfIvnwe][raven67854]] are more explicitly
+geared towards UDB and GZDoom, and are an excellent resource. There are
+even videos by detractors who don't like the pace and tenor of these
+playlists, [[https://www.youtube.com/watch?v=syIDpalKzeQ][who have their own video take]] (some strong language in that
+one). John Romero himself (who was part of the original Doom team in 1993)
+[[https://www.youtube.com/playlist?list=PLJ4UBQk5P8JD6c7_pH12d_TivnKqOdO21][livestreamed some mapping]] he did on [[https://romero.com/shop/p/sigil2usb][Sigil 2]] (and UDB was good enough for
+him). Famous mappers like [[https://www.youtube.com/playlist?list=PLQrQ055Wd7p77pBCmTQT6kW-K8Plmw_D-][bridgeburner]] and [[https://www.youtube.com/watch?v=iuooUOuBVII][Dragonfly]] make spot-tutorials
+for obscure/esoteric mapping tricks that serve as reference material for
+even hardcore modders. [[https://www.youtube.com/watch?v=c4-5d10dCyQ][James Paddock]] (who made the midi soundtrack for
+Sigil 2) and our friend [[https://www.youtube.com/watch?v=2HYYAnZsQHY][David Newton]] (why isn't he writing this!!) also
+have great videos. You should watch those last two links both before and
+after going through this section of the guide. It will make more sense the
+second time. I apologize to other famous mappers who also have a catalog of
+video tutorials for not mentioning them here.
+
 ** Getting UDB
 
+Now that we've gotten past the hyperlinks to youtube videos and
+playlists, let's get back to some exercises. This being a GUI, this
+section will have a lot of screenshots. First, create a directory
+named =maps= in your mod's project folder (this is a reserved folder
+name). Secondly, to get Ultimate Doom Builder, you can try their
+[[https://ultimatedoombuilder.github.io/][official website]], or the [[https://forum.zdoom.org/viewtopic.php?t=66745][ZDoom forums]]. For Linux, the build
+instructions are in the =README= file on the [[https://github.com/UltimateDoomBuilder/UltimateDoomBuilder?tab=readme-ov-file#ultimate-doom-builder][github repository]]
+(although on modern Linux systems, install =winetricks dotnet472= and
+[[https://askubuntu.com/questions/841847/mono-package-for-wine-is-not-installed][=wine-mono=]], and use =wine= to run the [[https://ultimatedoombuilder.github.io/][portable archive
+Builder.exe]]). Once you launch UDB, you will be greeted to an opening
+screen with some graphic. Using the top-left popup menus, navigate to
+=Tools -> Game Configurations= (or just press =F6=). This will bring
+up a =Game Configurations= window with a list of map formats on the
+left and a bunch of tabs for panels on the right. Select =GZDoom:
+Doom2 (UDMF)= format from the list, and in the =Resources= panel, add
+=freedoom2.wad=, =gzdoom.pk3=, and =my_fist_mod.pk3= files to the list
+(so that we can use stuff from your mod!). The =Game Configurations=
+window will look something like this:
+
+#+ATTR_HTML: :width 800px
+[[./images/screenshot07.jpg]]
+
+In the =Nodebuilder= tab, you can set both configurations to =(do not build
+nodes)= if you are on Linux. The engine can build BSP nodes during loading.
+In the =Testing= tab, you can let UDB know where your GZDoom executable is
+if you want to. This is to be able to launch the engine directly from UDB
+for rapid testing. This guide won't be using that method, as it robs us of
+the opportunity to learn a few other remaining, beginner concepts.
+
+With the =Game Configurations= out of the way, now navigate to =File
+-> New Map= (or just press =Ctrl + N=). It should bring up this
+=Map Options= window:
+
+#+ATTR_HTML: :width 425px
+[[./images/screenshot08.jpg]]
+
+Select the =GZDoom: Doom 2 (UDMF)= option for =Game
+configuration=. Leave =Script Type= option as =ZDoom ACS= (even though
+we won't be bothering with ACS scripting here). Make sure that the
+=Level Name= option is =MAP01=. This is important. This is not the
+name of your file. Nor is it the conceptual name of your map. It is an
+engine internal identifier lump, and I will explain its significance
+further down. You can re-add the three resource files:
+=freedoom2.wad=, =gzdoom.pk3=, and =my_first_mod.pk3= here. Hit okay
+and you will be greeted to a blank grid, with some unlabeled buttons
+to the top and the left (hover over for a tool tip). There will be a
+broad, bottom bar that says =Vertices Mode=. This can be hidden, but
+let's leave it open since we are a beginner. At the bottom right,
+among other things, there will be a grid-spacing setting (I think it
+defaults to =32 mp=). The view should look like this:
+
+#+ATTR_HTML: :width 800px
+[[./images/screenshot09.jpg]]
+
 *** Your first room
+
+For starters, do not click anything. Save the blank map inside the
+=maps= subfolder in your mod's project folder. Give it a name like
+=myfirstmap.wad=. The top title of the UDB window should now say
+"=myfirstmap.wad (MAP01)=". Now let us learn our first hotkeys. Press
+the =L=-key on your keyboard. The broad, bottom bar should now read
+=Linedefs Mode= instead of =Vertices Mode=. You can get back into
+=Vertices Mode= by pressing =V=. Pressing =S= should swap you to
+=Sectors Mode=, and hitting =T= will take you to =Things Mode=. Just
+practice changing between these various modes. What your left-click or
+right-click is able to do depends on what mode you are in. To draw or
+select lines, you will have to be in =Linedefs Mode=. To draw/select
+sectors, be in =Sectors Mode=, and so on. You can, of course, switch
+between these same modes by clicking on the appropriate button on the
+left panel. But I want you to get used to using hotkeys. By the end of
+year-two of Doom mapping, I want you to be able to match
+[[https://www.youtube.com/watch?v=lFI6Mv5gJ3w][Bridgeburner's hotkey prowess from this video]]. Write them down in a
+cheatsheet if you have to. You can, of course, change the default
+hotkeys to your preferred bindings later.
+
+Right. Now let's focus on the blank grid expanse in the center of the
+screen. This grid presents a top-down plan view of your map (which is empty
+right now). Here, you can use the mouse's scroll wheel to zoom in and out.
+And if you hold down the =spacebar=-key, your mouse movements will cause
+the grid to pan. It might be hard to tell with the only fixed-point of
+reference being the plus-sign at the center/origin. So let's create a point
+of reference by drawing a rectangular room somewhere. Press =Ctrl + Shift +
+D= to enter the =Draw Rectangle Mode=. Now left click somewhere in the
+blank grid a little bit to the top-left of center. Let go of the mouse
+button. Now move the mouse pointer towards the bottom-right until the
+rectangle being dragged open is a decent size (something over 256 $\times$
+256 is good). Left click again. This should materialize the rectangle and
+kick you out of the =Draw Rectangle Mode=.
+
+You are looking at the top-down view of your first room. All you can see is
+its floor texture (there is a button that switches it to show the ceiling
+texture in the top-down view, but I won't tell you where it is!). This room
+has one =Sector=, four =Vertices= and four =Lines=. The =Lines= have a
+little knotch at the center pointing inwards into the room. This knotch
+tells you where the "front-side" of the line is. These four =Lines= are
+single-sided lines since their backs are facing the void. Now if you switch
+to =Sectors Mode= (=S=) and left-click on the room's floor anywhere, you
+will "select" the sector. Press the =C=-key to cancel the selection. Switch
+to =Linedefs Mode= (=L=) and you will be able to select the lines by
+left-clicking on them. You can select multiple lines by drag selecting, or
+clicking on multiple of them in sequence. Again, hit the =C=-key to clear
+the selection. The =C=-key is your best friend.
+
+When in any of these modes, if you right-click on the appropriate entity
+(and not in the void or empty region), you will bring up a window for its
+properties. If you had multiple entities selected before you right-clicked
+on one of them, the properties will collectively apply to all of them. If
+you accidentally right-click in the void (or within a =Sector= while in
+=Linedefs Mode=), you will start drawing lines. Hit the =Escape=-key to
+snap out of it. The =Escape=-key is your other best friend. If you
+right-click on a =Line= while in =Vertices Mode= you will create a new
+=Vertex= and split the =Line= into two =Lines= there. Hit =Ctrl + Z= to
+undo that action. Or select that =Vertex= while in =Vertices Mode= and
+=Delete= it.
+
 *** Using custom textures from your mod
+
+Now, get into =Linedefs Mode= (=L=) and right-click on the top (North)
+=Line= of your room. It should bring of a properties window with tabs
+in a top row. Click on the =Front= tab (remember, this line is
+one-sided and doesn't really have a =Back=-side). To the right you
+will see a column of three gray squares, with the middle square
+displaying a texture and a name like =STARTAN1= or =STARTAN2= (these
+are just the UDB defaults). Left-click on the middle square to bring
+up another window that allows you to select some other texture. It
+will show you all the available textures to choose from based on the
+resource files (=freedoom2.wad=, =gzdoom.pk3=, and =my_first_mod.pk3=)
+that you specified in the =Game Configuration= setting.
+
+#+ATTR_HTML: :width 800px
+[[./images/screenshot10.jpg]]
+
+Scroll down until you see =my_first_mod.pk3= in the list. Selecting it
+and then =All= will bring up three textures. If you recall, I used a
+custom image (of John Romero's forehead) called =John_Romero.png= and
+then created a virtual texture lump in the =TEXTURES.lmp= patch called
+=BIGDOOR1=. The both of these, as well as our modified =AQRUST08=
+texture are showing up as selectable options. Note that only the
+first-eight DOS-friendly characters of =John_Romero.png= show up.  Let
+us select our modified =AQRUST08= and apply it to the middle-texture
+slot of the =Line=. As far as playing is concerned, it doesn't matter
+whether you use the =AQRUST08= texture lump from =freedoom2.wad= or
+=my_first_mod.pk3= here, as the mod ensures that the replacement gets
+applied in GZDoom. But for UDB to visually display the right one
+within its views, we might as well use our modified lump.
+
+There is a checkbox for "=Long Texture Names=" in the =Browse texture=
+window. *NEVER* turn that on. It will store the absolute file-path to
+your texture file in the map wad instead of the short-lump name. It is
+better to use the lump names, as this keeps your mod ... well
+... modd-able (both by yourself and others). If someone in the future
+makes a replacement mod that, say, replaces =AQRUST08= with a
+higher-resolution version with PBR-material shaders for realistic
+lighting and reflections, that replacement won't take effect on your
+map if it isn't just using the simple lump name =AQRUST08=.
+
+Okay great. We have a room with one wall painted with our modified
+texture. To actually make this map playable, we need to add a
+player-start =Thing=. Enter =Things Mode= (=T=) and right-click
+anywhere inside the room. This should, by default, place a =Player 1
+start= "=Thing=" on the map and bring up its propeties window. Here
+you can set the starting =Angle= you want the player to face and hit
+=OK=. If you accidentally placed additional =Things=, select them in
+=Things Mode= by left-clicking them and hit =Delete= (or use =Ctrl +
+Z= a bunch to undo recent steps).
+
+#+ATTR_HTML: :width 555px
+[[./images/screenshot11.jpg]]
+
+Now just an empty room (albeit with some art on one of the walls) is
+boring. Let's add some other =Things= for the player to interact
+with. While still in =Things Mode=, right-click at some corner of the
+room and expand the =Monsters= folder in the =Things= selection
+panel. You should be able to select an entry called
+=$FN_ZOMBIE=. Normally, this would have said "=Former Human=". But
+since we added a class-replacement clause in our =Zscript= file for
+the =ZombieMan= class, UDB doesn't know which resource file to
+prioritize. So it is trying to display a =Tag Name=, but is running
+into a =LANGUAGE= lump substitution bug (don't worry about it, it
+might have gotten fixed by the time you read this). Anyway, select
+=$FN_ZOMBIE= and make sure that his =Angle= is facing away from the
+=Player 1 start= =Thing= so that he doesn't get alerted as soon as the
+game starts. When you launch the game with your mod, the class
+replacement will automatically kick in, and you will be fighting an
+=MFM_InviZombie=. Similarly, scroll down to find the =Health Bonus=
+=Thing= and place it somewhere else in the room.
+
+#+ATTR_HTML: :width 670px
+[[./images/FN_Zombie.jpg]]
+
 *** Placing custom things from your mod
+
+Now you might be wonder, how do we place our shiny =MFM_Elixir=
+=Thing= into the map. Even though we defined it, we removed the
+replacement clause (like I asked you to!). So it exists as a separate
+independent entity that can be summoned in the game from the console
+(and by killing the =MFM_InviZombie= class with weak bullets). But it
+is not available in this list for pre-placement on the map. To fix
+this, we have to give it an [[https://zdoom.org/wiki/Editor_number][Editor Number]]. Leave UDB open in the
+background (minimize it or switch to a different workspace if your OS
+allows it). Now create a new file in your mod's project folder called
+=MAPINFO.lmp=. In it, put the following text:
+
+#+BEGIN_SRC
+DoomEdNums
+{
+  20001 = "MFM_Elixir"
+}
+#+END_SRC
+
+Map wad files aren't storing =Things= in them by their entire
+definition. It only stores a =Thing='s editor number (along with some
+map properties like starting angle). Most standard =Things= have a
+[[https://zdoom.org/wiki/Standard_editor_numbers][standard editor number]] that all Doom source ports and map editors
+respect (more or less). For GZDoom, as of this writing, all editor
+numbers between 11,000 to 14,000, and between 14,166 to 31,999 are
+available to modders for custom classes. Here, we have assigned the
+number =20001= to our custom =MFM_Elixir= class in a new (reserved
+name) lump file =MAPINFO.lmp=. Now re-zip the archive:
+
+#+BEGIN_SRC
+  zip -r my_first_mod.pk3 textures/ TEXTURES.lmp sprites/ ZSCRIPT.zsc MAPINFO.lmp
+#+END_SRC
+
+I understand that this zip command is getting a bit long. I will
+present [[makefile][my solution]] to this problem later. For now, it is important to
+know what is (and what is not) going into the =pk3=. For example, I am
+still leaving out the =maps= folder that I had you create a while back
+in this section. Also, since we are editing these files, the editing
+software can sometimes create temporary or permanent backup copies of
+the files (usually with the same names and a tilde "~" character
+appended in the end). Make sure that you don't accidentally zip those
+into the =pk3= file.
+
+Now return to UDB, navigate to the =Tools= popup menu and reload resources
+(=F8=-key) from your resource files (=freedoom2.wad=, etc.). Right-clicking
+in =Things Mode= again should allow you to scroll down to the
+=User-defined= folder and place the =MFM_Elixir= class in your map. The
+display sprite for it in UDB will be the same as that of the =Health Bonus=
+since we didn't actually change its =Spawn= state sprite. We merely changed
+the rendering style, which is an engine thing, not a UDB thing.
+
+#+ATTR_HTML: :width 276px
+[[./images/elixir.jpg]]
+
+*** 3D view and =Line= action special
+
+The room is going to be fun for a while. But eventually, the player will
+want to leave it. Let's add an exit button. Switch to =Vertices Mode=
+(=V=). Right click at two places on the northern =Line= of the room again
+to place two =Vertices= exactly 64 map-units apart (it should be easy if
+the grid-spacing is set to =32 mp= at the bottom right). This splits the
+northern =Line= into three. Switch to =Linedefs Mode= (=L=) and right-click
+on the middle =Line= as shown to bring up its properties window. In the
+=Front= tab again, change the middle texture to a switch texture like
+=SW1COMP= (you can type it below the gray square without bringing up the
+=Browse texture= window). Any switch texture that is 64 units wide or
+greater is good here. Hit =OK=.
+
+#+ATTR_HTML: :width 800px
+[[./images/screenshot12.jpg]]
+
+The switch is just a texture painted on the wall. You can't activate
+it yet. Before we learn to make it do that, I want to introduce you to
+the 3D view in UDB. So far, we have been looking at our level in the
+top-down "plan" view. Here, we could switch amongst a bunch of "modes"
+and operate on the map. But you can look at your map in a 3D
+perspective from within UDB. Move your mouse cursor somewhere close to
+or inside the room, and hit the =Q=-key. Now look around using the
+mouse. Do you see your room? Don't click on anything. Hit =Q= again to
+return to the "plan" view. Move the mouse cursor over to a different
+location and enter 3D view again (=Q=) to spawn your viewpoint at that
+new location.
+
+In the 3D view, you can actually fly the viewpoint through the map
+using the =E-S-D-F= keys be default (these are shifted by one key over
+to the right from the standard =W-A-S-D= movement keys for FPS
+games). While in 3D view, the "modes" have no meaning. The map-entity
+(walls, floors, ceilings, or =Things=) that the central cursor is
+pointing at will be highlighted with a pulsating orange glow, unless
+highlighting has been toggled off with the =H=-key. Anything you do
+(like hit keys or scroll the mouse wheel) will affect the entity
+highlighted, even if the highlighting effect has been visually turned
+off (hit =H= to turn it back on again). Like pressing the arrow-keys
+(with or without the =Shift=-key pressed) while a wall or floor is
+highlighted will offset its texture. The arrow-keys can move locations
+of highlighted =Things=. And the mouse wheel can raise or lower a
+highlighted floor or ceiling. People, epecially newcomers, find this
+behavior very frustrating. The way to avoid this problem is to
+actually select the entities you want to manipulate by left-clicking
+them (yes, while in 3D view). Selected objects pulsate in red, and you
+can selected multiple entities by sequential clicking on them (press
+your best friend the =C=-key to clear selection). When one or more
+entities are selected, hitting keys or scrolling the mouse wheel will
+now only manipulate the selected entities. Let's practice doing it
+this way.
+
+#+ATTR_HTML: :width 800px
+[[./images/screenshot13.jpg]]
+
+Find the middle-segment of the northern wall with the switch
+texture. Unless you really lucked out with your room =Vertices=
+location, it will most likely be misaligned as shown. Left-click on it
+while still in 3D mode so that it pulsates with a red highlight
+instead of orange. Now use =Shift= plus the left or right arrow keys
+to change the texture offsets until you are satisfied with the
+alignment. Hit =C= to clear the selection and then =Q= to exit back to
+the "plan" view mode.
+
+Now, to make the switch actually usable, we have to give that middle
+=Line= an action special. From =Linedefs Mode=, right-click on that
+line, and in the =Properties= tab, in the =Action= panel, you can
+click on the list icon to the right of the wide bar and search for the
+=End Normal= action special (or just type the number =243= in the
+smaller leftward box as shown). Then in the =Activation= panel, click
+on the "=When player presses use=" checkbox to tick it on. Hit
+=OK=. Now your =Line= will execute the action special =End Normal=
+defined in the =UDMF= map standard when the player presses the =USE=
+key while facing it (and is close enough). Note that we assigned this
+to the =Line=, and not the switch texture. That whole wall is
+technically the switch, and can be activated from any height (like
+from a ledge or ladder). That picture of that switch at the bottom is
+just for show. This is just how Doom works. If you want a height
+restriction, you will have to do something clever like a lowered
+ceiling and a recessed sector.
+
+#+ATTR_HTML: :width 800px
+[[./images/screenshot14.jpg]]
+
+Save your map (=Ctrl + S=). Now to play it, I already committed to not
+showing you how to do it from within UDB. So we use the launcher
+program and add the map file =myfirstmap.wad= (it was saved in the
+=maps= subfolder of your mod's project folder) to the list of mods in
+our preset. Then launch the game. You can (in my experience) do this
+while the map file is open in UDB. If you want to launch from a
+terminal command prompt instead, the command would be:
+
+#+BEGIN_SRC
+  ./gzdoom -iwad freedoom2.wad -file <PATH-TO-PROJECT-FOLDER>/my_first_mod.pk3 <PATH-TO-PROJECT-FOLDER>/maps/myfirstmap.wad
+#+END_SRC
+
+Voila. You are playing your map in the game. There is the
+=MFM_Elixir=, and the =MFM_InviZombie=. And that tempting switch. If
+you rush forward and hit it, the level =MAP01= will end and the game
+will show you the intermission screen, and then load =MAP02= for you.
+
+*** Switch patch and animation
+
+You might have noticed that when you hit the level-exit switch, the
+level just ends. The switch didn't actually visually flip, and there
+was no switching sound made. While this is okay for a level-exit
+switch (after all, there is no time for the sound to play), it will
+become problematic if you want to use that switch texture for other
+things (like opening doors) in other places on the map. Side-note:
+Typically, you are supposed to have a distinctive looking special
+switch for level exits that don't look like other switches that do
+other things. A game-design aspect of visual clarity. But let's leave
+that aside for now.
+
+When I introduced the =TEXTURES= lump, I promised to show you how to
+slap a switch onto any wall texture. The switch textures on offer from
+=freedoom2.wad= (browse through them through UDB now instead of SLADE)
+all come with background wall textures, and none of them are on
+=AQRUST08=. Let's fix that. In our =TEXTURES.lmp= file, we can define
+two new texture lumps by combining our modified =AQRUST08.png= file
+and two internal switch lumps called =SW1S0= and =SW1S1= from inside
+=freedoom2.wad= like so:
+
+#+BEGIN_SRC
+Texture MYSW1, 64, 128
+{
+	Patch "textures/AQRUST08.png", 0, 0
+	Patch SW1S0, 16, 82
+}
+
+Texture MYSW1ON, 64, 128
+{
+	Patch "textures/AQRUST08.png", 0, 0
+	Patch SW1S1, 16, 82
+}
+#+END_SRC
+
+I have called these new virtual texture lumps =MYSW1= and =MYSW1ON=,
+and their overall sizes are 64 $\times$ 128 pixels. The patches are
+applied in the order they are specified, and I have carefully chosen
+the patch offsets to put the switch at the bottom center. Now, we
+create a new file with yet another reserved lump name: =ANIMDEFS.lmp=
+(be sure to not type "anime" by mistake). Its contents should be:
+
+#+BEGIN_SRC
+switch MYSW1 on sound Switch1 pic MYSW1ON tics 0
+switch MYSW1ON off sound Switch2 pic MYSW1 tics 0
+#+END_SRC
+
+This is invoking internal sound lumps named =Switch1= and =Switch2= from
+inside =freedoom2.wad=, and telling the engine to treat our two new virtual
+textures as switches that are complementary states of each other. Now
+zip-up the whole thing again:
+
+#+BEGIN_SRC
+  zip -r my_first_mod.pk3 textures/ TEXTURES.lmp sprites/ ZSCRIPT.zsc MAPINFO.lmp ANIMDEFS.lmp
+#+END_SRC
+
+In UDB, you can reload the resource files (=F8=) and change that one
+=Line='s texture to the newly available =MYSW1=. Go into the 3D view mode
+and align the texture of that middle wall (and/or neighboring walls). Come
+out of 3D view. Save (=Ctrl + S=). Now launch the game again with your map.
+This time, assuming that your framerate is high enough, you should see the
+switch change states (and briefly hear the =Switch1= sound effect) as the
+level ends.
+
+#+ATTR_HTML: :width 800px
+[[./images/screenshot15.jpg]]
+
+Practice a small set of hotkeys over and over again until you get the
+hang of them. Then add one new hotkey for every new feature you
+learn. To review, [[https://www.youtube.com/watch?v=mDm1hwfncQk][watch this]]. And [[https://www.youtube.com/watch?v=c4-5d10dCyQ][this]] and [[https://www.youtube.com/watch?v=2HYYAnZsQHY][this]].
 
 ** The Mapfile lump
 
-Coming soon ...
+You can close UDB now. We are done with that.
 
-*** Changing name for freedoom1
-*** MAPINFO lump
+Let us analyze what happened when you launched the game with
+=myfirstmap.wad=. You might recall that when you first started a new map in
+UDB, it opened a =Map Options= window where there was an option called
+=Level Name=. I had asked you to leave this as the default =MAP01=. Well
+the IWAD that you feed the engine contains instructions for what map to
+start the game in, and which map follows which. =freedoom2.wad=, for
+example, instructs the engine that a map with the lump name =MAP01= is
+supposed to be the first map, and that =MAP02= should be the next one when,
+for example, the =End Normal= action special is executed from =MAP01=. And
+this is why, when you loaded you map with the =freedoom2.wad= as the IWAD,
+it started you off in your custom map. And upon hitting the exit switch, it
+sends you off to =MAP02= (contained within =freedoom2.wad=). Your map
+replaced the default =MAP01= lump inside the IWAD.
+
+*** Changing the map lump name
+
+Now let's do some experiments. Open the launcher program again, and
+this time launch your mod with =freedoom1.wad= as the IWAD (I hope you
+didn't delete that one after the download!). You will note that the
+game does not start you off on your custom map. It just starts you off
+in Freedoom 1's regular maps, no matter which of the four "Episodes"
+you start with. In fact, you can play through the whole of Freedoom 1
+and never encounter your map.
+
+That is because Freedoom 1 instructs the engine to follow a different
+set of map lump naming conventions. If you start with Episode 1, the
+engine starts you off in map lump =E1M1=. The next map in the sequence
+is called =E1M2=. And so on. You can still tell the engine to force
+you into the map though. Launch with =freedoom1.wad= as the IWAD
+again, and this time, run `changemap MAP01` in the console. If you hit
+the level exit switch though, it will take you to the end credits
+sequence, since the IWAD =freedoom1.wad= doesn't tell the engine what
+the next lump after =MAP01= should be.
+
+You can define your own sequence of maps and map lumps in your
+=MAPINFO.lmp= file. This is also where you would specify the level
+soundtracks, what sky texture to use for each level, give them fancy
+nicknames like "Hanger Base", and so on. I won't show you how, but
+know that this exists. And it doesn't have to be a linear sequence of
+maps (with or without episodes) either. You can even specify clusters,
+with a central hub map and several "spoke" maps that you can travel to
+and return from. [[https://www.doomworld.com/forum/topic/141009-godless-night-gzdoom-episode-rc1-11292023/][Godless Night]] is my favorite example of this
+structure. We will see an example PWAD that does this later.
+
+Open =myfirstmap.wad= in SLADE. It can do it. It is a WAD file after
+all. You should see its insides:
+
+#+ATTR_HTML: :width 400px
+[[./images/insidemap.jpg]]
+
+It is simple, as it should be. Maps can get a little heavier that that
+later on, when you add more complicated things to your map, like ACS
+scripts, and [[https://www.youtube.com/watch?v=MFgGaZPZ5m4][Dialogue lumps]]. Remember that rule I had about not
+modifying anything through SLADE? This is where we break that
+rule. Rename the first marker lump from =MAP01= to =MAP02=. Save. Now
+launch the game again with =freedoom2.wad=. This time, you will have
+to play through the entire first level of the base game before it
+plops you into your custom map, which now has the lump name
+=MAP02=. And after you hit the exit switch in that, the engine will
+load =MAP03= for you. You could have named it =E1M1= and launched it
+with =freedoom1.wad= as well. Now change the name back to =MAP01=
+again through SLADE (hit save before closing).
+
 *** Packing the map with your mod
+
+So far we have some texture/sprite replacements, and custom classes
+mod in a =pk3= file (=my_first_mod.pk3=), and a map in a =wad= file
+(=myfirstmap.wad=). But can we smoosh them together? The =pk3= format
+already has a way to do that. First, rename =myfirstmap.wad= to
+=map01.wad= (the file name has to match the lump name for this
+method). Then, just add the map file (along with the =maps= subfolder)
+to the zip archive:
+
+#+BEGIN_SRC
+  zip -r my_first_mod.pk3 textures/ TEXTURES.lmp sprites/ ZSCRIPT.zsc MAPINFO.lmp ANIMDEFS.lmp maps/map01.wad
+#+END_SRC
+
+And you are done. Note that I specified the file name =maps/map01.wad= in
+full in the command instead of just the subfolder name =maps/=. This is
+because if you look inside the subfolder, you will see a lot of backup
+files that got created by UDB and SLADE when we opened the file in them. We
+don't want these files ending up in our =pk3= file. I could have specified
+a regular expression like =maps/*.wad= too to catch only the files that end
+in a =.wad=. In the end, the structure of your full =my_first_mod.pk3=
+should be:
+
+#+ATTR_HTML: :width 230px
+[[./images/final_pk3.jpg]]
+
+Now if you launch the game with just =freedoom2.wad= (or =Doom2.wad=) as
+the IWAD, and your mod =my_first_mod.pk3= as the PWAD. No extra map file
+needed. You should be playing your mod in your map. You can create more
+maps, name them =MAP02=, =MAP03=, and so on, and package them all inside
+the =maps= subfolder in your =pk3= file. There is some more work to be done
+if you want to make your own standalone IWAD. We will analyze some publicly
+available IWADS in SLADE later. But for all intents and purposes, you are
+now a certified doom modder. Now go create something!
 
 * Misc.
 
-** Git and version control
+** Productivity boosting microhabits
 
 Coming soon ...
+
+*** <<makefile>>Makefile
+*** Git and version control
+*** IDEs and text editors
+*** Workstation setup and long-term health
 
 ** Seeking help and forum/discord etiquette
 
 Coming soon ...
 
-** Studying famous mods
+** Publishing stuff and licenses
+
+Coming soon ...
+
+** Studying some public mods
 
 Coming soon ...
