@@ -10,7 +10,12 @@
 input[type='checkbox']{display: none;}
 .spoiler{background-color: gray; color: transparent; user-select: none; display: inline;}
 input[id^='redacted']:checked + .spoiler{background-color: inherit; color: inherit; transition: 0.5s; border: solid 1px;}
+@keyframes slidein {from {top: 4em; right: 5em; font-size: 5em;}}
+@-moz-keyframes slidein {from {top: 4em; right: 5em; font-size: 5em;}}
+@-webkit-keyframes slidein {from {top: 4em; right: 5em; font-size: 5em;}}
+@-o-keyframes slidein {from {top: 4em; right: 5em; font-size: 5em;}}
 #table-of-contents {font-size: 1.5em;position: fixed;right: 0em;top: 0em;background: #fffff8;box-shadow: 0 0 1em #777777;
+animation: 5s slidein;-moz-animation: 5s slidein;-webkit-animation: 5s slidein;-o-animation: 5s slidein;
 -webkit-box-shadow: 0 0 1em #777777;-moz-box-shadow: 0 0 1em #777777;border-bottom-radius-left: 5px;-webkit-border-bottom-left-radius: 5px;
 -moz-border-radius-bottomleft: 5px;text-align: right;max-height: 80%;overflow: auto;z-index: 100;}
 #table-of-contents h2 {font-size: 1em;max-width: 10em;font-weight: normal;padding-left: 0.5em;padding-right: 0.5em;padding-top: 0.05em;padding-bottom: 0.05em;z-index: 100;}
