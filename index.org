@@ -10,23 +10,26 @@ Contents/" to the top-right of this page to navigate between
 sections. Click on the "Switch Color Mode" text at the top-left of the
 page to switch between /light/ and /dark/ modes.
 
-This guide will introduce the basics of modding for the GZDoom source port.
-It is aimed at beginners with little-to-no technical knowledge. It will
-seem tedious to people with some proficiency with coding or GUI experience.
-For more advanced help, check the [[https://zdoom.org/wiki/Tutorials][Tutorials page]] on the zdoom wiki, or
-Jekyll Grim's [[https://jekyllgrim.github.io/ZScript_Basics/][Zscript basics]]. The guide will focus on GZDoom, but might
-have limited applicability to other source ports. It is structured as a
-sequence of exercises that the reader is expected to follow along by
-actually implementing the instructions on their computer. It is meant to be
-done at a relaxed pace over several sessions spanning days, and not in a
-single sitting. It presents particular ways of doing things in particular
-chapters for pedagogical reasons and to inculcate good habits. It will not
-present the full context or historical information for everything, because
-it is meant to be a first-pass curriculum, where too much extraneous
-information can be overwhelming and counter-productive. You can recommend
-additions/changes to this guide by submitting PRs to the [[https://github.com/dileepvr/gzdoom_modding_101][github repo]].
-Please only make changes to the =index.org= file. Do not edit the =html=
-file directly. And do not expand the scope too much.
+This guide will introduce the basics of modding for the GZDoom source
+port.  It is aimed at beginners with little-to-no technical
+knowledge. It will seem tedious to people with some proficiency with
+coding or GUI experience.  For more advanced help, check the [[https://zdoom.org/wiki/Tutorials][Tutorials
+page]] on the zdoom wiki, or Jekyll Grim's [[https://jekyllgrim.github.io/ZScript_Basics/][ZScript basics]]. The guide
+will focus on GZDoom, but might have limited applicability to other
+source ports. It is structured as a sequence of exercises that the
+reader is expected to follow along by actually implementing the
+instructions on their computer. It is meant to be done at a relaxed
+pace over several sessions spanning days, and not in a single
+sitting. It presents particular ways of doing things in particular
+chapters for pedagogical reasons and to inculcate good habits (see
+also: [[https://www.youtube.com/watch?v=Bg21M2zwG9Q][WAX ON, WAX OFF]]). It will not present the full context or
+historical information for everything, because it is meant to be a
+first-pass curriculum (see table of contents, top-right), where too
+much extraneous information can be overwhelming and
+counter-productive. You can recommend additions/changes to this guide
+by submitting PRs to the [[https://github.com/dileepvr/gzdoom_modding_101][github repo]].  Please only make changes to the
+=index.org= file. Do not edit the =html= file directly. And do not
+expand the scope too much.
 
 * Running GZDoom and understanding WADs
 
@@ -92,11 +95,11 @@ Let's run Freedoom 2 from the command line. From the
 terminal/command-prompt, run the following command:
 
 - Windows
-#+BEGIN_SRC
+#+BEGIN_SRC SH
 gzdoom.exe -iwad freedoom2.wad
 #+END_SRC
 - Linux
-#+BEGIN_SRC
+#+BEGIN_SRC SH
 ./gzdoom -iwad freedoom2.wad
 #+END_SRC
 
@@ -112,10 +115,10 @@ screens of the main menu, and the first level:
 [[./images/screenshot02.jpg]]
 
 These screenshots are from running version 0.13.0 of =freedoom2.wad=.
-Another version might look slightly different. And while we are here, go
-back into the main menu, go to =Options=, then enable =Full Options Menu=.
-In here, go to =Display Options -> Texture Options -> Texture Filter mode=
-and set it to "=None (Trilinear)=". Thank me later.
+Another version might look slightly different. And while we are here,
+go back into the main menu, go to =Options=, then enable =Full Options
+Menu=.  In here, go to =Display Options -> Texture Options -> Texture
+Filter mode= and set it to "=None=". Thank me later.
 
 The files =freedoom1.wad= and =freedoom2.wad= are called IWADs, which is
 short for [[https://zdoom.org/wiki/IWAD][internal WADs]]. These are wad-files that have all the information
@@ -143,7 +146,7 @@ not important and can be anything of your choosing. You can
 right-click the folder and compress it into a zip file. On Linux, you
 can run this command from the location of your project folder:
 
-#+BEGIN_SRC
+#+BEGIN_SRC SH
   zip -r my_first_mod.zip textures/
 #+END_SRC
 
@@ -155,7 +158,7 @@ dragging and dropping the zip file onto your =gzdoom.exe= executable file,
 and selecting the =freedoom2.wad= IWAD when it asks, or by running the
 command:
 
-#+BEGIN_SRC
+#+BEGIN_SRC SH
   ./gzdoom -iwad freedoom2.wad -file <PATH-TO-PROJECT-FOLDER>/my_first_mod.zip
 #+END_SRC
 
@@ -182,7 +185,7 @@ all instances of that texture with the one from your PWAD. *This is
 also why it was important to name the file exactly right.* If you load
 two PWADs that both replace the same texture like so:
 
-#+BEGIN_SRC
+#+BEGIN_SRC SH
   ./gzdoom -iwad freedoom2.wad -file mod1.pk3 -file mod2.pk3
 #+END_SRC
 
@@ -216,20 +219,21 @@ is a view of my DoomRunner front page:
 
 As you can see, I have highlighted a preset that I have named
 "=Elementalism=" that is using the GZDoom executable, the =doom2.wad=
-IWAD file, and a whole bunch of PWADs in a particular
-order. [[https://www.moddb.com/mods/elementalism][=Elementalism=]] is an ambitious map pack, and [[https://xxheavy-swagxx.itch.io/hellrider-vengeful][=Hellrider
-Vengeful=]] is a weapons and player-movement mod. Here, I am adding a
-mod called [[https://forum.zdoom.org/viewtopic.php?t=75585][=Flashlight++=]] even though =Hellrider= already comes with a
-flashlight, because the maps in =Elementalism= have all been
-programmed to strip the player of all inventory items and pistol-start
-every level. And the flashlight in =Flashlight++= happens to be
-unclearable using that method. If I were to try and and another mod
-that modifies weapons, like [[https://github.com/jekyllgrim/Beautiful-Doom/releases][=Beautiful Doom=]] to this list, then the
-conflict with =Hellrider= will cause all weapons to be replaced by one
-mod and ammunition pickups be of the other. So not all mods are
-designed to go together. I mostly ignore DoomRunner's separate map
-pack subwindow and load map-pack mods as regular mods, with full
-control over load order.
+IWAD file, and a whole bunch of PWADs in a particular order. The
+=lights.pk3= file from the GZDoom install is for dynamic lights (it
+doesn't get loaded by default for performance reasons). [[https://www.moddb.com/mods/elementalism][=Elementalism=]]
+is an ambitious map pack, and [[https://xxheavy-swagxx.itch.io/hellrider-vengeful][=Hellrider Vengeful=]] is a weapons and
+player-movement mod. Here, I am adding a mod called [[https://forum.zdoom.org/viewtopic.php?t=75585][=Flashlight++=]]
+even though =Hellrider= already comes with a flashlight, because the
+maps in =Elementalism= have all been programmed to strip the player of
+all inventory items and pistol-start every level. And the flashlight
+in =Flashlight++= happens to be unclearable using that method. If I
+were to try and and another mod that modifies weapons, like [[https://github.com/jekyllgrim/Beautiful-Doom/releases][=Beautiful
+Doom=]] to this list, then the conflict with =Hellrider= will cause
+all weapons to be replaced by one mod and ammunition pickups be of the
+other. So not all mods are designed to go together. I mostly ignore
+DoomRunner's separate map pack subwindow and load map-pack mods as
+regular mods, with full control over load order.
 
 For the rest of this guide, I recommend picking a launcher program and
 launching GZDoom with =my_first_mod.pk3= and =freedoom2.wad= just to
@@ -320,7 +324,7 @@ The commas and the curly-brackets ={= & =}= are important and not just
 for show. Now re-compress the zip archive with these two new files and
 the new subfolder.
 
-#+BEGIN_SRC
+#+BEGIN_SRC SH
   zip -r my_first_mod.pk3 textures/ TEXTURES.lmp
 #+END_SRC
 
@@ -485,7 +489,7 @@ folder of your mod.
 #+ATTR_HTML: :width 100px
 [[./images/STIMA0.png]]
 
-#+BEGIN_SRC
+#+BEGIN_SRC SH
   zip -r my_first_mod.pk3 textures/ TEXTURES.lmp sprites/
 #+END_SRC
 
@@ -533,18 +537,18 @@ offset specified in the =TEXTURES.lmp= file, now you can modify the
 resetting the offsets within that file. The sprite replacement should
 work in the game now.
 
-* Zscript class replacements
+* ZScript class replacements
 
-Now we will learn the very basics of a scripting language called [[https://zdoom.org/wiki/ZScript][=Zscript=]].
+Now we will learn the very basics of a scripting language called [[https://zdoom.org/wiki/ZScript][=ZScript=]].
 GZDoom understands multiple scripting languages for modding. But most of
 them are deprecated and are only supported for backwards compatibility with
 older mods. For modern GZDoom, there are only two scripting languages you
-need to learn: =ACS= and =Zscript=. This guide won't be going into =ACS=,
+need to learn: =ACS= and =ZScript=. This guide won't be going into =ACS=,
 but know that that is mostly only used for map specials (conditional
-triggers and scripted sequences). For everything else, stick to =Zscript=.
-There are more advanced, and comprehensive guides to learning =Zscript=:
-[[https://jekyllgrim.github.io/ZScript_Basics/][Ash's Zscript basics]] and [[https://www.youtube.com/playlist?list=PL-36gm0W-VKl89pw9lUfF36TJ28bjrNUn][David Newton's Youtube Tutorials]]. In this guide,
-we will show the use of =Zscript= to modify two things present in this
+triggers and scripted sequences). For everything else, stick to =ZScript=.
+There are more advanced, and comprehensive guides to learning =ZScript=:
+[[https://jekyllgrim.github.io/ZScript_Basics/][Ash's ZScript basics]] and [[https://www.youtube.com/playlist?list=PL-36gm0W-VKl89pw9lUfF36TJ28bjrNUn][David Newton's Youtube Tutorials]]. In this guide,
+we will show the use of =ZScript= to modify two things present in this
 animated view from Freedoom 2, visible after you turn left at the big door
 in the starting area:
 
@@ -595,7 +599,7 @@ or =C=-like programming language, this should be familiar. The colon
 ("=:=") after the word "=Spawn=" is deliberate and not a typo. Now
 re-zip the archive with the new file:
 
-#+BEGIN_SRC
+#+BEGIN_SRC SH
   zip -r my_first_mod.pk3 textures/ TEXTURES.lmp sprites/ ZSCRIPT.zsc
 #+END_SRC
 
@@ -614,7 +618,7 @@ necessary clause at the beginning of the =ZSCRIPT= lump, and signals a
 minimum version that your mod can now be run in. If you try and load
 =my_first_mod.pk3= in GZDoom 4.13.2 with the =ZSCRIPT.zsc= file in, it
 should throw an error. This facility exists to ensure that mods that
-use new, advanced =Zscript= features don't get accidentally launched
+use new, advanced =ZScript= features don't get accidentally launched
 by older versions of the engine, which would result in a crash.
 
 Looking further down, even if you have no experience with programming,
@@ -734,7 +738,7 @@ double-slash like so:
 
 All text in a line that follows a double-slash "=//=" is treated as
 non-existent by the engine. So this is a great way to leave comments
-or notes-to-self all over your Zscript code to help yourself (and
+or notes-to-self all over your ZScript code to help yourself (and
 others) understand the code better. After doing this, you should be
 able to =summon HealthBonus= and =summon MFM_Elixir= via the console
 and watch both items flashing next to each other like so:
@@ -808,7 +812,7 @@ ZombieMan= definition in the [[https://github.com/ZDoom/gzdoom/blob/master/wadsr
 file). It has a master parent-class simply called [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/actor.zs][=Actor=]], which has a
 parent-class called =Thinker=, which is doing most of the heavy lifting.
 
-=Zscript= is powerful enough to allow you to define any general sort
+=ZScript= is powerful enough to allow you to define any general sort
 of game actor with very unique, custom behavior. But since GZDoom
 started life as a Doom source port, it supports Doom-style functions
 and behavior out of the box. [[https://github.com/ZDoom/gzdoom/blob/master/wadsrc/static/zscript/actors/doom/possessed.zs][=ZombieMan=]] uses a very small set of
@@ -1009,13 +1013,13 @@ by novice modders and end up becoming very unfair. Game-design sense
 is an important skill that, imho, you cannot learn from a guide or
 tutorial.
 
-[[https://zdoom.org/wiki/ZScript][=Zscript=]] is a lot more powerful than what I have presented here.
+[[https://zdoom.org/wiki/ZScript][=ZScript=]] is a lot more powerful than what I have presented here.
 Everything we have covered could have also been done in the older scripting
 language called [[https://zdoom.org/wiki/DECORATE][=Decorate=]]. I didn't introduce [[https://zdoom.org/wiki/Events_and_handlers][=EventHandlers=]], custom
 functions, [[https://zdoom.org/wiki/Dynamic_arrays][dynamic arrays]], or
 [[https://zdoom.org/wiki/Structs:LevelLocals][manipulation of level data]].
 Consider this guide just the start of your journey, and devour the more
-advanced guides next: [[https://jekyllgrim.github.io/ZScript_Basics/][Ash's Zscript basics]] and [[https://www.youtube.com/playlist?list=PL-36gm0W-VKl89pw9lUfF36TJ28bjrNUn][David Newton's Youtube
+advanced guides next: [[https://jekyllgrim.github.io/ZScript_Basics/][Ash's ZScript basics]] and [[https://www.youtube.com/playlist?list=PL-36gm0W-VKl89pw9lUfF36TJ28bjrNUn][David Newton's Youtube
 Tutorials]].
 
 I have introduced the use of the [[https://zdoom.org/wiki/A_StartSound][=A_StartSound()=]] function but did not
@@ -1241,7 +1245,7 @@ with. While still in =Things Mode=, right-click at some corner of the
 room and expand the =Monsters= folder in the =Things= selection
 panel. You should be able to select an entry called
 =$FN_ZOMBIE=. Normally, this would have said "=Former Human=". But
-since we added a class-replacement clause in our =Zscript= file for
+since we added a class-replacement clause in our =ZScript= file for
 the =ZombieMan= class, UDB doesn't know which resource file to
 prioritize. So it is trying to display a =Tag Name=, but is running
 into a =LANGUAGE= lump substitution bug (don't worry about it, it
@@ -1286,7 +1290,7 @@ available to modders for custom classes. Here, we have assigned the
 number =20001= to our custom =MFM_Elixir= class in a new (reserved
 name) lump file =MAPINFO.lmp=. Now re-zip the archive:
 
-#+BEGIN_SRC
+#+BEGIN_SRC SH
   zip -r my_first_mod.pk3 textures/ TEXTURES.lmp sprites/ ZSCRIPT.zsc MAPINFO.lmp
 #+END_SRC
 
@@ -1403,7 +1407,7 @@ our preset. Then launch the game. You can (in my experience) do this
 while the map file is open in UDB. If you want to launch from a
 terminal command prompt instead, the command would be:
 
-#+BEGIN_SRC
+#+BEGIN_SRC SH
   ./gzdoom -iwad freedoom2.wad -file <PATH-TO-PROJECT-FOLDER>/my_first_mod.pk3 <PATH-TO-PROJECT-FOLDER>/maps/myfirstmap.wad
 #+END_SRC
 
@@ -1465,7 +1469,7 @@ inside =freedoom2.wad=, and telling the engine to treat our two new virtual
 textures as switches that are complementary states of each other. Now
 zip-up the whole thing again:
 
-#+BEGIN_SRC
+#+BEGIN_SRC SH
   zip -r my_first_mod.pk3 textures/ TEXTURES.lmp sprites/ ZSCRIPT.zsc MAPINFO.lmp ANIMDEFS.lmp
 #+END_SRC
 
@@ -1542,14 +1546,14 @@ It is simple, as it should be. Maps can get a little heavier that that
 later on, when you add more complicated things to your map, like ACS
 scripts, and [[https://www.youtube.com/watch?v=MFgGaZPZ5m4][Dialogue lumps]]. Remember that rule I had about not
 modifying anything through SLADE? This is where we break that
-rule. Rename the first marker lump from =MAP01= to =MAP02=. Save. Now
-launch the game again with =freedoom2.wad=. This time, you will have
-to play through the entire first level of the base game before it
-plops you into your custom map, which now has the lump name
-=MAP02=. And after you hit the exit switch in that, the engine will
-load =MAP03= for you. You could have named it =E1M1= and launched it
-with =freedoom1.wad= as well. Now change the name back to =MAP01=
-again through SLADE (hit save before closing).
+rule. Rename the first marker lump from =MAP01= to =MAP02=. Save. Do
+not change the actual WAD file name. Now launch the game again with
+=freedoom2.wad=. This time, you will have to play through the entire
+first level of the base game before it plops you into your custom map,
+which now has the lump name =MAP02=. And after you hit the exit switch
+in that, the engine will load =MAP03= for you. You could have named it
+=E1M1= and launched it with =freedoom1.wad= as well. Now change the
+name back to =MAP01= again through SLADE (hit save before closing).
 
 *** Packing the map with your mod
 
@@ -1561,7 +1565,7 @@ already has a way to do that. First, rename =myfirstmap.wad= to
 method). Then, just add the map file (along with the =maps= subfolder)
 to the zip archive:
 
-#+BEGIN_SRC
+#+BEGIN_SRC SH
   zip -r my_first_mod.pk3 textures/ TEXTURES.lmp sprites/ ZSCRIPT.zsc MAPINFO.lmp ANIMDEFS.lmp maps/map01.wad
 #+END_SRC
 
@@ -1590,12 +1594,399 @@ now a certified doom modder. Now go create something!
 
 ** Productivity boosting microhabits
 
-Coming soon ...
+Anything good takes a long time to produce. So it necessarily has to take
+several sessions, perhaps over months/years. We have this romanticized idea
+of the crazed artist being struck by inspiration and then running to the
+basement and etching a piece or composing a poem in one sitting. While art
+that drains the artist has its place, I recommend the more structured
+approach of habit formation. This will let you sustain hobbies for much
+longer and actually stick with projects until the finish line without
+risking burnout. It is good to have a set time table for modding, and it is
+actually a good thing to stop working when you are "hot." It makes the
+first few things to do in the next session very obvious, allowing you to
+hit the ground running and not waste cognitive energy on pointless
+decision-making.
+
+*** Workstation setup and IDEs/text-editors
+
+Much like in gaming, working consists of several nested state-loops
+operating over various timescales. And tiny discomforts or frustrations in
+the smallest loop can snowball over time into unpleasantness, and can cause
+us to not want to start/continue working without realizing why. It is
+important for the steps that are the smallest but are also repeated the
+most often to be as stress-free as possible. All micro-stressors should be
+eliminated. Just arranging your dedicated workstation at a comfortable desk
+and chair, and mounting the screen at mid-eye level while maintaining good
+posture can have a huge impact on your productivity. Have drinking water
+available on a different and/or lower platform to avoid spilling. Reduced
+brightness and a low contrast between background and text also goes a long
+way if you are working with text.
+
+Almost never having to move your arms maintains a low-latency between the
+act of desiring something of the computer and having it fullfilled. So
+avoid moving one hand to the mouse and back, or scanning and navigating
+popup menus, whenever possible. The OS-specific keyboard shortcuts for
+switching between windows (typically =Alt + Tab= and =Shift + Alt + Tab=)
+or switching workspaces (=Ctrl + Alt + Arrow Keys=) are a must if you are
+new to them. Much like web browsers, certain terminal programs support
+multiple tabs within the same window, which can be switched between with,
+typically, =Alt + Number Key=. Most terminals and command prompt programs
+also remember the history of commands, which can be revisited or cycled
+through by hitting the =UP-Arrrow Key= (or =Ctrl + P= if you are on Linux).
+Similarly, I use keyboard shortcuts to (a) move the cursor to the start/end
+of the line, (b) move cursor forward/backward by whole words, (c) delete
+rest of the word/command to the right of the cursor, (d) delete one word at
+a time, (c) hit =Tab= a bunch of times after having typed a "word"
+partially to either autocomplete it, or list available valid
+autocompletions. That =Tab=-completion trick is great for file-system
+navigation and typing out long file names. So I never find typing out
+commands frustrating. I can revisit a previously executed malformed
+command, navigate to the mistake, fix it and re-execute it with very few
+key presses without moving either of my wrists.
+
+If you are new to coding, I suggest looking into IDEs. =ZScript= is
+not a complicated language, and you will never generate too many
+libraries and =#include= clauses but a good IDE can still be
+helpful. It'll give you syntax highlighting, auto-indentation, code
+folding and fast intra- and inter-file navigation, and popup hints for
+function arguments/definitions and possible completions as you type
+them. Power-coders in the community swear by [[https://code.visualstudio.com/][VSCode]] and have some
+[[https://github.com/nikitalita/ZScript-VSCode][extant packages]] available to configure it for =ZScript=. I myself use
+[[https://www.gnu.org/software/emacs/][Emacs]] on Linux. Text search/navigation and mass-text manipulation,
+managing multiple buffers and [[https://karthinks.com/software/emacs-window-management-almanac][sub-windows]], running a Bash terminal
+within Emacs, and setting it up to open =*.zsc= files in =c-mode=
+gives me most of what I need. With a little extra work, Emacs can be
+turned into a full IDE. Hell, this guide was written in Emacs (in
+[[https://www.youtube.com/watch?v=SzA2YODtgK4][=org-mode=]] markup and then a modified [[https://github.com/Zilong-Li/org-tufte][=ox-tufte.el=]] script with custom
+=css= headers for export to =html=, but I digress).
+
+And get a good, wired, mechanical keyboard.
 
 *** <<makefile>>Makefile
+
+Throughout this guide, I have had you manually executing the =zip= command
+to generate the =pk3= archive. You technically didn't need to generate said
+archive, as GZDoom can work with [[https://zdoom.org/wiki/Using_ZIPs_as_WAD_replacement#Using_folders_instead_of_archives][whole folders]]. My purpose was two-fold:
+(a) most people, especially when new, conceptualize a mod as a single,
+share-able file. And (b) I didn't want to bring up temporary backup files
+that programs like UDB, SLADE, and text editors (even Emacs) generate when
+working on files, which can duplicate code and throw errors. So a tool like
+=zip= was used to generate the archive with just the necessary, base files.
+However, the command kept getting longer and more complicated as we added
+more files and subfolders to the project. While you could create a
+shell-script or a =*.bat= file with the =zip= command in it, and run that
+every time, a better option is to use a =makefile=.
+
+Linux comes built-in with a command line tool called =make=. On Windows,
+there are a [[https://zdoom.org/wiki/Using_ZIPs_as_WAD_replacement#Using_folders_instead_of_archives][bunch of routes]] to get it working. So I never run =zip= on my
+doom modding projects. After I make additions/changes to the code and
+assets, I run the =make= command from the project-folder location. The tool
+then looks for a file named =makefile= at that location, and executes the
+instructions therein. To illustrate with a real-world example, take a look
+at the project files in one of my [[https://github.com/dileepvr/gzdoom_isometric_demo][publicly shared mods]], an IWAD template
+for isometric-viewpoint games in GZDoom. Its =makefile= has the following
+contents:
+
+#+BEGIN_SRC
+BUILDDIR=build
+ZIP=zip
+ZIPFLAGS=-r -FS
+ZIPEXCLUDES=-x '**~' 'build/*' '.*' 'makefile' '**.dbs' '**.backup*' '**.bak' '**.autosave*'
+ZIPTARGET=$(BUILDDIR)/$(notdir $(CURDIR)).ipk3
+
+TARGETS=$(BUILDDIR) $(ZIPTARGET)
+
+.phony: all debug clean
+all: $(TARGETS)
+
+debug:
+	@echo $(BUILDDIR)
+	@echo $(ZIPTARGET)
+	@echo $(ZIPEXCLUDES)
+
+$(BUILDDIR):
+	mkdir $(BUILDDIR)
+
+$(ZIPTARGET) : *.* */*.obj */*.lmp */*.png */*.wav */*/*.png maps/*.wad *.zc */*/*.zc | $(BUILDDIR)
+	$(ZIP) $(ZIPFLAGS) $(ZIPTARGET) * $(ZIPEXCLUDES)
+#+END_SRC
+
+Without knowing much about =makefile= syntax, you can kind-of guess what it
+is doing. There are a whole bunch of variables (all capitalized) at the
+start. The variable =BUILDDIR= is set to the text-string "=build=". And
+there is a variable named =ZIPEXCLUDES= that lists a bunch of regular
+expressions for files to exclude from the archive (including =makefile= and
+the contents of the =build= subfolder). And there is a variable named
+=ZIPTARGET= which is using some internal =make= variables like =CURDIR=
+(stands for "current directory"). With this =makefile= in my project's root
+folder, I can type =make= or =make all= to have the =build= subfolder
+automatically created if it didn't exist, and execute the =zip= command for
+all of those file-types in the second-to-last line (with the excludes).
+=make= also keeps track of what files have changed since it last ran, so
+running =make= twice will not regenerate the archive (unlike a =zip=
+command), and only files that have been changed will get added to the
+archive. I can run =make clean= to delete the archive in case I need a
+fresh one built, and I use =make debug= to make sure that I have assigned
+the variables correctly (by having them printed out). I always start with a
+simple =makefile= in all of my projects and slowly grow its complexity with
+the project over time. If you want, you can even have =make= launch GZDoom
+and run your archive after it builds it. Some work will be needed to hide
+your local file structure from the =makefile= if you end up sharing your
+source code.
+
 *** Git and version control
-*** IDEs and text editors
-*** Workstation setup and long-term health
+
+Imagine that you were maintaining a big modding project. You've realized
+that the way you've set some coding structure up was inefficient. You want
+to rewrite it but this would require changing a whole bunch of things that
+could break the mod. So you would probably make backup copies of the files
+that you want to start changing (naming them =<FILENAME>.backup01.<DATE>=
+or something like that). Or maybe you will zip-up the whole project in its
+current state into a backup archive. Half-way into your modifications, your
+friend sends you a custom class in a =ZScript= file that he wants you to
+try. So you zip-up your current, half-finished, totally-not-working state
+into another backup zip-archive, unzip the old backup, and add your
+friend's =ZScript= code to start tinkering with it. A few hours later the
+artist you commissioned sends you a spritesheet as promised. So you create
+a third backup archive and replace your placeholder sprites in the current
+project directory with the one the artist sent over. You will need to
+modify the offsets in your =TEXTURES= lump to make it work, so you back
+that file up in case you'll need to revert it later. And pretty soon, you
+are juggling nearly full-sized copies of your project in various branched
+stages of development, with no tracking information regarding what came
+before what and for what reason. Now imagine if more than one person were
+working on the project. Do they make independent copies of each other's
+work and email zip files over with strange names every day? What if they
+work on the same file at the same time? How do you imagine that Microsoft
+is developing Windows?
+
+This is a very old problem in software development, and people have
+figured out how to programmatically track these things. The technique
+is called "version control". There are many version-control software
+to choose from, but the most popular one these days is called
+=git=. It was written by Linus Torvalds (the guy who invented the
+Linux kernel). Though once it became public, lots of people have since
+worked on it. The software runs on your computer and can manage your
+project's development versions over time.
+
+You can install a [[https://git-scm.com/][GUI version of =git=]] and learn to use that, but since I
+am old-school, I use the command line on Linux systems. So I will be
+showing the commands that I execute to use =git=. When I start a new
+project, be it a GZDoom mod, or a tutorial/guide like this website, I first
+create a project folder. And inside this empty folder, I run the command:
+
+#+BEGIN_SRC SH
+  git init
+#+END_SRC
+
+This creates a hidden subfolder named =.git= (the "=.=" prefix is
+deliberate and not a typo). This is where =git= will store all of its
+content for this project. The contents of =.git= should never be messed
+with manually (in fact, don't even look into that folder!). Only the
+program =git= is allowed to look inside and change things. After this, I
+create a hidden file named =.gitignore=. This file contains regular
+expressions for the types of files that =git= should not consider as part
+of the project (i.e. to be saved). Since I use Emacs, I know that any file
+I work on gets a temporary backup file created with the same name and a
+tilde "=~=" suffix. So the first line in my =.gitignore= is always:
+
+#+BEGIN_SRC
+**~
+#+END_SRC
+
+with more lines added later over time. The double "=**=" handles recursive
+subfolders. After this I begin working on the project proper like normal. I
+create new files and modify old ones. When I am done for the day, or I just
+want to save the progress made so far before trying some crazy idea, from
+the terminal I run:
+
+#+BEGIN_SRC SH
+  git status
+#+END_SRC
+
+This will print a report of any new files that aren't being track by =git=
+(i.e. newly created) and are also not matching any expression in
+=.gitignore=. It will also print a list of files that have been modified
+since the last "commit". I use:
+
+#+BEGIN_SRC SH
+  git add <FILENAME>
+#+END_SRC
+
+to add the new files if there are any, and then I commit the changes
+with the command:
+
+#+BEGIN_SRC SH
+  git commit -a -m "<SOME MESSAGE ABOUT THIS COMMIT>"
+#+END_SRC
+
+The flag "=-m=" lets me enter the message for this commit in the
+command line (otherwise, =git= will open a text editor and ask me to
+type the commit message there). Technically, I also add the flag
+"=-S=" to the commit command to cryptographically sign my commits, but
+that is beyond the scope of this guide. This saves the current state
+of the project.
+
+The next day, I run the command:
+
+#+BEGIN_SRC SH
+  git checkout
+#+END_SRC
+
+to "checkout" the latest commit into the project folder before I start
+working on it. At the end, I check =git status= again and commit
+before calling it a night. At any time, if I am not happy with the
+changes that I have made but don't know how to safely undo all the
+changes that have been accumulating, I can use =git checkout -f= to
+checkout the latest commit again (the "=-f=" means "forced, as in
+allow =git= to overwrite files). This will replace all the files in
+the project folder with the ones from that commit. I can checkout an
+earlier commit instead of the latest one too. To view older commits
+(and their commit messages) I type:
+
+#+BEGIN_SRC SH
+  git log
+#+END_SRC
+
+This shows the entire commit history with hashes and commit messages (I
+type "=Q=" to exit the mode). Then I can use:
+
+#+BEGIN_SRC SH
+git checkout <LAST-FEW-CHARACTERS-OF-THE-COMMIT-HASH>
+#+END_SRC
+
+to checkout a specific commit from the past (throw in a "=-f=" to
+overwrite current changes). To view all the changes (additions and
+deletions) that I have made to all the text files in the project since
+the last commit, I run the =git diff= commmand. I can even check the
+difference between any two commits using their hashes that way.
+
+So far, we have seen a linear, chronological chain of commits. But I can
+even branch my commits to try crazy experiments. And I can even merge
+branches back into main (and that branching and merging history is all
+stored by =git=). A long-running, complex project may have several
+abandoned/stale branches that had been created for various experiments and
+tests over time.
+
+All of this might seem like too much to memorize, but it becomes
+second nature after a while. Most people starting out use a [[https://education.github.com/git-cheat-sheet-education.pdf][=git=
+cheatsheet]]. Much like learning the hotkeys for UDB, you start with a
+small set of 5-6 commands, practice them a bunch until you master
+them, and then learn one new command at a time and incorporate it into
+your workflow. Or you could just use the GUI. But it is good to get
+familiar with terms like =commit=, =checkout=, =status=, =branch=,
+=merge=, etc. just to be aware of what is possible to do.
+
+*** Remote repositories
+
+The commit history (which is stored in a very efficient,
+differences-only format by =git=) is collectively called a
+"repository" (or "repo" for short). The real power of version control
+starts to shine when you start using remote repositories. Meaning
+storing your project on a remote server that is accessible from any
+computer connected to the internet. That doesn't necessarily mean that
+it is public, as you can have a private remote repo that requires a
+password or a cryptographic key. Famous public =git= repo servers that
+offer free accounts are [[https://bitbucket.org/product/][Bitbucket]], [[https://gitlab.com/][Gitlab]], and the one this website is
+hosted on: [[https://github.com/][Github]]. These are private companies (Github was acquired by
+Microsoft a while ago) that don't have anything to do with the
+open-source software called =git=, though their employees might be
+developers. You could get a private repo going on Github if you get a
+paid account.
+
+You can view the repo hosting this website by visiting
+[[https://github.com/dileepvr/gzdoom_modding_101][=https://github.com/dileepvr/gzdoom_modding_101=]]. It is a barebones repo
+with very few files (the =README.org= file is a symbolic link to
+=index.org=) and one subfolder for images. The =.gitignore= file has
+only one line in it. To view the commit history with the dates,
+messages, and the last few characters of the hashes, click on
+"commits" below the green "code" button, or simply visit [[https://github.com/dileepvr/gzdoom_modding_101/commits/master/][this
+link]]. This is just a linear chain with only the "master" branch, but
+you can checkout this repository and view earlier versions of the
+guide to see how it has evolved over time.
+
+So to work on this website, my workflow is only slightly different from the
+one above. When I start, I run:
+
+#+BEGIN_SRC SH
+  git pull
+  git checkout
+#+END_SRC
+
+before I begin. The =git pull= command pulls all the changes that the
+remote repo as accrued (very useful if you have multiple collaborators).
+After I am done for the day, I run the =commit= command, and then run:
+
+#+BEGIN_SRC SH
+  git push
+#+END_SRC
+
+to push my latest commits to the remote repo. When I start working on
+it from, say, one of my other computers (like the laptop while
+traveling), I can =git pull= the changes that I pushed from my desktop
+earlier and continue working. I just need to remember to =git push=
+after I am done! If I want to start working in it on an entirely new
+computer that didn't have the project repo to begin with, I run:
+
+#+BEGIN_SRC SH
+  git clone git@github.com:dileepvr/gzdoom_modding_101.git
+#+END_SRC
+
+to clone the repo on my local machine, and then start cracking. You
+can clone any publicly available repo, by the way. You just won't be
+able to push changes to it if you don't have write-access.
+
+The [[https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories][Github docs page]] contains instructions for starting a new repo. You can
+either create it on the website and clone locally, or start =git init= on
+the local machine and then push the first commit to your Github account.
+You may either use the website's GUI, the =git= program's GUI, or the
+command line to manage remote repos. You don't have to push everything you
+commit either. You can have local branches that don't get pushed to the
+remote repo (useful for clean, collaborative projects). When trying to
+merge two branches that have diverged too much, =git= can report a "merge
+conflict" and will create diffs inside files, giving you the opportunity to
+resolve the conflicts by making choices about which conflicting blocks of
+text to keep or discard. But that is an advanced topic.
+
+The isometric-camera IWAD template that I mentioned earlier is also
+[[https://github.com/dileepvr/gzdoom_isometric_demo][hosted on Github]]. This one has a "=license.txt=" file in addition to a
+"=readme.org=" file. Its [[https://github.com/dileepvr/gzdoom_isometric_demo/commits/main/][commit history]] is also linear with no
+branches, but it has a couple of "tags" named "v1.0" and "v1.1" that
+I've designated as [[https://github.com/dileepvr/gzdoom_isometric_demo/releases]["Release candidates"]] using Github's facility for the
+same. These were particularly stable commits that I was happy
+with. There is a "Releases" tab in the right-panel on the repo's home
+page. The [[https://github.com/dileepvr/gzdoom_isometric_demo/blob/main/.gitignore][=.gitignore=]] file in this repo has a few more lines to cover
+the backup files created by programs like UDB and Slade.
+
+Lastly, GZDoom itself is hosted on and actively
+[[https://github.com/zdoom/gzdoom/][developed on Github]]. It has over a
+hundred branches and tags (some of which are release versions). You can
+click on the "master" pull-down button to the top left in the home page to
+see some of the branch names. In the right-panel, you can see a list of the
+major contributors, some of whom can push to the repo directly. They have
+the keys to the engine source and make the major decisions. In the top,
+there is a tab for "Issues." This is where anyone can report bugs or make
+feature requests that is visible to the public (and anyone can contribute
+to the discussion). Right next to it, there is a tab called "Pull
+Requests", where contributions from third-party people like myself (who
+can't push to the repo directly) are staged before they are either accepted
+or rejected. This is a Github feature (not a =git= feature), and other repo
+servers have similar collaborative tools. The work flow is:
+
+1. "Fork" the GZDoom repo.
+2. Clone the fork on my local machine.
+3. Start a new branch and commit some work.
+4. Push the branch to my forked repo.
+5. Create a "pull request" to the main GZDoom repo on Github's page.
+
+At the time of writing, there are 581 forks of GZDoom. Most of them are
+likely just experiments from the past that have been abandoned by various
+people. But engine dev is sort of irrelevant to modding. I caught the
+GZDoom repo home page a few hours after one of my minor pull requests ("PR"
+for short) had been accepted. So the latest commit briefly showed my name:
+
+#+ATTR_HTML: :width 800px
+[[./images/gzdoom_github.jpg]]
 
 ** Seeking help and forum/discord etiquette
 
