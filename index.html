@@ -70,49 +70,51 @@ table{border-color: var(--light-fg);}input#lightswitch:checked ~ table{border-co
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org917cc9f">Running GZDoom and understanding WADs</a>
+<li><a href="#orgbfe3648">Running GZDoom and understanding WADs</a>
 <ul>
-<li><a href="#orgcff2264">Getting the Engine</a></li>
-<li><a href="#org40c6bd4">Getting some IWADs</a></li>
+<li><a href="#orgb6495cb">Getting the Engine</a></li>
+<li><a href="#org1fc81c2">Getting some IWADs</a></li>
 </ul>
 </li>
-<li><a href="#org7993946">Basic replacement mods</a>
+<li><a href="#orge709a73">Basic replacement mods</a>
 <ul>
-<li><a href="#org5ed3d31">Texture replacement</a></li>
-<li><a href="#org64087f9">Text files as lumps</a></li>
-<li><a href="#org178a46e">Basics of SLADE</a></li>
-<li><a href="#org706de57">Sprite replacement and offsets</a></li>
+<li><a href="#orgef33ef0">Texture replacement</a></li>
+<li><a href="#orgc6b2752">Text files as lumps</a></li>
+<li><a href="#orgc0b4551">Basics of SLADE</a></li>
+<li><a href="#orgb943fc1">Sprite replacement and offsets</a></li>
 </ul>
 </li>
-<li><a href="#org8ab20a6">ZScript class replacements</a>
+<li><a href="#org6ff5890">ZScript class replacements</a>
 <ul>
-<li><a href="#orgc2c38fd">New pickup item</a></li>
-<li><a href="#orgd502e61">Modifying Zombieman</a></li>
+<li><a href="#org4b1e2ff">New pickup item</a></li>
+<li><a href="#org281fe59">Modifying Zombieman</a></li>
 </ul>
 </li>
-<li><a href="#orgdddcab9">Basics of mapping</a>
+<li><a href="#orgf3d984a">Basics of mapping</a>
 <ul>
-<li><a href="#orgb2a75bd">Getting UDB</a></li>
-<li><a href="#org1b83488">The Mapfile lump</a></li>
+<li><a href="#orgd662bc1">Getting UDB</a></li>
+<li><a href="#orgc240745">The Mapfile lump</a></li>
 </ul>
 </li>
-<li><a href="#org289cd01">Misc.</a>
+<li><a href="#orgdb34b22">Misc.</a>
 <ul>
-<li><a href="#org8fab980">Productivity boosting microhabits</a></li>
-<li><a href="#orga520d0a">Seeking help and forum/discord etiquette</a></li>
-<li><a href="#org323cbea">Publishing stuff and licenses</a></li>
-<li><a href="#org4f4950e">Studying some public mods</a></li>
+<li><a href="#orgdcf43a1">Productivity boosting microhabits</a></li>
+<li><a href="#org1f41579">Git and version control</a></li>
+<li><a href="#orge33450e">Seeking help and forum/discord etiquette</a></li>
+<li><a href="#orga911f67">Publishing stuff and licenses</a></li>
+<li><a href="#orgb8d94e2">Studying some public mods</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 <section><p>
-If you are reading this on the github repo, try <a href="https://dileepvr.github.io/gzdoom_modding_101">this link</a> for some
-<code>HTML</code> styling. Then use the floating element labeled &ldquo;<i>Table of
-Contents</i>&rdquo; to the top-right of this page to navigate between
-sections. Click on the &ldquo;Switch Color Mode&rdquo; text at the top-left of the
-page to switch between <i>light</i> and <i>dark</i> modes.
+If you are reading this on the github repo, try <a href="https://dileepvr.github.io/gzdoom_modding_101">this link</a> for some <code>HTML</code>
+styling. Then use the floating element labeled &ldquo;<i>Table of Contents</i>&rdquo; to the
+top-right of this page to navigate between sections by clicking on them.
+I&rsquo;ve removed the scrollbar, so that is the only way. Click on the &ldquo;Switch
+Color Mode&rdquo; text at the top-left of the page to switch between <i>light</i> and
+<i>dark</i> modes.
 </p>
 
 <p>
@@ -127,24 +129,33 @@ reader is expected to follow along by actually implementing the
 instructions on their computer. It is meant to be done at a relaxed
 pace over several sessions spanning days, and not in a single
 sitting. It presents particular ways of doing things in particular
-chapters for pedagogical reasons and to inculcate good habits (see
-also: <a href="https://www.youtube.com/watch?v=Bg21M2zwG9Q">WAX ON, WAX OFF</a>). It will not present the full context or
-historical information for everything, because it is meant to be a
-first-pass curriculum (see table of contents, top-right), where too
-much extraneous information can be overwhelming and
-counter-productive. You can recommend additions/changes to this guide
-by submitting PRs to the <a href="https://github.com/dileepvr/gzdoom_modding_101">github repo</a>.  Please only make changes to the
-<code>index.org</code> file. Do not edit the <code>html</code> file directly. And do not
-expand the scope too much.
+chapters for pedagogical reasons and to inculcate good habits, like
+how one only practices scales for the first few weeks when they start
+learning a new musical instrument (see also: <a href="https://www.youtube.com/watch?v=Bg21M2zwG9Q">WAX ON, WAX OFF</a>). It will
+not present the full context or historical information for everything,
+because it is meant to be a first-pass curriculum (see table of
+contents, top-right), where too much extraneous information can be
+overwhelming and counter-productive. The reader won&rsquo;t be provided with
+too many choices for ways to do something at first to avoid decision
+paralysis (<b>this point is missed in most tutorials</b>). A stable
+foundation will first be built so that the reader will have somewhere
+to retreat to when they are lost.
+</p>
+
+<p>
+You can recommend additions/changes to this guide by submitting PRs to
+the <a href="https://github.com/dileepvr/gzdoom_modding_101">github repo</a>. Please only make changes to the <code>index.org</code> file. Do
+not edit the <code>html</code> file directly. And do not expand the scope too
+much.
 </p>
 </section>
 
-<div id="outline-container-org917cc9f" class="outline-2">
-<h2 id="org917cc9f">Running GZDoom and understanding WADs</h2>
-<div class="outline-text-2" id="text-org917cc9f">
+<div id="outline-container-orgbfe3648" class="outline-2">
+<h2 id="orgbfe3648">Running GZDoom and understanding WADs</h2>
+<div class="outline-text-2" id="text-orgbfe3648">
 </div>
-<div id="outline-container-orgcff2264" class="outline-3">
-<h3 id="orgcff2264">Getting the Engine</h3>
+<div id="outline-container-orgb6495cb" class="outline-3">
+<h3 id="orgb6495cb">Getting the Engine</h3>
 <section><p>
 First, let us get GZDoom running and playing a game. Download the
 latest version of GZDoom (and not ZDoom) for your operating system
@@ -194,8 +205,8 @@ understanding what is happening under the hood.
 </section>
 </div>
 
-<div id="outline-container-org40c6bd4" class="outline-3">
-<h3 id="org40c6bd4">Getting some IWADs</h3>
+<div id="outline-container-org1fc81c2" class="outline-3">
+<h3 id="org1fc81c2">Getting some IWADs</h3>
 <section><p>
 Running the engine executable by itself couldn&rsquo;t run a game because
 you haven&rsquo;t downloaded any actual games for the engine to run. Let us
@@ -241,14 +252,14 @@ screens of the main menu, and the first level:
 </p>
 
 
-<figure id="org24b6ba0">
+<figure id="org96f242d">
 <img src="./images/screenshot01.jpg" alt="screenshot01.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 1: </span>Main menu screen for Freedoom 2 (v0.13.0)</figcaption>
 </figure>
 
 
-<figure id="org2c029bc">
+<figure id="org3de932b">
 <img src="./images/screenshot02.jpg" alt="screenshot02.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 2: </span>Starting area of MAP01 in Freedoom 2 (v0.13.0)</figcaption>
@@ -272,12 +283,12 @@ look into what is actually inside them by using another program.
 </div>
 </div>
 
-<div id="outline-container-org7993946" class="outline-2">
-<h2 id="org7993946">Basic replacement mods</h2>
-<div class="outline-text-2" id="text-org7993946">
+<div id="outline-container-orge709a73" class="outline-2">
+<h2 id="orge709a73">Basic replacement mods</h2>
+<div class="outline-text-2" id="text-orge709a73">
 </div>
-<div id="outline-container-org5ed3d31" class="outline-3">
-<h3 id="org5ed3d31">Texture replacement</h3>
+<div id="outline-container-orgef33ef0" class="outline-3">
+<h3 id="orgef33ef0">Texture replacement</h3>
 <section><p>
 Now we are going to make our first mod. Create a project folder
 somewhere on your computer. Call it something like
@@ -289,7 +300,7 @@ named <code>AQRUST08.png</code>. The filename is important.
 </p>
 
 
-<figure id="org3c2ebc2">
+<figure id="org282f8df">
 <img src="./images/AQRUST08.png" alt="AQRUST08.png">
 
 <figcaption><span class="figure-number">Figure 3: </span><code>AQRUST08.png</code> modified wall texture</figcaption>
@@ -324,15 +335,15 @@ Once you launch the game, you should be greeted to this view:
 </p>
 
 
-<figure id="orgcb4b42b">
+<figure id="org5b347d6">
 <img src="./images/screenshot03.jpg" alt="screenshot03.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 4: </span>Opening area of MAP01 in Freedoom 2 (v0.13.0) with a texture replaced</figcaption>
 </figure>
 </section>
 
-<div id="outline-container-orga54e2c4" class="outline-4">
-<h4 id="orga54e2c4">Analysis</h4>
+<div id="outline-container-org65fc807" class="outline-4">
+<h4 id="org65fc807">Analysis</h4>
 <section><p>
 Let us unpack what is happening here. You ran GZDoom with two files:
 <code>freedoom2.wad</code> and <code>my_first_mod.zip</code>. The first one is the IWAD,
@@ -363,8 +374,8 @@ under the hood it is merely a zip file.
 </section>
 </div>
 
-<div id="outline-container-orgb6b8689" class="outline-4">
-<h4 id="orgb6b8689">Get setup with a Launcher before proceeding further</h4>
+<div id="outline-container-org6e292c5" class="outline-4">
+<h4 id="org6e292c5"><a id="orgc1dabda"></a>Get setup with a Launcher before proceeding further</h4>
 <section><p>
 This is one reason I illustrated the command line method of launching
 GZDoom. Selecting multiple mod files and dragging-and-dropping them
@@ -387,7 +398,7 @@ is a view of my DoomRunner front page:
 </p>
 
 
-<figure id="org026fcc6">
+<figure id="org4344a01">
 <img src="./images/doomrunner01.jpg" alt="doomrunner01.jpg" width="800px">
 
 </figure>
@@ -404,7 +415,8 @@ even though <code>Hellrider</code> already comes with a flashlight, because the
 maps in <code>Elementalism</code> have all been programmed to strip the player of
 all inventory items and pistol-start every level. And the flashlight
 in <code>Flashlight++</code> happens to be unclearable using that method. If I
-were to try and and another mod that modifies weapons, like <a href="https://github.com/jekyllgrim/Beautiful-Doom/releases"><code>Beautiful
+were to try and and another mod that modifies weapons, like
+<a href="https://github.com/jekyllgrim/Beautiful-Doom/releases"><code>Beautiful
 Doom</code></a> to this list, then the conflict with <code>Hellrider</code> will cause
 all weapons to be replaced by one mod and ammunition pickups be of the
 other. So not all mods are designed to go together. I mostly ignore
@@ -420,7 +432,7 @@ constructing and executing lengthy commands like the ones above.
 </p>
 
 
-<figure id="orgeac0ba7">
+<figure id="orgefe57a5">
 <img src="./images/doomrunner02.jpg" alt="doomrunner02.jpg" width="800px">
 
 </figure>
@@ -447,8 +459,8 @@ format. More on that later.
 </div>
 </div>
 
-<div id="outline-container-org64087f9" class="outline-3">
-<h3 id="org64087f9">Text files as lumps</h3>
+<div id="outline-container-orgc6b2752" class="outline-3">
+<h3 id="orgc6b2752">Text files as lumps</h3>
 <section><p>
 Let us continue adding to your mod. So far, you have a zip file (now named
 &ldquo;<code>my_first_mod.pk3</code>&rdquo;) which contains a folder named <code>textures</code>, which
@@ -532,7 +544,7 @@ The archive&rsquo;s internal structure should look something like this:
 </p>
 
 
-<figure id="org895c6f7">
+<figure id="org5cd800d">
 <img src="./images/filestructure01.jpg" alt="filestructure01.jpg">
 
 </figure>
@@ -543,7 +555,7 @@ launcher like DoomRunner) should bring up this view:
 </p>
 
 
-<figure id="orgbf22b47">
+<figure id="orgaafbf4a">
 <img src="./images/screenshot06.jpg" alt="screenshot06.jpg" width="800px">
 
 </figure>
@@ -576,8 +588,8 @@ others!) if the lump names are standardized.
 </section>
 </div>
 
-<div id="outline-container-org178a46e" class="outline-3">
-<h3 id="org178a46e">Basics of SLADE</h3>
+<div id="outline-container-orgc0b4551" class="outline-3">
+<h3 id="orgc0b4551">Basics of SLADE</h3>
 <section><p>
 Next, we will introduce another helpful program to our modding
 toolbelt. This one is a WAD-editor called SLADE. You can acquire it
@@ -598,7 +610,7 @@ with:
 </p>
 
 
-<figure id="org97528e4">
+<figure id="org2f08749">
 <img src="./images/SLADE01.jpg" alt="SLADE01.jpg" width="800px">
 
 </figure>
@@ -672,7 +684,7 @@ you with a list of virtual textures defined within.
 </p>
 
 
-<figure id="orga557a80">
+<figure id="org7cb867e">
 <img src="./images/SLADE02.jpg" alt="SLADE02.jpg" width="800px">
 
 </figure>
@@ -690,8 +702,8 @@ what is going on here.
 </section>
 </div>
 
-<div id="outline-container-org706de57" class="outline-3">
-<h3 id="org706de57">Sprite replacement and offsets</h3>
+<div id="outline-container-orgb943fc1" class="outline-3">
+<h3 id="orgb943fc1">Sprite replacement and offsets</h3>
 <section><p>
 So far, we have made basic replacements for textures. Next, let us
 replace some sprites. You would think that this is more of the same,
@@ -703,7 +715,7 @@ screenshot image:
 </p>
 
 
-<figure id="orgcbbf9fd">
+<figure id="orgd6e226e">
 <img src="./images/screenshot04.jpg" alt="screenshot04.jpg" width="800px">
 
 </figure>
@@ -736,7 +748,7 @@ folder of your mod.
 </p>
 
 
-<figure id="orgac2299b">
+<figure id="org18d2523">
 <img src="./images/STIMA0.png" alt="STIMA0.png" width="100px">
 
 </figure>
@@ -753,7 +765,7 @@ like this:
 </p>
 
 
-<figure id="org3be61dc">
+<figure id="orgc3351b5">
 <img src="./images/filestructure02.jpg" alt="filestructure02.jpg">
 
 </figure>
@@ -802,8 +814,8 @@ work in the game now.
 </div>
 </div>
 
-<div id="outline-container-org8ab20a6" class="outline-2">
-<h2 id="org8ab20a6">ZScript class replacements</h2>
+<div id="outline-container-org6ff5890" class="outline-2">
+<h2 id="org6ff5890">ZScript class replacements</h2>
 <section><p>
 Now we will learn the very basics of a scripting language called <a href="https://zdoom.org/wiki/ZScript"><code>ZScript</code></a>.
 GZDoom understands multiple scripting languages for modding. But most of
@@ -820,15 +832,15 @@ in the starting area:
 </p>
 
 
-<figure id="org80c8852">
+<figure id="orgd690676">
 <img src="./images/animated01.gif" alt="animated01.gif" width="800px">
 
 <figcaption><span class="figure-number">Figure 5: </span>We will be modifying the green <code>HealthBonus</code> items, and the <code>Zombieman</code> enemy</figcaption>
 </figure>
 </section>
 
-<div id="outline-container-orgc2c38fd" class="outline-3">
-<h3 id="orgc2c38fd">New pickup item</h3>
+<div id="outline-container-org4b1e2ff" class="outline-3">
+<h3 id="org4b1e2ff">New pickup item</h3>
 <section><p>
 First, let&rsquo;s replace those green, flashing bottles from the image above.
 That is a <code>HealthBonus</code>. Unlike the <code>StimPacks</code> from before, these give the
@@ -888,8 +900,8 @@ points instead of 1.
 </p>
 </section>
 
-<div id="outline-container-org5f60b14" class="outline-4">
-<h4 id="org5f60b14">Analysis</h4>
+<div id="outline-container-orgbfdc4fe" class="outline-4">
+<h4 id="orgbfdc4fe">Analysis</h4>
 <section><p>
 Let us go through the contents of the <code>ZSCRIPT.zsc</code> file to see how
 this is achieved. The first line reads <code>version "4.14"</code>. This is a
@@ -1040,7 +1052,7 @@ and watch both items flashing next to each other like so:
 </p>
 
 
-<figure id="orgb931d31">
+<figure id="org057de7b">
 <img src="./images/potions.gif" alt="potions.gif">
 
 </figure>
@@ -1048,13 +1060,13 @@ and watch both items flashing next to each other like so:
 <p>
 Let us leave the mod in a state where <code>MFM_Elixir</code> is <b>NOT</b> replacing
 <code>HealthBonus</code> for now, as we will be using this to learn something new
-in the <a href="#orgdddcab9">&ldquo;<i>Basics of mapping</i>&rdquo;</a> section later.
+in the <a href="#orgf3d984a">&ldquo;<i>Basics of mapping</i>&rdquo;</a> section later.
 </p>
 </section>
 </div>
 
-<div id="outline-container-org8d21227" class="outline-4">
-<h4 id="org8d21227">Homework assignment</h4>
+<div id="outline-container-org5fd79f9" class="outline-4">
+<h4 id="org5fd79f9">Homework assignment</h4>
 <section><p>
 The sprites that we have explored so far: <code>STIMA0</code>, and the
 <code>BON1[ABCD]0</code>, all share a common feature. They all end in a &ldquo;0&rdquo;. The
@@ -1106,15 +1118,15 @@ clear later.
 </div>
 </div>
 
-<div id="outline-container-orgd502e61" class="outline-3">
-<h3 id="orgd502e61">Modifying Zombieman</h3>
+<div id="outline-container-org281fe59" class="outline-3">
+<h3 id="org281fe59">Modifying Zombieman</h3>
 <section><p>
 Okay. Now we do enemies. Boot up the game. You see these two former
 gentlemen admiring the flashing <code>HealthBonus</code> bottles:
 </p>
 
 
-<figure id="org036514b">
+<figure id="org34686cf">
 <img src="./images/screenshot05.jpg" alt="screenshot05.jpg" width="800px">
 
 <figcaption><span class="figure-number">Figure 6: </span>Zombiemen of culture</figcaption>
@@ -1218,7 +1230,7 @@ like so:
 </p>
 
 
-<figure id="org76fe62d">
+<figure id="org3dde99e">
 <img src="./images/invi01.gif" alt="invi01.gif" width="800px">
 
 </figure>
@@ -1255,7 +1267,7 @@ shaded (as we&rsquo;ve already seen). This should look like this:
 </p>
 
 
-<figure id="orgd0c3f16">
+<figure id="orgf1a5597">
 <img src="./images/invi02.gif" alt="invi02.gif" width="800px">
 
 </figure>
@@ -1303,7 +1315,7 @@ difficulty more fair.
 </p>
 
 
-<figure id="org17d5c71">
+<figure id="orge9f00b7">
 <img src="./images/invi03.gif" alt="invi03.gif" width="800px">
 
 <figcaption><span class="figure-number">Figure 7: </span>Look closely. That other guy in the back stole my kill!</figcaption>
@@ -1381,8 +1393,8 @@ with these on your own.
 </div>
 </div>
 
-<div id="outline-container-orgdddcab9" class="outline-2">
-<h2 id="orgdddcab9">Basics of mapping</h2>
+<div id="outline-container-orgf3d984a" class="outline-2">
+<h2 id="orgf3d984a">Basics of mapping</h2>
 <section><p>
 Doom modding is dominated by custom maps. This is the most popular format
 for sharing and enjoying the community&rsquo;s creations. Over the years, there
@@ -1429,8 +1441,8 @@ video tutorials for not mentioning them here.
 </p>
 </section>
 
-<div id="outline-container-orgb2a75bd" class="outline-3">
-<h3 id="orgb2a75bd">Getting UDB</h3>
+<div id="outline-container-orgd662bc1" class="outline-3">
+<h3 id="orgd662bc1">Getting UDB</h3>
 <section><p>
 Now that we&rsquo;ve gotten past the hyperlinks to youtube videos and
 playlists, let&rsquo;s get back to some exercises. This being a GUI, this
@@ -1453,7 +1465,7 @@ window will look something like this:
 </p>
 
 
-<figure id="org1e86301">
+<figure id="org8730d36">
 <img src="./images/screenshot07.jpg" alt="screenshot07.jpg" width="800px">
 
 </figure>
@@ -1474,7 +1486,7 @@ With the <code>Game Configurations</code> out of the way, now navigate to <code>
 </p>
 
 
-<figure id="org0165977">
+<figure id="org24233dc">
 <img src="./images/screenshot08.jpg" alt="screenshot08.jpg" width="425px">
 
 </figure>
@@ -1497,14 +1509,14 @@ defaults to <code>32 mp</code>). The view should look like this:
 </p>
 
 
-<figure id="org220573c">
+<figure id="orgc9632db">
 <img src="./images/screenshot09.jpg" alt="screenshot09.jpg" width="800px">
 
 </figure>
 </section>
 
-<div id="outline-container-orgf713cdf" class="outline-4">
-<h4 id="orgf713cdf">Your first room</h4>
+<div id="outline-container-org5a316b2" class="outline-4">
+<h4 id="org5a316b2">Your first room</h4>
 <section><p>
 For starters, do not click anything. Save the blank map inside the
 <code>maps</code> subfolder in your mod&rsquo;s project folder. Give it a name like
@@ -1574,8 +1586,8 @@ undo that action. Or select that <code>Vertex</code> while in <code>Vertices Mod
 </section>
 </div>
 
-<div id="outline-container-org27c1ab7" class="outline-4">
-<h4 id="org27c1ab7">Using custom textures from your mod</h4>
+<div id="outline-container-org5966d6b" class="outline-4">
+<h4 id="org5966d6b">Using custom textures from your mod</h4>
 <section><p>
 Now, get into <code>Linedefs Mode</code> (<code>L</code>) and right-click on the top (North)
 <code>Line</code> of your room. It should bring of a properties window with tabs
@@ -1591,7 +1603,7 @@ that you specified in the <code>Game Configuration</code> setting.
 </p>
 
 
-<figure id="org9028e0f">
+<figure id="org39192ee">
 <img src="./images/screenshot10.jpg" alt="screenshot10.jpg" width="800px">
 
 </figure>
@@ -1637,7 +1649,7 @@ Z</code> a bunch to undo recent steps).
 </p>
 
 
-<figure id="org433203f">
+<figure id="org9cca9aa">
 <img src="./images/screenshot11.jpg" alt="screenshot11.jpg" width="555px">
 
 </figure>
@@ -1663,15 +1675,15 @@ replacement will automatically kick in, and you will be fighting an
 </p>
 
 
-<figure id="org04cf704">
+<figure id="orgf3714aa">
 <img src="./images/FN_Zombie.jpg" alt="FN_Zombie.jpg" width="670px">
 
 </figure>
 </section>
 </div>
 
-<div id="outline-container-org85578bb" class="outline-4">
-<h4 id="org85578bb">Placing custom things from your mod</h4>
+<div id="outline-container-org3c10ff0" class="outline-4">
+<h4 id="org3c10ff0">Placing custom things from your mod</h4>
 <section><p>
 Now you might be wonder, how do we place our shiny <code>MFM_Elixir</code>
 <code>Thing</code> into the map. Even though we defined it, we removed the
@@ -1708,7 +1720,7 @@ name) lump file <code>MAPINFO.lmp</code>. Now re-zip the archive:
 
 <p>
 I understand that this zip command is getting a bit long. I will
-present <a href="#orgebe9549">my solution</a> to this problem later. For now, it is important to
+present <a href="#org81162f0">my solution</a> to this problem later. For now, it is important to
 know what is (and what is not) going into the <code>pk3</code>. For example, I am
 still leaving out the <code>maps</code> folder that I had you create a while back
 in this section. Also, since we are editing these files, the editing
@@ -1729,15 +1741,15 @@ the rendering style, which is an engine thing, not a UDB thing.
 </p>
 
 
-<figure id="org49be80d">
+<figure id="orge18d3f3">
 <img src="./images/elixir.jpg" alt="elixir.jpg" width="276px">
 
 </figure>
 </section>
 </div>
 
-<div id="outline-container-orgffd0fc6" class="outline-4">
-<h4 id="orgffd0fc6">3D view and <code>Line</code> action special</h4>
+<div id="outline-container-orgfd8f9e8" class="outline-4">
+<h4 id="orgfd8f9e8">3D view and <code>Line</code> action special</h4>
 <section><p>
 The room is going to be fun for a while. But eventually, the player will
 want to leave it. Let&rsquo;s add an exit button. Switch to <code>Vertices Mode</code>
@@ -1753,7 +1765,7 @@ greater is good here. Hit <code>OK</code>.
 </p>
 
 
-<figure id="orgfb3750a">
+<figure id="org4742822">
 <img src="./images/screenshot12.jpg" alt="screenshot12.jpg" width="800px">
 
 </figure>
@@ -1798,7 +1810,7 @@ this way.
 </p>
 
 
-<figure id="orgc116ea3">
+<figure id="org90886c4">
 <img src="./images/screenshot13.jpg" alt="screenshot13.jpg" width="800px">
 
 </figure>
@@ -1834,7 +1846,7 @@ ceiling and a recessed sector.
 </p>
 
 
-<figure id="org285a195">
+<figure id="org5d0de96">
 <img src="./images/screenshot14.jpg" alt="screenshot14.jpg" width="800px">
 
 </figure>
@@ -1861,8 +1873,8 @@ will show you the intermission screen, and then load <code>MAP02</code> for you.
 </section>
 </div>
 
-<div id="outline-container-org011059e" class="outline-4">
-<h4 id="org011059e">Switch patch and animation</h4>
+<div id="outline-container-org56b34cf" class="outline-4">
+<h4 id="org56b34cf">Switch patch and animation</h4>
 <section><p>
 You might have noticed that when you hit the level-exit switch, the
 level just ends. The switch didn&rsquo;t actually visually flip, and there
@@ -1934,7 +1946,7 @@ level ends.
 </p>
 
 
-<figure id="org4729f6a">
+<figure id="org7811fad">
 <img src="./images/screenshot15.jpg" alt="screenshot15.jpg" width="800px">
 
 </figure>
@@ -1948,8 +1960,8 @@ learn. To review, <a href="https://www.youtube.com/watch?v=mDm1hwfncQk">watch th
 </div>
 </div>
 
-<div id="outline-container-org1b83488" class="outline-3">
-<h3 id="org1b83488">The Mapfile lump</h3>
+<div id="outline-container-orgc240745" class="outline-3">
+<h3 id="orgc240745">The Mapfile lump</h3>
 <section><p>
 You can close UDB now. We are done with that.
 </p>
@@ -1971,8 +1983,8 @@ replaced the default <code>MAP01</code> lump inside the IWAD.
 </p>
 </section>
 
-<div id="outline-container-orgc442d74" class="outline-4">
-<h4 id="orgc442d74">Changing the map lump name</h4>
+<div id="outline-container-org8e1ba42" class="outline-4">
+<h4 id="org8e1ba42">Changing the map lump name</h4>
 <section><p>
 Now let&rsquo;s do some experiments. Open the launcher program again, and
 this time launch your mod with <code>freedoom1.wad</code> as the IWAD (I hope you
@@ -2013,7 +2025,7 @@ all. You should see its insides:
 </p>
 
 
-<figure id="org8540158">
+<figure id="org1d718e7">
 <img src="./images/insidemap.jpg" alt="insidemap.jpg" width="400px">
 
 </figure>
@@ -2035,8 +2047,8 @@ name back to <code>MAP01</code> again through SLADE (hit save before closing).
 </section>
 </div>
 
-<div id="outline-container-orgd12faa4" class="outline-4">
-<h4 id="orgd12faa4">Packing the map with your mod</h4>
+<div id="outline-container-org696a43d" class="outline-4">
+<h4 id="org696a43d">Packing the map with your mod</h4>
 <section><p>
 So far we have some texture/sprite replacements, and custom classes
 mod in a <code>pk3</code> file (<code>my_first_mod.pk3</code>), and a map in a <code>wad</code> file
@@ -2062,7 +2074,7 @@ should be:
 </p>
 
 
-<figure id="orge7969c3">
+<figure id="org6b7d953">
 <img src="./images/final_pk3.jpg" alt="final_pk3.jpg" width="230px">
 
 </figure>
@@ -2082,12 +2094,12 @@ now a certified doom modder. Now go create something!
 </div>
 </div>
 
-<div id="outline-container-org289cd01" class="outline-2">
-<h2 id="org289cd01">Misc.</h2>
-<div class="outline-text-2" id="text-org289cd01">
+<div id="outline-container-orgdb34b22" class="outline-2">
+<h2 id="orgdb34b22">Misc.</h2>
+<div class="outline-text-2" id="text-orgdb34b22">
 </div>
-<div id="outline-container-org8fab980" class="outline-3">
-<h3 id="org8fab980">Productivity boosting microhabits</h3>
+<div id="outline-container-orgdcf43a1" class="outline-3">
+<h3 id="orgdcf43a1">Productivity boosting microhabits</h3>
 <section><p>
 Anything good takes a long time to produce. So it necessarily has to take
 several sessions, perhaps over months/years. We have this romanticized idea
@@ -2104,8 +2116,8 @@ decision-making.
 </p>
 </section>
 
-<div id="outline-container-org2a6902a" class="outline-4">
-<h4 id="org2a6902a">Workstation setup and IDEs/text-editors</h4>
+<div id="outline-container-org9c64a00" class="outline-4">
+<h4 id="org9c64a00">Workstation setup and IDEs/text-editors</h4>
 <section><p>
 Much like in gaming, working consists of several nested state-loops
 operating over various timescales. And tiny discomforts or frustrations in
@@ -2116,9 +2128,12 @@ most often to be as stress-free as possible. All micro-stressors should be
 eliminated. Just arranging your dedicated workstation at a comfortable desk
 and chair, and mounting the screen at mid-eye level while maintaining good
 posture can have a huge impact on your productivity. Have drinking water
-available on a different and/or lower platform to avoid spilling. Reduced
-brightness and a low contrast between background and text also goes a long
-way if you are working with text.
+available on a different and/or lower platform to avoid spilling. If
+making/editing maps, drop the in-game music volume to zero and play some
+<a href="https://www.youtube.com/playlist?list=PLqQrLgmFTo2Si_S9Ysek8ljsspFwOXfmY">instrumental soundtracks</a> in the background on your computer, so that it
+keeps playing constantly as you go back-and-forth between UDB and the
+engine. Reduced brightness and a low contrast between background and text
+also goes a long way when working with text.
 </p>
 
 <p>
@@ -2153,14 +2168,15 @@ helpful. It&rsquo;ll give you syntax highlighting, auto-indentation, code
 folding and fast intra- and inter-file navigation, and popup hints for
 function arguments/definitions and possible completions as you type
 them. Power-coders in the community swear by <a href="https://code.visualstudio.com/">VSCode</a> and have some
-<a href="https://github.com/nikitalita/ZScript-VSCode">extant packages</a> available to configure it for <code>ZScript</code>. I myself use
-<a href="https://www.gnu.org/software/emacs/">Emacs</a> on Linux. Text search/navigation and mass-text manipulation,
-managing multiple buffers and <a href="https://karthinks.com/software/emacs-window-management-almanac">sub-windows</a>, running a Bash terminal
-within Emacs, and setting it up to open <code>*.zsc</code> files in <code>c-mode</code>
-gives me most of what I need. With a little extra work, Emacs can be
-turned into a full IDE. Hell, this guide was written in Emacs (in
-<a href="https://www.youtube.com/watch?v=SzA2YODtgK4"><code>org-mode</code></a> markup and then a modified <a href="https://github.com/Zilong-Li/org-tufte"><code>ox-tufte.el</code></a> script with custom
-<code>css</code> headers for export to <code>html</code>, but I digress).
+<a href="https://github.com/nikitalita/ZScript-VSCode">extant packages</a> available to configure it for <code>ZScript</code>. Someone even
+made a <a href="https://forum.zdoom.org/viewtopic.php?f=37&amp;t=46674"><code>ZScript</code> syntax highlighter for notepad++</a>. I myself use <a href="https://www.gnu.org/software/emacs/">Emacs</a>
+on Linux. Text search/navigation and mass-text manipulation, managing
+multiple buffers and <a href="https://karthinks.com/software/emacs-window-management-almanac">sub-windows</a>, running a Bash terminal within
+Emacs, and setting it up to open <code>*.zsc</code> files in <code>c-mode</code> gives me
+most of what I need. With a little extra work, Emacs can be turned
+into a full IDE. Hell, this guide was written in Emacs (in <a href="https://www.youtube.com/watch?v=SzA2YODtgK4"><code>org-mode</code></a>
+markup and then a modified <a href="https://github.com/Zilong-Li/org-tufte"><code>ox-tufte.el</code></a> script with custom <code>css</code>
+headers for export to <code>html</code>, but I digress).
 </p>
 
 <p>
@@ -2169,8 +2185,8 @@ And get a good, wired, mechanical keyboard.
 </section>
 </div>
 
-<div id="outline-container-org52d8d47" class="outline-4">
-<h4 id="org52d8d47"><a id="orgebe9549"></a>Makefile</h4>
+<div id="outline-container-org37e1c17" class="outline-4">
+<h4 id="org37e1c17"><a id="org81162f0"></a>Makefile</h4>
 <section><p>
 Throughout this guide, I have had you manually executing the <code>zip</code> command
 to generate the <code>pk3</code> archive. You technically didn&rsquo;t need to generate said
@@ -2247,9 +2263,10 @@ source code.
 </p>
 </section>
 </div>
+</div>
 
-<div id="outline-container-org4fec325" class="outline-4">
-<h4 id="org4fec325">Git and version control</h4>
+<div id="outline-container-org1f41579" class="outline-3">
+<h3 id="org1f41579">Git and version control</h3>
 <section><p>
 Imagine that you were maintaining a big modding project. You&rsquo;ve realized
 that the way you&rsquo;ve set some coding structure up was inefficient. You want
@@ -2288,7 +2305,7 @@ project&rsquo;s development versions over time.
 </p>
 
 <p>
-You can install a <a href="https://git-scm.com/">GUI version of <code>git</code></a> and learn to use that, but since I
+You can install a <a href="https://github.com/apps/desktop">GUI version of <code>git</code></a> and learn to use that, but since I
 am old-school, I use the command line on Linux systems. So I will be
 showing the commands that I execute to use <code>git</code>. When I start a new
 project, be it a GZDoom mod, or a tutorial/guide like this website, I first
@@ -2406,15 +2423,14 @@ second nature after a while. Most people starting out use a <a href="https://edu
 cheatsheet</a>. Much like learning the hotkeys for UDB, you start with a
 small set of 5-6 commands, practice them a bunch until you master
 them, and then learn one new command at a time and incorporate it into
-your workflow. Or you could just use the GUI. But it is good to get
+your workflow. Or you could just <a href="https://github.com/apps/desktop">use the GUI</a>. But it is good to get
 familiar with terms like <code>commit</code>, <code>checkout</code>, <code>status</code>, <code>branch</code>,
 <code>merge</code>, etc. just to be aware of what is possible to do.
 </p>
 </section>
-</div>
 
-<div id="outline-container-orge809913" class="outline-4">
-<h4 id="orge809913">Remote repositories</h4>
+<div id="outline-container-orgbea66c9" class="outline-4">
+<h4 id="orgbea66c9">Remote repositories</h4>
 <section><p>
 The commit history (which is stored in a very efficient,
 differences-only format by <code>git</code>) is collectively called a
@@ -2541,7 +2557,7 @@ for short) had been accepted. So the latest commit briefly showed my name:
 </p>
 
 
-<figure id="org9e0c27f">
+<figure id="orga2146f4">
 <img src="./images/gzdoom_github.jpg" alt="gzdoom_github.jpg" width="800px">
 
 </figure>
@@ -2549,24 +2565,201 @@ for short) had been accepted. So the latest commit briefly showed my name:
 </div>
 </div>
 
-<div id="outline-container-orga520d0a" class="outline-3">
-<h3 id="orga520d0a">Seeking help and forum/discord etiquette</h3>
+<div id="outline-container-orge33450e" class="outline-3">
+<h3 id="orge33450e">Seeking help and forum/discord etiquette</h3>
 <section><p>
-Coming soon &#x2026;
+There is little point in getting into GZDoom modding if you are not also
+going to get involved with the modding community. The GZDoom community is
+only a subset of the greater Doom community. But you can ask for help with
+general concepts (like mapping) pretty much anywhere. GZDoom-specific
+queries (like anything to do with modern <code>ZScript</code>) should be saved for
+specific circles. For general help where the <a href="https://zdoom.org/wiki/">wiki</a> falls short, you can try
+the <a href="https://www.doomworld.com/"><code>Doomworld</code> forums</a>, or the subreddit <a href="https://www.reddit.com/r/DoomModDevs/"><code>r/DoomModDevs</code></a>. Naturally, these
+communities have their own set of rules. Forums will enforce strict
+subforum topic relevance. Subreddits will have a flair-tagging mechanism
+for the same. This is meant to keep all records neatly organized and
+searchable for future help-seekers. <a href="https://www.doomworld.com/"><code>Doomworld</code></a> will very likely have a
+&ldquo;make five or ten replies to other threads before being allowed to start
+your own&rdquo; rule.
+</p>
+
+<p>
+For GZDoom circles, at the time of writing, the two active places are the
+<a href="https://forum.zdoom.org/"><code>ZDoom</code> forums</a> and the <a href="https://dsc.gg/zdoom"><code>ZDoom</code> Discord</a>. The Discord server is way more live
+and active, but you will find the same people (including me, come say hi!)
+in both places. Discord can be such a time-sink, in fact, that Graf Zahl
+(the creator and lead developer of GZDoom) has deleted his Discord account,
+and only posts on the forum (and occasionally comments on <a href="https://github.com/ZDoom/gzdoom/">Github</a>). The
+forum is where you would post stuff that you want the search-engines like
+Google to crawl. So if you are posting some helpful assets or templates
+(more on that in the <a href="#orgfb306ec">next section</a>), that would go in the <a href="https://forum.zdoom.org/viewforum.php">Resources</a>
+subforum. But you can&rsquo;t create a post until after you&rsquo;ve made over five
+replies in other threads, to prove that you are sincere. You can be banned
+from the forum, so don&rsquo;t be a dick! And do a thorough search for the issue
+you are looking to get help on. It is possible that someone else has had
+the same problem years ago and has already made a post about it. The forums
+have their own <a href="https://forum.zdoom.org/viewforum.php?f=39">Tutorials subforum</a>.
+</p>
+
+<p>
+The <a href="https://dsc.gg/zdoom">Discord</a> ban hammer sees a lot more action. They get scammers, bots, and
+people stalking or harassing other community members by creating multiple
+accounts. This screenshot was from a few days ago on a GZDoom-adjacent
+Discord server that gets the sentiment across. Do you see the problem here:
+</p>
+
+
+<figure id="org74bbf73">
+<img src="./images/discord_ban_saga.jpg" alt="discord_ban_saga.jpg" width="600px">
+
+</figure>
+
+<p>
+Leaving or muting Discord servers is trivial. And a returning user would
+open by identifying themselves by their old account. In fact, you can
+peruse the <a href="https://forum.zdoom.org/viewtopic.php?f=48&amp;t=54921">thread about the Discord on the forum</a> to see a whole bunch of
+people banned for various reasons, begging to be let back in.
+</p>
+
+<p>
+If you are new to Discord, do not repeatedly join and leave the same
+servers. That is seen as suspicious behavior. As soon as you enter the
+ZDoom Discord, you will be asked to introduce yourself in the <code>#welcome</code>
+channel. There, a moderator will give you access to all of the other
+channels, once they are convinced that you are not a bot. For the first few
+days, your name will have a green symbol next to it, so every post you make
+will advertise your n00b status to everyone. Here is a non-exhaustive list
+of channels on the GZDoom Discord:
+</p>
+
+
+<figure id="org2bfaa56">
+<img src="./images/discord_channels.jpg" alt="discord_channels.jpg" width="300px">
+
+</figure>
+
+<p>
+There are more off screen, including some private ones that only special
+people (who have proven themselves) get access to. For example, you start
+doing engine development and making PRs, you might be invited to a private
+channel meant for discussing those. Assume that it is always turtles all
+the way up.
+</p>
+
+<p>
+When you first join, it is generally a good idea to just lurk without
+making any posts. Observe the behavior to get an idea of the culture.
+Figure out who the jesters are, since it is impossible to guess the correct
+tone from text, and someone&rsquo;s banter can easily be mistaken for an
+offensive retort if you aren&rsquo;t familiar with their personality. Some people
+yap a lot and just want to have the last word. It is best to just let them
+have it, as long as you got the help that you were looking for. Figure out
+who the veterans are (it&rsquo;s the people who are doing all the helping,
+answering questions, etc.). I&rsquo;ve seen too many instances of someone new
+lecturing an actual engine dev about some historical Doom factoid. Often,
+if you need help with a specific mod, you can find that mod&rsquo;s author
+hanging out on Discord. And be sure to thank the people who help you out.
+</p>
+
+<p>
+Just make sure to not ping-spam anyone (that is when you use the <code>@</code>
+to mention their name, or reply to their posts incessantly). And try
+not to send direct messages without permission in one of the public
+channels. Be careful about asking for commissioned help on either the
+forum or Discord. You become a magnet for scammers. Don&rsquo;t accept
+friend-requests from strangers, as this gives them legitimacy when
+interacting with others who see the friendship status (think ring of
+trust). If you need commissioned help, seek out recommendations and
+references for commissions from other trusted people or approach
+artists using the contact details on their portfolio page (making sure
+that the page is old enough and the work on it hasn&rsquo;t been stolen or
+AI generated). All of these places have some rules about posting AI
+generated assets or code.
 </p>
 </section>
 </div>
 
-<div id="outline-container-org323cbea" class="outline-3">
-<h3 id="org323cbea">Publishing stuff and licenses</h3>
+<div id="outline-container-orga911f67" class="outline-3">
+<h3 id="orga911f67"><a id="orgfb306ec"></a>Publishing stuff and licenses</h3>
 <section><p>
-Coming soon &#x2026;
+The thing you would want to publish would be the <code>*.pk3</code> file, which is
+under-the-hood a zip archive. If your mod is very big (with lots of assets,
+say) and you want to avoid waiting time during loading, you could find the
+appropriate flags for the <code>zip</code> command that will create the archive
+without compresing it. Regardless, literally any file-sharing service (like
+mediafire or Google Drive) can be used to generate downloadable links. If
+your project is already on <a href="https://github.com/">Github</a>, you can tag your current/desired commit
+with a version number (via a <code>git</code> command) and use Github&rsquo;s &ldquo;Releases&rdquo;
+feature in the repo website&rsquo;s right panel. That is a great way to
+continuously update your work with patches, improvements, and bugfixes,
+while maintaining version history. GZDoom itself <a href="https://github.com/ZDoom/gzdoom/releases">does it like this</a>.
+</p>
+
+<p>
+If you want to share with the GZDoom community specifically and want it to
+be find-able via a Google search (or duckduckgo or what have you), creating
+a thread on the <a href="https://forum.zdoom.org/"><code>ZDoom</code> forums</a> is a great way to go. Here, you can receive
+public feedback and commentary in the thread and update the main post as
+and when newer versions become available. People on Github generally create
+&ldquo;Release Candidates&rdquo; over there and link to it in a forum post. <a href="https://www.moddb.com/">ModDB.com</a>
+is another popular avenue for sharing, although you can&rsquo;t post links there
+and need to upload the file to their server. Uploading your mod to multiple
+places instead of linking makes updating versions much more difficult. If
+you are taking the indie-developer persona seriously, you could create a
+portfolio page on <a href="https://itch.io/">itch.io</a> and host your mods there. For example, the
+weapons and movement mod that I mentioned earlier when introducing <a href="#orgc1dabda">launcher
+programs</a> (Hellrider: Vengeful) is hosted on the current project-lead&rsquo;s
+<a href="https://xxheavy-swagxx.itch.io/hellrider-vengeful">itch.io page</a>. But the original mod that it is based on was announced and
+updated on a <a href="https://forum.zdoom.org/viewtopic.php?t=68575">forum post</a> by its former author (Endie).
+</p>
+
+<p>
+If you are using another mod-author&rsquo;s work in your mod, naturally you need
+to have their permission; either personally, or via a license file in their
+mod. Speaking of which, you need to include a license file in your own mod.
+You also need to make it clear which parts of your mod are your work and
+covered by the license. A good choice, if you are stuck, is <a href="https://opensource.org/license/mit">The MIT
+License</a>. This is short, and covers most cases. It grants permission to
+others to reuse your work in theirs, even for commercial profit (and they
+won&rsquo;t owe anything back to you). And their reuse can be published by them
+in any newer license of their choice.
+</p>
+
+<p>
+A more restrictive option is the <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License">GNU General Public License (GPL)</a>. You will
+have to choose between GPLv2 and GPLv3 (though for most purposes, the
+differences won&rsquo;t matter to you). This is an infectious license that allows
+reuse but doesn&rsquo;t allow closing the source. Additionally, it requires
+anyone else using your work to publish that work under a GPL license too.
+This has gotten a little tricky since GZDoom itself uses a GPLv3 license.
+Many dev teams have released commercial, total-conversion IWADs (standalone
+games) and have bundled them with some modified version of GZDoom (see
+<a href="https://selacogame.com/">Selaco</a> and <a href="https://store.steampowered.com/app/1693280/Supplice/">Supplice (steam link)</a>, for recent examples). And their licensing
+is in a legal grey area untested by case law. Note that this wouldn&rsquo;t have
+been a problem if they didn&rsquo;t bundle a modified GZDoom executable file with
+their game and just released it as an IWAD/IPK3 mod instead. Be careful,
+especially when using other people&rsquo;s work, to check if their license
+restricts your licensing options like GPL does.
+</p>
+
+<p>
+If you don&rsquo;t want to make things this official, just use a <a href="https://en.wikipedia.org/wiki/Beerware">Beerware
+license</a>. It is always worth it to include a license file (and a
+readme file with information on what all stuff the license covers in
+the project) so that people who want to use your work don&rsquo;t have to
+track you down and ask for permission directly.
+</p>
+
+<p>
+<a href="https://creativecommons.org/">Creative Commons</a> has been suggested as yet another option, but this is
+discouraged. CC is better for artwork and assets like sound/music, but
+is terrible for code and map files.
 </p>
 </section>
 </div>
 
-<div id="outline-container-org4f4950e" class="outline-3">
-<h3 id="org4f4950e">Studying some public mods</h3>
+<div id="outline-container-orgb8d94e2" class="outline-3">
+<h3 id="orgb8d94e2">Studying some public mods</h3>
 <section><p>
 Coming soon &#x2026;
 </p>

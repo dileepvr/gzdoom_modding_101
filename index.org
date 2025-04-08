@@ -4,11 +4,12 @@
 #+HTML_DOCTYPE: html5
 #+BIND: org-tufte-embed-images:nil
 
-If you are reading this on the github repo, try [[https://dileepvr.github.io/gzdoom_modding_101][this link]] for some
-=HTML= styling. Then use the floating element labeled "/Table of
-Contents/" to the top-right of this page to navigate between
-sections. Click on the "Switch Color Mode" text at the top-left of the
-page to switch between /light/ and /dark/ modes.
+If you are reading this on the github repo, try [[https://dileepvr.github.io/gzdoom_modding_101][this link]] for some =HTML=
+styling. Then use the floating element labeled "/Table of Contents/" to the
+top-right of this page to navigate between sections by clicking on them.
+I've removed the scrollbar, so that is the only way. Click on the "Switch
+Color Mode" text at the top-left of the page to switch between /light/ and
+/dark/ modes.
 
 This guide will introduce the basics of modding for the GZDoom source
 port.  It is aimed at beginners with little-to-no technical
@@ -21,15 +22,22 @@ reader is expected to follow along by actually implementing the
 instructions on their computer. It is meant to be done at a relaxed
 pace over several sessions spanning days, and not in a single
 sitting. It presents particular ways of doing things in particular
-chapters for pedagogical reasons and to inculcate good habits (see
-also: [[https://www.youtube.com/watch?v=Bg21M2zwG9Q][WAX ON, WAX OFF]]). It will not present the full context or
-historical information for everything, because it is meant to be a
-first-pass curriculum (see table of contents, top-right), where too
-much extraneous information can be overwhelming and
-counter-productive. You can recommend additions/changes to this guide
-by submitting PRs to the [[https://github.com/dileepvr/gzdoom_modding_101][github repo]].  Please only make changes to the
-=index.org= file. Do not edit the =html= file directly. And do not
-expand the scope too much.
+chapters for pedagogical reasons and to inculcate good habits, like
+how one only practices scales for the first few weeks when they start
+learning a new musical instrument (see also: [[https://www.youtube.com/watch?v=Bg21M2zwG9Q][WAX ON, WAX OFF]]). It will
+not present the full context or historical information for everything,
+because it is meant to be a first-pass curriculum (see table of
+contents, top-right), where too much extraneous information can be
+overwhelming and counter-productive. The reader won't be provided with
+too many choices for ways to do something at first to avoid decision
+paralysis (*this point is missed in most tutorials*). A stable
+foundation will first be built so that the reader will have somewhere
+to retreat to when they are lost.
+
+You can recommend additions/changes to this guide by submitting PRs to
+the [[https://github.com/dileepvr/gzdoom_modding_101][github repo]]. Please only make changes to the =index.org= file. Do
+not edit the =html= file directly. And do not expand the scope too
+much.
 
 * Running GZDoom and understanding WADs
 
@@ -195,7 +203,7 @@ the sequence of the files specified. For the rest of this guide, we will be
 naming the zip-archive file =my_first_mod.pk3=, but always remember that
 under the hood it is merely a zip file.
 
-*** Get setup with a Launcher before proceeding further
+*** <<launcher>>Get setup with a Launcher before proceeding further
 
 This is one reason I illustrated the command line method of launching
 GZDoom. Selecting multiple mod files and dragging-and-dropping them
@@ -228,7 +236,8 @@ even though =Hellrider= already comes with a flashlight, because the
 maps in =Elementalism= have all been programmed to strip the player of
 all inventory items and pistol-start every level. And the flashlight
 in =Flashlight++= happens to be unclearable using that method. If I
-were to try and and another mod that modifies weapons, like [[https://github.com/jekyllgrim/Beautiful-Doom/releases][=Beautiful
+were to try and and another mod that modifies weapons, like
+[[https://github.com/jekyllgrim/Beautiful-Doom/releases][=Beautiful
 Doom=]] to this list, then the conflict with =Hellrider= will cause
 all weapons to be replaced by one mod and ammunition pickups be of the
 other. So not all mods are designed to go together. I mostly ignore
@@ -1618,9 +1627,12 @@ most often to be as stress-free as possible. All micro-stressors should be
 eliminated. Just arranging your dedicated workstation at a comfortable desk
 and chair, and mounting the screen at mid-eye level while maintaining good
 posture can have a huge impact on your productivity. Have drinking water
-available on a different and/or lower platform to avoid spilling. Reduced
-brightness and a low contrast between background and text also goes a long
-way if you are working with text.
+available on a different and/or lower platform to avoid spilling. If
+making/editing maps, drop the in-game music volume to zero and play some
+[[https://www.youtube.com/playlist?list=PLqQrLgmFTo2Si_S9Ysek8ljsspFwOXfmY][instrumental soundtracks]] in the background on your computer, so that it
+keeps playing constantly as you go back-and-forth between UDB and the
+engine. Reduced brightness and a low contrast between background and text
+also goes a long way when working with text.
 
 Almost never having to move your arms maintains a low-latency between the
 act of desiring something of the computer and having it fullfilled. So
@@ -1651,14 +1663,15 @@ helpful. It'll give you syntax highlighting, auto-indentation, code
 folding and fast intra- and inter-file navigation, and popup hints for
 function arguments/definitions and possible completions as you type
 them. Power-coders in the community swear by [[https://code.visualstudio.com/][VSCode]] and have some
-[[https://github.com/nikitalita/ZScript-VSCode][extant packages]] available to configure it for =ZScript=. I myself use
-[[https://www.gnu.org/software/emacs/][Emacs]] on Linux. Text search/navigation and mass-text manipulation,
-managing multiple buffers and [[https://karthinks.com/software/emacs-window-management-almanac][sub-windows]], running a Bash terminal
-within Emacs, and setting it up to open =*.zsc= files in =c-mode=
-gives me most of what I need. With a little extra work, Emacs can be
-turned into a full IDE. Hell, this guide was written in Emacs (in
-[[https://www.youtube.com/watch?v=SzA2YODtgK4][=org-mode=]] markup and then a modified [[https://github.com/Zilong-Li/org-tufte][=ox-tufte.el=]] script with custom
-=css= headers for export to =html=, but I digress).
+[[https://github.com/nikitalita/ZScript-VSCode][extant packages]] available to configure it for =ZScript=. Someone even
+made a [[https://forum.zdoom.org/viewtopic.php?f=37&t=46674][=ZScript= syntax highlighter for notepad++]]. I myself use [[https://www.gnu.org/software/emacs/][Emacs]]
+on Linux. Text search/navigation and mass-text manipulation, managing
+multiple buffers and [[https://karthinks.com/software/emacs-window-management-almanac][sub-windows]], running a Bash terminal within
+Emacs, and setting it up to open =*.zsc= files in =c-mode= gives me
+most of what I need. With a little extra work, Emacs can be turned
+into a full IDE. Hell, this guide was written in Emacs (in [[https://www.youtube.com/watch?v=SzA2YODtgK4][=org-mode=]]
+markup and then a modified [[https://github.com/Zilong-Li/org-tufte][=ox-tufte.el=]] script with custom =css=
+headers for export to =html=, but I digress).
 
 And get a good, wired, mechanical keyboard.
 
@@ -1734,7 +1747,7 @@ and run your archive after it builds it. Some work will be needed to hide
 your local file structure from the =makefile= if you end up sharing your
 source code.
 
-*** Git and version control
+** Git and version control
 
 Imagine that you were maintaining a big modding project. You've realized
 that the way you've set some coding structure up was inefficient. You want
@@ -1769,7 +1782,7 @@ Linux kernel). Though once it became public, lots of people have since
 worked on it. The software runs on your computer and can manage your
 project's development versions over time.
 
-You can install a [[https://git-scm.com/][GUI version of =git=]] and learn to use that, but since I
+You can install a [[https://github.com/apps/desktop][GUI version of =git=]] and learn to use that, but since I
 am old-school, I use the command line on Linux systems. So I will be
 showing the commands that I execute to use =git=. When I start a new
 project, be it a GZDoom mod, or a tutorial/guide like this website, I first
@@ -1873,7 +1886,7 @@ second nature after a while. Most people starting out use a [[https://education.
 cheatsheet]]. Much like learning the hotkeys for UDB, you start with a
 small set of 5-6 commands, practice them a bunch until you master
 them, and then learn one new command at a time and incorporate it into
-your workflow. Or you could just use the GUI. But it is good to get
+your workflow. Or you could just [[https://github.com/apps/desktop][use the GUI]]. But it is good to get
 familiar with terms like =commit=, =checkout=, =status=, =branch=,
 =merge=, etc. just to be aware of what is possible to do.
 
@@ -1990,11 +2003,158 @@ for short) had been accepted. So the latest commit briefly showed my name:
 
 ** Seeking help and forum/discord etiquette
 
-Coming soon ...
+There is little point in getting into GZDoom modding if you are not also
+going to get involved with the modding community. The GZDoom community is
+only a subset of the greater Doom community. But you can ask for help with
+general concepts (like mapping) pretty much anywhere. GZDoom-specific
+queries (like anything to do with modern =ZScript=) should be saved for
+specific circles. For general help where the [[https://zdoom.org/wiki/][wiki]] falls short, you can try
+the [[https://www.doomworld.com/][=Doomworld= forums]], or the subreddit [[https://www.reddit.com/r/DoomModDevs/][=r/DoomModDevs=]]. Naturally, these
+communities have their own set of rules. Forums will enforce strict
+subforum topic relevance. Subreddits will have a flair-tagging mechanism
+for the same. This is meant to keep all records neatly organized and
+searchable for future help-seekers. [[https://www.doomworld.com/][=Doomworld=]] will very likely have a
+"make five or ten replies to other threads before being allowed to start
+your own" rule.
 
-** Publishing stuff and licenses
+For GZDoom circles, at the time of writing, the two active places are the
+[[https://forum.zdoom.org/][=ZDoom= forums]] and the [[https://dsc.gg/zdoom][=ZDoom= Discord]]. The Discord server is way more live
+and active, but you will find the same people (including me, come say hi!)
+in both places. Discord can be such a time-sink, in fact, that Graf Zahl
+(the creator and lead developer of GZDoom) has deleted his Discord account,
+and only posts on the forum (and occasionally comments on [[https://github.com/ZDoom/gzdoom/][Github]]). The
+forum is where you would post stuff that you want the search-engines like
+Google to crawl. So if you are posting some helpful assets or templates
+(more on that in the [[publishing][next section]]), that would go in the [[https://forum.zdoom.org/viewforum.php][Resources]]
+subforum. But you can't create a post until after you've made over five
+replies in other threads, to prove that you are sincere. You can be banned
+from the forum, so don't be a dick! And do a thorough search for the issue
+you are looking to get help on. It is possible that someone else has had
+the same problem years ago and has already made a post about it. The forums
+have their own [[https://forum.zdoom.org/viewforum.php?f=39][Tutorials subforum]].
 
-Coming soon ...
+The [[https://dsc.gg/zdoom][Discord]] ban hammer sees a lot more action. They get scammers, bots, and
+people stalking or harassing other community members by creating multiple
+accounts. This screenshot was from a few days ago on a GZDoom-adjacent
+Discord server that gets the sentiment across. Do you see the problem here:
+
+#+ATTR_HTML: :width 600px
+[[./images/discord_ban_saga.jpg]]
+
+Leaving or muting Discord servers is trivial. And a returning user would
+open by identifying themselves by their old account. In fact, you can
+peruse the [[https://forum.zdoom.org/viewtopic.php?f=48&t=54921][thread about the Discord on the forum]] to see a whole bunch of
+people banned for various reasons, begging to be let back in.
+
+If you are new to Discord, do not repeatedly join and leave the same
+servers. That is seen as suspicious behavior. As soon as you enter the
+ZDoom Discord, you will be asked to introduce yourself in the =#welcome=
+channel. There, a moderator will give you access to all of the other
+channels, once they are convinced that you are not a bot. For the first few
+days, your name will have a green symbol next to it, so every post you make
+will advertise your n00b status to everyone. Here is a non-exhaustive list
+of channels on the GZDoom Discord:
+
+#+ATTR_HTML: :width 300px
+[[./images/discord_channels.jpg]]
+
+There are more off screen, including some private ones that only special
+people (who have proven themselves) get access to. For example, you start
+doing engine development and making PRs, you might be invited to a private
+channel meant for discussing those. Assume that it is always turtles all
+the way up.
+
+When you first join, it is generally a good idea to just lurk without
+making any posts. Observe the behavior to get an idea of the culture.
+Figure out who the jesters are, since it is impossible to guess the correct
+tone from text, and someone's banter can easily be mistaken for an
+offensive retort if you aren't familiar with their personality. Some people
+yap a lot and just want to have the last word. It is best to just let them
+have it, as long as you got the help that you were looking for. Figure out
+who the veterans are (it's the people who are doing all the helping,
+answering questions, etc.). I've seen too many instances of someone new
+lecturing an actual engine dev about some historical Doom factoid. Often,
+if you need help with a specific mod, you can find that mod's author
+hanging out on Discord. And be sure to thank the people who help you out.
+
+Just make sure to not ping-spam anyone (that is when you use the =@=
+to mention their name, or reply to their posts incessantly). And try
+not to send direct messages without permission in one of the public
+channels. Be careful about asking for commissioned help on either the
+forum or Discord. You become a magnet for scammers. Don't accept
+friend-requests from strangers, as this gives them legitimacy when
+interacting with others who see the friendship status (think ring of
+trust). If you need commissioned help, seek out recommendations and
+references for commissions from other trusted people or approach
+artists using the contact details on their portfolio page (making sure
+that the page is old enough and the work on it hasn't been stolen or
+AI generated). All of these places have some rules about posting AI
+generated assets or code.
+
+** <<publishing>>Publishing stuff and licenses
+
+The thing you would want to publish would be the =*.pk3= file, which is
+under-the-hood a zip archive. If your mod is very big (with lots of assets,
+say) and you want to avoid waiting time during loading, you could find the
+appropriate flags for the =zip= command that will create the archive
+without compresing it. Regardless, literally any file-sharing service (like
+mediafire or Google Drive) can be used to generate downloadable links. If
+your project is already on [[https://github.com/][Github]], you can tag your current/desired commit
+with a version number (via a =git= command) and use Github's "Releases"
+feature in the repo website's right panel. That is a great way to
+continuously update your work with patches, improvements, and bugfixes,
+while maintaining version history. GZDoom itself [[https://github.com/ZDoom/gzdoom/releases][does it like this]].
+
+If you want to share with the GZDoom community specifically and want it to
+be find-able via a Google search (or duckduckgo or what have you), creating
+a thread on the [[https://forum.zdoom.org/][=ZDoom= forums]] is a great way to go. Here, you can receive
+public feedback and commentary in the thread and update the main post as
+and when newer versions become available. People on Github generally create
+"Release Candidates" over there and link to it in a forum post. [[https://www.moddb.com/][ModDB.com]]
+is another popular avenue for sharing, although you can't post links there
+and need to upload the file to their server. Uploading your mod to multiple
+places instead of linking makes updating versions much more difficult. If
+you are taking the indie-developer persona seriously, you could create a
+portfolio page on [[https://itch.io/][itch.io]] and host your mods there. For example, the
+weapons and movement mod that I mentioned earlier when introducing [[launcher][launcher
+programs]] (Hellrider: Vengeful) is hosted on the current project-lead's
+[[https://xxheavy-swagxx.itch.io/hellrider-vengeful][itch.io page]]. But the original mod that it is based on was announced and
+updated on a [[https://forum.zdoom.org/viewtopic.php?t=68575][forum post]] by its former author (Endie).
+
+If you are using another mod-author's work in your mod, naturally you need
+to have their permission; either personally, or via a license file in their
+mod. Speaking of which, you need to include a license file in your own mod.
+You also need to make it clear which parts of your mod are your work and
+covered by the license. A good choice, if you are stuck, is [[https://opensource.org/license/mit][The MIT
+License]]. This is short, and covers most cases. It grants permission to
+others to reuse your work in theirs, even for commercial profit (and they
+won't owe anything back to you). And their reuse can be published by them
+in any newer license of their choice.
+
+A more restrictive option is the [[https://en.wikipedia.org/wiki/GNU_General_Public_License][GNU General Public License (GPL)]]. You will
+have to choose between GPLv2 and GPLv3 (though for most purposes, the
+differences won't matter to you). This is an infectious license that allows
+reuse but doesn't allow closing the source. Additionally, it requires
+anyone else using your work to publish that work under a GPL license too.
+This has gotten a little tricky since GZDoom itself uses a GPLv3 license.
+Many dev teams have released commercial, total-conversion IWADs (standalone
+games) and have bundled them with some modified version of GZDoom (see
+[[https://selacogame.com/][Selaco]] and [[https://store.steampowered.com/app/1693280/Supplice/][Supplice (steam link)]], for recent examples). And their licensing
+is in a legal grey area untested by case law. Note that this wouldn't have
+been a problem if they didn't bundle a modified GZDoom executable file with
+their game and just released it as an IWAD/IPK3 mod instead. Be careful,
+especially when using other people's work, to check if their license
+restricts your licensing options like GPL does.
+
+If you don't want to make things this official, just use a [[https://en.wikipedia.org/wiki/Beerware][Beerware
+license]]. It is always worth it to include a license file (and a
+readme file with information on what all stuff the license covers in
+the project) so that people who want to use your work don't have to
+track you down and ask for permission directly.
+
+[[https://creativecommons.org/][Creative Commons]] has been suggested as yet another option, but this is
+discouraged. CC is better for artwork and assets like sound/music, but
+is terrible for code and map files.
 
 ** Studying some public mods
 
