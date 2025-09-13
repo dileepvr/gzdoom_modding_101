@@ -4,12 +4,13 @@
 #+HTML_DOCTYPE: html5
 #+BIND: org-tufte-embed-images:nil
 
-If you are reading this on the github repo, try [[https://dileepvr.github.io/gzdoom_modding_101][this link]] for some =HTML=
-styling. Then use the floating element labeled "/Table of Contents/" to the
-top-right of this page to navigate between sections by clicking on them.
-I've removed the scrollbar, so that is the only way. Click on the "Switch
-Color Mode" text at the top-left of the page to switch between /light/ and
-/dark/ modes. Zoom-in via browser for bigger font size.
+If you are reading this on the github repo, try [[https://dileepvr.github.io/gzdoom_modding_101][this link]] for some
+=HTML= styling. Then use the floating element labeled "/Table of
+Contents/" to the top-right of this page to navigate between sections
+by clicking on them. The scrollbar might be disabled on Chrome-based
+browsers. Click on the "Switch Color Mode" text at the top-left of the
+page to switch between /light/ and /dark/ modes. Zoom-in via browser
+for bigger font size.
 
 This guide will introduce the basics of modding for the GZDoom source
 port.  It is aimed at beginners with little-to-no technical
@@ -857,7 +858,7 @@ You can define your own state labels, but will need custom functions
 to handle state transitions into and out of them. Let us now create a
 replacement class named =MFM_InviZombie= to make this enemy slightly
 more exciting. You can add these lines to the same =ZSCRIPT.zsc= file
-below the =MFM_Elixir= class definition. Let is add/modify the state
+below the =MFM_Elixir= class definition. Let us add/modify the state
 labels one at a time. For starters, we will split the =See= state
 label into two:
 
@@ -1103,8 +1104,8 @@ window will look something like this:
 #+ATTR_HTML: :width 800px
 [[./images/screenshot07.jpg]]
 
-In the =Nodebuilder= tab, you can set both configurations to =(do not build
-nodes)= if you are on Linux. The engine can build BSP nodes during loading.
+In the =Nodebuilder= tab, you can set both configurations to "=do not build
+nodes=" if you are on Linux. The engine can build BSP nodes during loading.
 In the =Testing= tab, you can let UDB know where your GZDoom executable is
 if you want to. This is to be able to launch the engine directly from UDB
 for rapid testing. This guide won't be using that method, as it robs us of
